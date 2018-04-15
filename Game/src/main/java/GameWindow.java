@@ -13,6 +13,9 @@ import static org.lwjgl.system.MemoryUtil.*;
 
 public class GameWindow {
 
+    private final int windowWidth = 800;
+    private final int windowHeight = 600 ;
+
     public GameWindow() {
     }
     // The window handle
@@ -33,7 +36,7 @@ public class GameWindow {
         glfwWindowHint(GLFW_RESIZABLE, GLFW_TRUE); // the window will be resizable
 
         // Create the window
-        window = glfwCreateWindow(800, 600, "Hello World!", NULL, NULL);
+        window = glfwCreateWindow(windowWidth, windowHeight, "Hello World!", NULL, NULL);
         if ( window == NULL )
             throw new RuntimeException("Failed to create the GLFW window");
 
@@ -73,13 +76,45 @@ public class GameWindow {
         return window;
     }
 
-    public void paint(Object[] entities){
+    public void paint(WindowModel model){
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // clear the framebuffer
+        Texture tex = new Texture();
+
+        float[] bg = model.getBackgroundRBGA();
+        glClearColor(bg[0], bg[1], bg[2], bg[3]);
+
+        ImageData[] images = model.getImages();
+        int x; int y;
+
+        for (int i = 0; i < images.length; i++) {
+
+            tex = tex.loadTexture(images[i].getPath());
+            x = images[i].getX();
+            y = images[i].getY();
+
+            float floatPerPixelX = 2.0f/windowWidth;
+            float floatPerPixelY = 2.0f/windowHeight;
+
+            float floatX; float floatY;
+            float width; float height;
+            
+            floatX = -1.0f + floatPerPixelX*x;
+            floatY = -1.0f + floatPerPixelY*y;
+
+            width = floatPerPixelX*tex.getWidth();
+            height = floatPerPixelY*tex.getHeight();
+
+            glBegin (GL_QUADS);
+            glTexCoord2f(0,0); glVertex2f(floatX,floatY);
+            glTexCoord2f(0,1); glVertex2f(floatX,floatY+height);
+            glTexCoord2f(1,1); glVertex2f(floatX+width,floatY+height);
+            glTexCoord2f(1,0); glVertex2f(floatX+width,floatY);
+            glEnd();
+        }
+
         glfwSwapBuffers(window);
         glfwPollEvents();
     }
 
-    public void setBackgroundColor(float red, float green, float blue, float alpha){
-        glClearColor(red, green, blue, alpha);
-    }
+
 }

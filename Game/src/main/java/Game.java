@@ -57,6 +57,7 @@ public class Game {
 
     private void loop() {
         GL.createCapabilities();
+        glEnable(GL_TEXTURE_2D);
 
         // Run the rendering loop until the user has attempted to close
         // the window or has pressed the ESCAPE key.
@@ -71,20 +72,4 @@ public class Game {
         this.state = state;
     }
 
-    /*private void input(){
-
-        DoubleBuffer x = BufferUtils.createDoubleBuffer(1);
-        DoubleBuffer y = BufferUtils.createDoubleBuffer(1);
-
-        glfwGetCursorPos(window, x, y);
-
-        if(x.get() >= 400){
-            System.out.println("now option");
-        }
-
-        //x.rewind();
-
-        //System.out.println(x.get());
-
-    }*/
 }
