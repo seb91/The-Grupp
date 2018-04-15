@@ -78,6 +78,9 @@ public class MainMenu implements GameState {
                     if(images[i].getPath().equals("./OptionsButton.png")){
                         context.setState(new OptionMenu(context, view, window));
                     }
+                    if(images[i].getPath().equals("./QuitButton.png")){
+                        glfwSetWindowShouldClose(window, true);
+                    }
                 }
             }
         }
