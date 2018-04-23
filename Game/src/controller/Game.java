@@ -1,12 +1,11 @@
 package controller;
 import view.GameWindow;
 import org.lwjgl.opengl.GL;
+import view.MainWindow;
 
 import static org.lwjgl.glfw.Callbacks.glfwFreeCallbacks;
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
-
-import view.*;
 
 public class Game {
 
@@ -16,7 +15,7 @@ public class Game {
     private GameWindow view;
     private long window;
 
-    private GameState state;
+    private GameWindow state;
 
 
     public void run() {
@@ -24,7 +23,7 @@ public class Game {
         view = new GameWindow();
         window = view.init();
 
-        state = new MainMenu(this, view, window);
+        state = new MainWindow(this, view, window);
 
         loop();
 
@@ -50,7 +49,7 @@ public class Game {
         }
     }
 
-    public void setState(GameState state){
+    public void setState(GameWindow state){
         this.state = state;
     }
 

@@ -1,44 +1,31 @@
-package controller;
-import java.nio.IntBuffer;
+package view;
 
 import static org.lwjgl.glfw.GLFW.*;
-
+import java.nio.IntBuffer;
 import org.lwjgl.*;
 
-import java.nio.*;
-
-import view.*;
 import model.*;
+import controller.Game;
 
-
-public class MainMenu implements GameState {
+public class MainWindow extends GameWindow {
 
     private Game context;
-
     private GameWindow view;
     private long window;
+    private String[] images = {"./assets/GameTitle.png",
+                               "./assets/PlayButton.png",
+                               "./assets/OptionsButton.png",
+                               "./assets/QuitButton.png"};
 
     private WindowModel menuModel = new MenuModel();
 
-    public MainMenu(Game context, GameWindow view, long window){
+    public MainWindow(Game context, GameWindow view, long window){
         this.context = context;
         this.view = view;
         this.window = window;
     }
 
-    public void input(){
-        DoubleBuffer x = BufferUtils.createDoubleBuffer(1);
-        DoubleBuffer y = BufferUtils.createDoubleBuffer(1);
-
-        glfwGetCursorPos(window, x, y);
-
-        glfwSetMouseButtonCallback(window, (window, button, action, mods) -> {
-            if ( button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_RELEASE )
-                click(x.get(),y.get());
-        });
-    }
-
-    private void click(Double posX, Double posY) {
+    public void click(Double posX, Double posY) {
         ImageData images[] = menuModel.getImages();
 
         IntBuffer w = BufferUtils.createIntBuffer(1);
@@ -55,7 +42,7 @@ public class MainMenu implements GameState {
                 if( (posX >= images[i].getX()&& posX <= images[i].getX()+images[i].getWidth()) && (posY >= images[i].getY() && posY <= images[i].getY()+images[i].getHeight())){
                     System.out.println(images[i].getPath()+" pressed");
                     if(images[i].getPath().equals("./assets/OptionsButton.png")){
-                        context.setState(new OptionMenu(context, view, window));
+                        context.setState(new OptionsWindow(context, view, window));
                     }
                     if(images[i].getPath().equals("./assets/QuitButton.png")){
                         glfwSetWindowShouldClose(window, true);
@@ -64,11 +51,6 @@ public class MainMenu implements GameState {
             }
         }
     }
-
-    public void update(){
-
-    }
-
     public void render(){
         view.paint(menuModel);
     }

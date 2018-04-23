@@ -1,46 +1,29 @@
-package controller;
-
-import java.nio.IntBuffer;
-import model.*;
+package view;
 
 import static org.lwjgl.glfw.GLFW.*;
-
+import java.nio.IntBuffer;
 import org.lwjgl.*;
 
-import java.nio.*;
+import model.*;
+import controller.Game;
 
-import view.*;
-
-
-public class OptionMenu implements GameState {
+public class OptionsWindow extends GameWindow {
 
     private Game context;
-
     private GameWindow view;
     private long window;
+    private String[] images = {"./assets/OptionsTitle.png",
+                               "./assets/BackButton.png"};
 
     private WindowModel optionsModel = new OptionsModel();
 
-    public OptionMenu(Game context, GameWindow view, long window){
+    public OptionsWindow(Game context, GameWindow view, long window){
         this.context = context;
         this.view = view;
         this.window = window;
     }
 
-    public void input(){
-        DoubleBuffer x = BufferUtils.createDoubleBuffer(1);
-        DoubleBuffer y = BufferUtils.createDoubleBuffer(1);
-
-        glfwGetCursorPos(window, x, y);
-
-        glfwSetMouseButtonCallback(window, (window, button, action, mods) -> {
-            if ( button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_RELEASE )
-                click(x.get(),y.get());
-        });
-    }
-
-    private void click(Double posX, Double posY) {
-
+    public void click(Double posX, Double posY) {
         ImageData images[] = optionsModel.getImages();
 
         IntBuffer w = BufferUtils.createIntBuffer(1);
@@ -57,16 +40,11 @@ public class OptionMenu implements GameState {
                 if( (posX >= images[i].getX()&& posX <= images[i].getX()+images[i].getWidth()) && (posY >= images[i].getY() && posY <= images[i].getY()+images[i].getHeight())){
                     System.out.println(images[i].getPath()+" pressed");
                     if(images[i].getPath().equals("./assets/BackButton.png")){
-                        context.setState(new MainMenu(context, view, window));
+                        context.setState(new MainWindow(context, view, window));
                     }
                 }
             }
-
         }
-    }
-
-    public void update(){
-
     }
 
     public void render(){

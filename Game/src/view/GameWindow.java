@@ -1,10 +1,11 @@
 package view;
 
+import java.nio.DoubleBuffer;
+import java.nio.IntBuffer;
+
+import org.lwjgl.BufferUtils;
 import org.lwjgl.glfw.*;
 import org.lwjgl.system.*;
-
-import java.nio.*;
-
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.system.MemoryStack.*;
@@ -21,7 +22,7 @@ public class GameWindow {
     public GameWindow() {
     }
     // The window handle
-    private long window;
+    private static long window;
 
     public long init() {
         // Setup an error callback. The default implementation
@@ -77,6 +78,17 @@ public class GameWindow {
 
         return window;
     }
+    public void input(){
+        DoubleBuffer x = BufferUtils.createDoubleBuffer(1);
+        DoubleBuffer y = BufferUtils.createDoubleBuffer(1);
+
+        glfwGetCursorPos(window, x, y);
+
+        glfwSetMouseButtonCallback(window, (window, button, action, mods) -> {
+            if ( button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_RELEASE )
+                click(x.get(),y.get());
+        });
+    }
 
     public void paint(WindowModel model){
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // clear the framebuffer
@@ -118,5 +130,7 @@ public class GameWindow {
         glfwPollEvents();
     }
 
-
+    public void click(Double posX, Double posY) {}
+    public void update(){}
+    public void render(){}
 }
