@@ -1,3 +1,4 @@
+package model;
 
 public class OptionsModel implements WindowModel {
 
@@ -15,8 +16,8 @@ public class OptionsModel implements WindowModel {
         int y = 500;
         int x =325;
 
-        images[0] = new ImageData("./OptionsTitle.png", 150, y,500,100 ,false);
-        images[1] = new ImageData("./BackButton.png", x, y-75,150,50 ,true);
+        images[0] = new ImageData("./assets/OptionsTitle.png", 150, y,500,100 ,false);
+        images[1] = new ImageData("./assets/BackButton.png", x, y-75,150,50 ,true);
     }
 
     public float[] getBackgroundRBGA() {

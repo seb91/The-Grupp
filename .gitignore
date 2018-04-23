@@ -1,4 +1,4 @@
 
 *.class
-Game/lwjgl-3.1.6/
+Game/lib/lwjgl-3.1.6/
 Game/.idea/workspace.xml

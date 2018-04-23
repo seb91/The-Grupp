@@ -1,3 +1,5 @@
+package model;
+
 public class ImageData {
     private String path;
     private int x;

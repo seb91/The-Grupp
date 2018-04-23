@@ -1,3 +1,5 @@
+package model;
+
 public class Terrain {
     private int posX;
     private int posY;
