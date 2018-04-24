@@ -10,27 +10,23 @@ import org.lwjgl.BufferUtils;
 import org.lwjgl.glfw.*;
 import org.lwjgl.opengl.GL;
 import org.lwjgl.system.*;
-
-import static org.lwjgl.glfw.Callbacks.glfwFreeCallbacks;
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
-
-import model.*;
 import services.*;
 
 public abstract class GameWindow implements Observable{
 
     private final int windowWidth = 800;
     private final int windowHeight = 600 ;
+    private Texture tex;
+
 
     private ArrayList<Observer> observers = new ArrayList<Observer>();
 
     // The window handle
     private static long window;
-
-    Texture tex;
 
     public long init() {
         // Setup an error callback. The default implementation
@@ -105,48 +101,32 @@ public abstract class GameWindow implements Observable{
         });
     }
 
-    public abstract void paint();/*{
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // clear the framebuffer
-        Texture tex = new Texture();
+    protected void paint(ViewObject e){
+        tex = tex.loadTexture(e.getImagepath());
+        int x = e.getX();
+        int y = e.getY();
 
-        glClearColor(1.0f, 0.0f, 0.0f, 0.0f);
+        float floatPerPixelX = 2.0f/windowWidth;
+        float floatPerPixelY = 2.0f/windowHeight;
 
-        ImageData[] images = getData();
+        float floatX; float floatY;
+        float width; float height;
 
-        int x; int y;
+        floatX = -1.0f + floatPerPixelX*x;
+        floatY = -1.0f + floatPerPixelY*y;
 
-        for (int i = 0; i < images.length; i++) {
+        width = floatPerPixelX*tex.getWidth();
+        height = floatPerPixelY*tex.getHeight();
 
-            tex = tex.loadTexture(images[i].getPath());
-            x = images[i].getX();
-            y = images[i].getY();
-
-            float floatPerPixelX = 2.0f/getWindowWidth();
-            float floatPerPixelY = 2.0f/getWindowHeight();
-
-            float floatX; float floatY;
-            float width; float height;
-
-            floatX = -1.0f + floatPerPixelX*x;
-            floatY = -1.0f + floatPerPixelY*y;
-
-            width = floatPerPixelX*tex.getWidth();
-            height = floatPerPixelY*tex.getHeight();
-
-            glBegin (GL_QUADS);
-            glTexCoord2f(0,0); glVertex2f(floatX,floatY);
-            glTexCoord2f(0,1); glVertex2f(floatX,floatY+height);
-            glTexCoord2f(1,1); glVertex2f(floatX+width,floatY+height);
-            glTexCoord2f(1,0); glVertex2f(floatX+width,floatY);
-            glEnd();
-        }
+        glBegin (GL_QUADS);
+        glTexCoord2f(0,0); glVertex2f(floatX,floatY);
+        glTexCoord2f(0,1); glVertex2f(floatX,floatY+height);
+        glTexCoord2f(1,1); glVertex2f(floatX+width,floatY+height);
+        glTexCoord2f(1,0); glVertex2f(floatX+width,floatY);
+        glEnd();
     }
 
-    protected abstract ImageData[] getData();*/
-
-
-
-
+    public abstract void render();
     protected abstract void click(double posX, double posY);
 
     protected int getWindowWidth(){

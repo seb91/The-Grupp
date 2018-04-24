@@ -5,80 +5,62 @@ import static org.lwjgl.opengl.GL11.*;
 
 import java.awt.event.ActionEvent;
 import java.nio.IntBuffer;
-import org.lwjgl.*;
+import java.util.ArrayList;
+import java.util.List;
+import org.lwjgl.BufferUtils;
 
-import model.*;
 import controller.Game;
 import services.Texture;
 
 public class MainWindow extends GameWindow {
 
-    int y = 500;
-    int x =325;
-
     float[] backgroundRBGA = new float[]{1.0f,0.0f,0.0f,0.0f};
 
-    ImageData[] images = {
-            new ImageData("./assets/GameTitle.png", 150, y ,500,100,false),
-            new ImageData("./assets/PlayButton.png", x, y-75,150,50,true ),
-            new ImageData("./assets/OptionsButton.png", x, y-150,150,50,true),
-            new ImageData("./assets/QuitButton.png", x, y-225,150,50,true)
-    };
+    private List<Button> buttons = new ArrayList<>();
+    private List<ViewObject> viewItems = new ArrayList<>();
 
-    public void paint(){
+
+    public MainWindow(){
+        buttons.add(new Button(Button.Id.PLAY,"./assets/PlayButton.png", 325, 425,150,50));
+        buttons.add(new Button(Button.Id.OPTIONS,"./assets/OptionsButton.png", 325, 350,150,50));
+        buttons.add(new Button(Button.Id.QUIT,"./assets/QuitButton.png", 325, 275,150,50));
+        viewItems.addAll(buttons);
+        viewItems.add(new Image("./assets/GameTitle.png", 150, 500 ,500,100));
+    }
+
+    public void render(){
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // clear the framebuffer
-        tex = new Texture();
 
         glClearColor(backgroundRBGA[0], backgroundRBGA[1], backgroundRBGA[2], backgroundRBGA[3]);
 
-        int x; int y;
-
-        for (int i = 0; i < images.length; i++) {
-
-            tex = tex.loadTexture(images[i].getPath());
-            x = images[i].getX();
-            y = images[i].getY();
-
-            float floatPerPixelX = 2.0f/getWindowWidth();
-            float floatPerPixelY = 2.0f/getWindowHeight();
-
-            float floatX; float floatY;
-            float width; float height;
-
-            floatX = -1.0f + floatPerPixelX*x;
-            floatY = -1.0f + floatPerPixelY*y;
-
-            width = floatPerPixelX*tex.getWidth();
-            height = floatPerPixelY*tex.getHeight();
-
-            glBegin (GL_QUADS);
-            glTexCoord2f(0,0); glVertex2f(floatX,floatY);
-            glTexCoord2f(0,1); glVertex2f(floatX,floatY+height);
-            glTexCoord2f(1,1); glVertex2f(floatX+width,floatY+height);
-            glTexCoord2f(1,0); glVertex2f(floatX+width,floatY);
-            glEnd();
+        for (ViewObject v : viewItems) {
+            paint(v);
         }
     }
 
     @Override
     protected void click(double posX, double posY) {
-        int winWidth = getWindowWidth();
         int winHeight = getWindowHeight();
 
         posY = winHeight - posY;
 
-        System.out.println("MClick ("+posX+", "+posY+")");
+        System.out.println("MClick (" + posX + ", " + posY + ")");
 
-        for ( int i = 0; i<images.length;i++) {
-            if(images[i].isButton()) {
-                if( (posX >= images[i].getX()&& posX <= images[i].getX()+images[i].getWidth()) && (posY >= images[i].getY() && posY <= images[i].getY()+images[i].getHeight())){
-                    System.out.println(images[i].getPath()+" pressed");
-                    if(images[i].getPath().equals("./assets/OptionsButton.png")){
-                        notifyObservers(new ActionEvent(this, 0, "Option pressed"));
-                    }
-                    if(images[i].getPath().equals("./assets/QuitButton.png")){
-                        notifyObservers(new ActionEvent(this, 1, "Quit pressed"));
-                    }
+        for (int i = 0; i < buttons.size(); i++) {
+            if (buttons.get(i).check(posX, posY)) {
+                switch (buttons.get(i).id) {
+                    case PLAY:
+                        System.out.println("Moving to Save menu");
+                        notifyObservers(new ActionEvent(this, 0, "SaveMenu"));
+                        break;
+                    case OPTIONS:
+                        System.out.println("Moving to Options menu");
+                        notifyObservers(new ActionEvent(this, 0, "OptionsMenu"));
+                        break;
+                    case QUIT:
+                        System.out.println("Terminating program");
+                        notifyObservers(new ActionEvent(this, 0, "Exit"));
+                        break;
                 }
             }
         }

@@ -26,7 +26,7 @@ public class Game implements Observer{
 
         while ( !glfwWindowShouldClose(window) ) {
             view.input();
-            view.paint();
+            view.render();
             glfwSwapBuffers(window);
             glfwPollEvents();
         }
@@ -46,21 +46,22 @@ public class Game implements Observer{
     public void actionPerformed(ActionEvent e) {
 
         switch(e.getActionCommand()){
-            case("Option pressed"):
+            case("OptionsMenu"):
                 System.out.println("option menu should appear");
                 view = new OptionsWindow();
                 view.addObserver(this);
                 break;
-            case("Quit pressed"):
-                glfwTerminate();
-                glfwSetErrorCallback(null).free();
-                System.exit(0);
-                break;
-            case("Back pressed"):
+
+            case("ReturnMain"):
                 System.out.println("got to back pressed switch");
                 view = new MainWindow();
                 view.addObserver(this);
+                break;
 
+            case("Exit"):
+                glfwTerminate();
+                glfwSetErrorCallback(null).free();
+                System.exit(0);
                 break;
         }
 
