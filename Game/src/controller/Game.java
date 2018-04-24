@@ -2,55 +2,49 @@ package controller;
 import view.GameWindow;
 import org.lwjgl.opengl.GL;
 import view.MainWindow;
+import view.OptionsWindow;
+
+import java.awt.event.ActionEvent;
 
 import static org.lwjgl.glfw.Callbacks.glfwFreeCallbacks;
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
 
-public class Game {
-
-    public Game() {
-    }
+public class Game implements Observer{
 
     private GameWindow view;
-    private long window;
-
-    private GameWindow state;
-
 
     public void run() {
 
-        view = new GameWindow();
-        window = view.init();
+        view = new MainWindow();
+        view.addObserver(this);
 
-        state = new MainWindow(this, view, window);
-
-        loop();
-
-        // Free the window callbacks and destroy the window
-        glfwFreeCallbacks(window);
-        glfwDestroyWindow(window);
+        view.init();
+        view.loop();
 
         // Terminate GLFW and free the error callback
         glfwTerminate();
         glfwSetErrorCallback(null).free();
+
     }
 
-    private void loop() {
-        GL.createCapabilities();
-        glEnable(GL_TEXTURE_2D);
+    @Override
+    public void actionPerformed(ActionEvent e) {
 
-        // Run the rendering loop until the user has attempted to close
-        // the window or has pressed the ESCAPE key.
-        while ( !glfwWindowShouldClose(window) ) {
-            state.input();
-            state.update();
-            state.render();
+        switch(e.getActionCommand()){
+            case("Option pressed"):
+                System.out.println("option menu should appear");
+                view = new OptionsWindow();
+                break;
+            case("Quit pressed"):
+                glfwTerminate();
+                glfwSetErrorCallback(null).free();
+                System.exit(0);
+                break;
+            case("Back pressed"):
+                view = new MainWindow();
+                break;
         }
-    }
 
-    public void setState(GameWindow state){
-        this.state = state;
     }
-
 }

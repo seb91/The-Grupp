@@ -1,3 +1,5 @@
+package main;
+
 import controller.*;
 
 public class Main {

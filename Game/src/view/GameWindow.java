@@ -1,11 +1,17 @@
 package view;
 
+import java.awt.event.ActionEvent;
 import java.nio.DoubleBuffer;
 import java.nio.IntBuffer;
+import java.util.ArrayList;
 
+import controller.Observer;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.glfw.*;
+import org.lwjgl.opengl.GL;
 import org.lwjgl.system.*;
+
+import static org.lwjgl.glfw.Callbacks.glfwFreeCallbacks;
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.system.MemoryStack.*;
@@ -14,13 +20,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import model.*;
 import services.*;
 
-public class GameWindow {
+public abstract class GameWindow implements Observable{
 
     private final int windowWidth = 800;
     private final int windowHeight = 600 ;
 
-    public GameWindow() {
-    }
+    private ArrayList<Observer> observers = new ArrayList<Observer>();
+
     // The window handle
     private static long window;
 
@@ -70,6 +76,12 @@ public class GameWindow {
 
         // Make the OpenGL context current
         glfwMakeContextCurrent(window);
+
+
+        //ADDED BECAUSE ELSE EVERYTHING BLOWS UP
+        GL.createCapabilities();
+        glEnable(GL_TEXTURE_2D);
+
         // Enable v-sync
         glfwSwapInterval(1);
 
@@ -78,7 +90,23 @@ public class GameWindow {
 
         return window;
     }
-    public void input(){
+
+    public void loop() {
+        // Run the rendering loop until the user has attempted to close
+        // the window or has pressed the ESCAPE key.
+        while ( !glfwWindowShouldClose(window) ) {
+            input();
+            paint();
+            glfwSwapBuffers(window);
+            glfwPollEvents();
+        }
+
+        // Free the window callbacks and destroy the window
+        glfwFreeCallbacks(window);
+        glfwDestroyWindow(window);
+    }
+
+    protected void input(){
         DoubleBuffer x = BufferUtils.createDoubleBuffer(1);
         DoubleBuffer y = BufferUtils.createDoubleBuffer(1);
 
@@ -90,47 +118,25 @@ public class GameWindow {
         });
     }
 
-    public void paint(WindowModel model){
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // clear the framebuffer
-        Texture tex = new Texture();
+    protected abstract void paint();
+    protected abstract void click(double posX, double posY);
 
-        float[] bg = model.getBackgroundRBGA();
-        glClearColor(bg[0], bg[1], bg[2], bg[3]);
-
-        ImageData[] images = model.getImages();
-        int x; int y;
-
-        for (int i = 0; i < images.length; i++) {
-
-            tex = tex.loadTexture(images[i].getPath());
-            x = images[i].getX();
-            y = images[i].getY();
-
-            float floatPerPixelX = 2.0f/windowWidth;
-            float floatPerPixelY = 2.0f/windowHeight;
-
-            float floatX; float floatY;
-            float width; float height;
-            
-            floatX = -1.0f + floatPerPixelX*x;
-            floatY = -1.0f + floatPerPixelY*y;
-
-            width = floatPerPixelX*tex.getWidth();
-            height = floatPerPixelY*tex.getHeight();
-
-            glBegin (GL_QUADS);
-            glTexCoord2f(0,0); glVertex2f(floatX,floatY);
-            glTexCoord2f(0,1); glVertex2f(floatX,floatY+height);
-            glTexCoord2f(1,1); glVertex2f(floatX+width,floatY+height);
-            glTexCoord2f(1,0); glVertex2f(floatX+width,floatY);
-            glEnd();
-        }
-
-        glfwSwapBuffers(window);
-        glfwPollEvents();
+    protected int getWindowWidth(){
+        return windowWidth;
     }
 
-    public void click(Double posX, Double posY) {}
-    public void update(){}
-    public void render(){}
+    protected int getWindowHeight(){
+        return windowHeight;
+    }
+
+    @Override
+    public void addObserver(Observer o) {
+        observers.add(o);
+    }
+
+    protected void notifyObservers(ActionEvent e){
+        for(Observer o : observers){
+            o.actionPerformed(e);
+        }
+    }
 }
