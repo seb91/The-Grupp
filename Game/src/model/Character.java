@@ -19,7 +19,25 @@ public class Character {
             this.weapon = weapon;
         }
 
+    public Character(String name, int maxHealth, int startPosX, int startPosY, boolean isEnemy, String weaponName, int weaponDamage){
+        this.name = name;
+        this.maxHealth = maxHealth;
+        this.health = maxHealth;
+        this.posX=startPosX;
+        this.posY=startPosY;
+        this.isEnemy = isEnemy;
+        this.weapon = new Weapon(weaponName,weaponDamage);
+    }
 
+    public String toString(){
+            return this.name + ", " +
+                    this.maxHealth  + ", " +
+                    this.health  + ", " +
+                    this.posX  + ", " +
+                    this.posY  + ", " +
+                    this.isEnemy  + ", " +
+                    this.weapon.toString();
+    }
         public String getName() {
             return name;
     }
@@ -75,4 +93,5 @@ public class Character {
     public void setWeapon(Weapon weapon) {
         this.weapon = weapon;
     }
+
 }
