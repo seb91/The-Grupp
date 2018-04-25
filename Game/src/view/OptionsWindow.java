@@ -23,10 +23,9 @@ public class OptionsWindow extends GameWindow {
             new ImageData("./assets/BackButton.png", x, y-75,150,50 ,true)
     };
 
-    @Override
-    protected void paint() {
+    public void paint() {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // clear the framebuffer
-        Texture tex = new Texture();
+        tex = new Texture();
 
         glClearColor(backgroundRBGA[0], backgroundRBGA[1], backgroundRBGA[2], backgroundRBGA[3]);
 
@@ -73,6 +72,7 @@ public class OptionsWindow extends GameWindow {
                 if( (posX >= images[i].getX()&& posX <= images[i].getX()+images[i].getWidth()) && (posY >= images[i].getY() && posY <= images[i].getY()+images[i].getHeight())){
                     System.out.println(images[i].getPath()+" pressed");
                     if(images[i].getPath().equals("./assets/BackButton.png")){
+                        System.out.println("before action event");
                         notifyObservers(new ActionEvent(this, 2, "Back pressed"));
                     }
                 }

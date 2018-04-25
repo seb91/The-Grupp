@@ -25,9 +25,9 @@ public class MainWindow extends GameWindow {
             new ImageData("./assets/QuitButton.png", x, y-225,150,50,true)
     };
 
-    protected void paint(){
+    public void paint(){
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // clear the framebuffer
-        Texture tex = new Texture();
+        tex = new Texture();
 
         glClearColor(backgroundRBGA[0], backgroundRBGA[1], backgroundRBGA[2], backgroundRBGA[3]);
 

@@ -30,6 +30,8 @@ public abstract class GameWindow implements Observable{
     // The window handle
     private static long window;
 
+    Texture tex;
+
     public long init() {
         // Setup an error callback. The default implementation
         // will print the error message in System.err.
@@ -91,22 +93,7 @@ public abstract class GameWindow implements Observable{
         return window;
     }
 
-    public void loop() {
-        // Run the rendering loop until the user has attempted to close
-        // the window or has pressed the ESCAPE key.
-        while ( !glfwWindowShouldClose(window) ) {
-            input();
-            paint();
-            glfwSwapBuffers(window);
-            glfwPollEvents();
-        }
-
-        // Free the window callbacks and destroy the window
-        glfwFreeCallbacks(window);
-        glfwDestroyWindow(window);
-    }
-
-    protected void input(){
+    public void input(){
         DoubleBuffer x = BufferUtils.createDoubleBuffer(1);
         DoubleBuffer y = BufferUtils.createDoubleBuffer(1);
 
@@ -118,7 +105,48 @@ public abstract class GameWindow implements Observable{
         });
     }
 
-    protected abstract void paint();
+    public abstract void paint();/*{
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // clear the framebuffer
+        Texture tex = new Texture();
+
+        glClearColor(1.0f, 0.0f, 0.0f, 0.0f);
+
+        ImageData[] images = getData();
+
+        int x; int y;
+
+        for (int i = 0; i < images.length; i++) {
+
+            tex = tex.loadTexture(images[i].getPath());
+            x = images[i].getX();
+            y = images[i].getY();
+
+            float floatPerPixelX = 2.0f/getWindowWidth();
+            float floatPerPixelY = 2.0f/getWindowHeight();
+
+            float floatX; float floatY;
+            float width; float height;
+
+            floatX = -1.0f + floatPerPixelX*x;
+            floatY = -1.0f + floatPerPixelY*y;
+
+            width = floatPerPixelX*tex.getWidth();
+            height = floatPerPixelY*tex.getHeight();
+
+            glBegin (GL_QUADS);
+            glTexCoord2f(0,0); glVertex2f(floatX,floatY);
+            glTexCoord2f(0,1); glVertex2f(floatX,floatY+height);
+            glTexCoord2f(1,1); glVertex2f(floatX+width,floatY+height);
+            glTexCoord2f(1,0); glVertex2f(floatX+width,floatY);
+            glEnd();
+        }
+    }
+
+    protected abstract ImageData[] getData();*/
+
+
+
+
     protected abstract void click(double posX, double posY);
 
     protected int getWindowWidth(){
