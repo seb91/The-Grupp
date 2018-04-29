@@ -4,20 +4,15 @@ import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
 
 import java.awt.event.ActionEvent;
-import java.nio.IntBuffer;
 import java.util.ArrayList;
 import java.util.List;
-import org.lwjgl.BufferUtils;
-
-import controller.Game;
-import services.Texture;
 
 public class MainWindow extends GameWindow {
 
     float[] backgroundRBGA = new float[]{1.0f,0.0f,0.0f,0.0f};
 
     private List<Button> buttons = new ArrayList<>();
-    private List<ViewObject> viewItems = new ArrayList<>();
+    private List<GUIObject> viewItems = new ArrayList<>();
 
 
     public MainWindow(){
@@ -25,7 +20,7 @@ public class MainWindow extends GameWindow {
         buttons.add(new Button(Button.Id.OPTIONS,"./assets/OptionsButton.png", 325, 350,150,50));
         buttons.add(new Button(Button.Id.QUIT,"./assets/QuitButton.png", 325, 275,150,50));
         viewItems.addAll(buttons);
-        viewItems.add(new Image("./assets/GameTitle.png", 150, 500 ,500,100));
+        viewItems.add(new Image("./assets/GameTitle.png", 150, 500));
     }
 
     public void render(){
@@ -33,17 +28,15 @@ public class MainWindow extends GameWindow {
 
         glClearColor(backgroundRBGA[0], backgroundRBGA[1], backgroundRBGA[2], backgroundRBGA[3]);
 
-        for (ViewObject v : viewItems) {
-            paint(v);
+        for (GUIObject v : viewItems) {
+            paint(v.getImagePath(),v.getX(),v.getY());
         }
     }
 
     @Override
     protected void click(double posX, double posY) {
         int winHeight = getWindowHeight();
-
         posY = winHeight - posY;
-
         System.out.println("MClick (" + posX + ", " + posY + ")");
 
         for (int i = 0; i < buttons.size(); i++) {
@@ -51,7 +44,7 @@ public class MainWindow extends GameWindow {
                 switch (buttons.get(i).id) {
                     case PLAY:
                         System.out.println("Moving to Save menu");
-                        notifyObservers(new ActionEvent(this, 0, "SaveMenu"));
+                        notifyObservers(new ActionEvent(this, 0, "Play"));
                         break;
                     case OPTIONS:
                         System.out.println("Moving to Options menu");
@@ -63,6 +56,16 @@ public class MainWindow extends GameWindow {
                         break;
                 }
             }
+        }
+    }
+    protected void pressed(int key) {
+        switch (key) {
+            case GLFW_KEY_ENTER:
+                notifyObservers(new ActionEvent(this, 0, "Play"));
+                break;
+            case GLFW_KEY_ESCAPE:
+                notifyObservers(new ActionEvent(this, 0, "Exit"));
+                break;
         }
     }
 }

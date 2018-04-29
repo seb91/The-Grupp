@@ -1,14 +1,14 @@
 package controller;
-import view.GameWindow;
-import org.lwjgl.opengl.GL;
+
 import view.MainWindow;
 import view.OptionsWindow;
+import view.GameWindow;
+import view.LevelWindow;
 
 import java.awt.event.ActionEvent;
 
 import static org.lwjgl.glfw.Callbacks.glfwFreeCallbacks;
 import static org.lwjgl.glfw.GLFW.*;
-import static org.lwjgl.opengl.GL11.*;
 
 public class Game implements Observer{
 
@@ -16,6 +16,8 @@ public class Game implements Observer{
 
     private long window;
 
+    //Temporary, for testing purposes. Should be replaced with a Level model later.
+    int model = 75;
 
     public void run() {
 
@@ -24,6 +26,7 @@ public class Game implements Observer{
 
         window = view.init();
 
+        //Main game loop
         while ( !glfwWindowShouldClose(window) ) {
             view.input();
             view.render();
@@ -46,23 +49,42 @@ public class Game implements Observer{
     public void actionPerformed(ActionEvent e) {
 
         switch(e.getActionCommand()){
+            case("MainMenu"):
+                System.out.println("Main menu should load");
+                view = new MainWindow();
+                view.addObserver(this);
+                break;
+            case("Play"):
+                System.out.println("Level view should load");
+                view = new LevelWindow(model);
+                view.addObserver(this);
+                break;
+            case("CharacterRight"):
+                model=model+5;
+                view = new LevelWindow(model);
+                view.addObserver(this);
+                break;
+            case("CharacterLeft"):
+                model=model-5;
+                view = new LevelWindow(model);
+                view.addObserver(this);
+                break;
             case("OptionsMenu"):
                 System.out.println("option menu should appear");
                 view = new OptionsWindow();
                 view.addObserver(this);
                 break;
-
             case("ReturnMain"):
                 System.out.println("got to back pressed switch");
                 view = new MainWindow();
                 view.addObserver(this);
                 break;
-
             case("Exit"):
                 glfwTerminate();
                 glfwSetErrorCallback(null).free();
                 System.exit(0);
                 break;
+
         }
 
     }
