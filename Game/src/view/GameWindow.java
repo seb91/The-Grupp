@@ -4,12 +4,15 @@ import java.awt.event.ActionEvent;
 import java.nio.DoubleBuffer;
 import java.nio.IntBuffer;
 import java.util.ArrayList;
+import java.util.List;
 
 import controller.Observer;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.glfw.*;
-import org.lwjgl.opengl.GL;
+import org.lwjgl.opengl.*;
 import org.lwjgl.system.*;
+
+import static java.util.Arrays.asList;
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.system.MemoryStack.*;
@@ -90,6 +93,7 @@ public abstract class GameWindow implements Observable{
     }
 
     public void input(){
+        //Cursor input
         DoubleBuffer x = BufferUtils.createDoubleBuffer(1);
         DoubleBuffer y = BufferUtils.createDoubleBuffer(1);
 
@@ -99,12 +103,20 @@ public abstract class GameWindow implements Observable{
             if ( button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_RELEASE )
                 click(x.get(),y.get());
         });
-    }
 
-    protected void paint(ViewObject e){
-        tex = tex.loadTexture(e.getImagepath());
-        int x = e.getX();
-        int y = e.getY();
+        //Key input
+        //http://www.glfw.org/docs/latest/group__keys.html
+        List<Integer> AcceptedKeys = asList(GLFW_KEY_LEFT,
+                                            GLFW_KEY_RIGHT,
+                                            GLFW_KEY_ESCAPE,
+                                            GLFW_KEY_ENTER);
+        glfwSetKeyCallback(window, (window, key, scancode, action, mods) -> {
+            if ( AcceptedKeys.contains(key) && (action == GLFW_REPEAT || action == GLFW_PRESS))
+                pressed(key);
+        });
+    }
+    protected void paint(String imagePath, int x, int y) {
+        tex = tex.loadTexture(imagePath);
 
         float floatPerPixelX = 2.0f/windowWidth;
         float floatPerPixelY = 2.0f/windowHeight;
@@ -127,7 +139,10 @@ public abstract class GameWindow implements Observable{
     }
 
     public abstract void render();
+
     protected abstract void click(double posX, double posY);
+
+    protected void pressed(int key){};
 
     protected int getWindowWidth(){
         return windowWidth;
