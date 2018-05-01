@@ -24,7 +24,7 @@ public abstract class GameWindow implements Observable{
     private final int windowWidth = 800;
     private final int windowHeight = 600 ;
     private Texture tex;
-
+    protected AssetHandler assets = new AssetHandler();
 
     private ArrayList<Observer> observers = new ArrayList<Observer>();
 

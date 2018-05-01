@@ -44,7 +44,7 @@ public class MainWindow extends GameWindow {
                 switch (buttons.get(i).id) {
                     case PLAY:
                         System.out.println("Moving to Save menu");
-                        notifyObservers(new ActionEvent(this, 0, "Play"));
+                        notifyObservers(new ActionEvent(this, 0, "Map"));
                         break;
                     case OPTIONS:
                         System.out.println("Moving to Options menu");
@@ -61,7 +61,7 @@ public class MainWindow extends GameWindow {
     protected void pressed(int key) {
         switch (key) {
             case GLFW_KEY_ENTER:
-                notifyObservers(new ActionEvent(this, 0, "Play"));
+                notifyObservers(new ActionEvent(this, 0, "Map"));
                 break;
             case GLFW_KEY_ESCAPE:
                 notifyObservers(new ActionEvent(this, 0, "Exit"));

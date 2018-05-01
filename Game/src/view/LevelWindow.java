@@ -20,7 +20,7 @@ public class LevelWindow extends GameWindow {
     public LevelWindow(int model) {
         this.model = model;
         viewItems.add(new Image("./assets/GroundTexture.png", 0, 0));
-        buttons.add(new Button(Button.Id.RETURN, "./assets/MapButton.png", 0, 0, 150, 50));
+        buttons.add(new Button(Button.Id.RETURN, "./assets/MapButton.png", 650, 0, 150, 50));
         viewItems.addAll(buttons);
 
     }
@@ -45,7 +45,7 @@ public class LevelWindow extends GameWindow {
                 switch (buttons.get(i).id) {
                     case RETURN:
                         System.out.println("Moving to main menu");
-                        notifyObservers(new ActionEvent(this, 0, "MainMenu"));
+                        notifyObservers(new ActionEvent(this, 0, "Map"));
                         break;
                 }
             }
@@ -63,8 +63,8 @@ public class LevelWindow extends GameWindow {
                 notifyObservers(new ActionEvent(this,0,"CharacterRight"));
                 break;
             case GLFW_KEY_ESCAPE:
-                System.out.println("Escape key pressed, moving to main menu");
-                notifyObservers(new ActionEvent(this, 0, "MainMenu"));
+                System.out.println("Escape key pressed, moving to map");
+                notifyObservers(new ActionEvent(this, 0, "Map"));
                 break;
         }
     }
