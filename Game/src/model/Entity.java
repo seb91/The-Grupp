@@ -8,7 +8,12 @@ public abstract class Entity {
     private int width;
     private int height;
 
-    protected enum ID{};
+    public Id id;
+    public enum Id {
+        NODE, LOCKED_NODE, BOSS_NODE, LOCKED_BOSS_NODE,
+        CHARACTER, ENEMY, TERRAIN, POINTER
+    }
+
 
     public Entity(int posX, int posY, int width, int height){
         this.posX = posX;
@@ -40,6 +45,12 @@ public abstract class Entity {
     public int getY(){
         return posY;
     }
+
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public void setY(int y) { this.y = y; }
 
     public int getWidth(){
         return width;

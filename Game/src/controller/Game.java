@@ -1,9 +1,7 @@
 package controller;
 
-import view.MainWindow;
-import view.OptionsWindow;
-import view.GameWindow;
-import view.LevelWindow;
+import view.*;
+import model.*;
 
 import java.awt.event.ActionEvent;
 
@@ -13,14 +11,14 @@ import static org.lwjgl.glfw.GLFW.*;
 public class Game implements Observer{
 
     private GameWindow view;
+    private Model model;
 
     private long window;
 
     //Temporary, for testing purposes. Should be replaced with a Level model later.
-    int model = 75;
+    int modelTemp = 75;
 
     public void run() {
-
         view = new MainWindow();
         view.addObserver(this);
 
@@ -54,19 +52,37 @@ public class Game implements Observer{
                 view = new MainWindow();
                 view.addObserver(this);
                 break;
-            case("Play"):
+            case("Map"):
+                System.out.println("Map view should load");
+                model = new MapModel("map_1");
+                view = new MapWindow(model);
+                view.addObserver(this);
+                break;
+            case("PointerRight"):
+                System.out.println("Right");
+                model.moveRight();
+                view = new MapWindow(model);
+                view.addObserver(this);
+                break;
+            case("PointerLeft"):
+                System.out.println("Left");
+                model.moveLeft();
+                view = new MapWindow(model);
+                view.addObserver(this);
+                break;
+            case("EnterLevel"):
                 System.out.println("Level view should load");
-                view = new LevelWindow(model);
+                view = new LevelWindow(modelTemp);
                 view.addObserver(this);
                 break;
             case("CharacterRight"):
-                model=model+5;
-                view = new LevelWindow(model);
+                modelTemp=modelTemp+5;
+                view = new LevelWindow(modelTemp);
                 view.addObserver(this);
                 break;
             case("CharacterLeft"):
-                model=model-5;
-                view = new LevelWindow(model);
+                modelTemp=modelTemp-5;
+                view = new LevelWindow(modelTemp);
                 view.addObserver(this);
                 break;
             case("OptionsMenu"):
