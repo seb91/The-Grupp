@@ -1,6 +1,5 @@
 *.class
 *.iml
-Game/.idea
-Game/lib
-Game/Game.iml
-Game/target
+Game/.idea/*
+Game/lib/*
+Game/target/*
