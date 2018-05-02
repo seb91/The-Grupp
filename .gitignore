@@ -1,6 +1,5 @@
-
 *.class
 Game/.idea
 Game/lib
 Game/Game.iml
-Game/Target
+Game/target
