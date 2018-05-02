@@ -5,8 +5,8 @@ public class Enemy extends Entity{
     private int hp;
 
 
-    public Enemy(int posX, int posY, int width, int height, int hp) {
-        super(posX, posY, width, height);
+    public Enemy(Id id,int posX, int posY, int width, int height, int hp) {
+        super(id,posX, posY, width, height);
         this.hp = hp;
     }
 

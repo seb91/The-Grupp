@@ -2,8 +2,8 @@ package model;
 
 public abstract class Entity {
 
-    private int posX;
-    private int posY;
+    protected int posX;
+    protected int posY;
 
     private int width;
     private int height;
@@ -11,11 +11,12 @@ public abstract class Entity {
     public Id id;
     public enum Id {
         NODE, LOCKED_NODE, BOSS_NODE, LOCKED_BOSS_NODE,
-        CHARACTER, ENEMY, TERRAIN, POINTER
+        PLAYER, ENEMY, TERRAIN, POINTER
     }
 
 
-    public Entity(int posX, int posY, int width, int height){
+    public Entity(Id id, int posX, int posY, int width, int height){
+        this.id = id;
         this.posX = posX;
         this.posY = posY;
         this.width = width;
@@ -47,10 +48,10 @@ public abstract class Entity {
     }
 
     public void setX(int x) {
-        this.x = x;
+        posX = x;
     }
 
-    public void setY(int y) { this.y = y; }
+    public void setY(int y) { posY = y; }
 
     public int getWidth(){
         return width;

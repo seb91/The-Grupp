@@ -6,10 +6,8 @@ public class Pointer extends Entity {
     private ArrayList<Integer> positions;
     private int position;
 
-    public Pointer(Id id,int x, int y) {
-        this.id = id;
-        this.x = x;
-        this.y = y;
+    public Pointer(Id id,int posX, int posY, int width, int height) {
+        super(id,posX, posY, width, height);
         this.position = 0;
     }
     public int getPosition() {
