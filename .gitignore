@@ -1,14 +1,6 @@
 
 *.class
-Game/lib/lwjgl-3.1.6/
-Game/.idea/workspace.xml
-Game/lib/lwjgl/dyncall_license.txt
-Game/.idea/encodings.xml
-Game/.idea/misc.xml
-Game/.idea/misc.xml
+Game/.idea
+Game/lib
 Game/Game.iml
-*.xml
-*.iml
-*.xml
-Game/.idea/misc.xml
-Game/Game.iml
+Game/Target
