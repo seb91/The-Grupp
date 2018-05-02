@@ -1,7 +1,21 @@
 package model;
 
 public class Projectile extends Entity{
-    public Projectile(int posX, int posY, int width, int height) {
+
+    private boolean isHostile;
+    private int velocity;
+
+    public Projectile(int posX, int posY, int width, int height, boolean isHostile, int velocity) {
         super(posX, posY, width, height);
+        this.isHostile = isHostile;
+        this.velocity = velocity;
+    }
+
+    public boolean getHostility(){
+        return isHostile;
+    }
+
+    public int getVelocity(){
+        return velocity;
     }
 }
