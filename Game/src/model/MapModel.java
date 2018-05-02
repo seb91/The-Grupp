@@ -23,23 +23,23 @@ public class MapModel extends Model {
             if(map.get(i).equals("NODE")) {
                 //To be checked with save file later
                 if(true) {
-                    nodes.add(new Node(Node.Id.NODE, x,y));
+                    nodes.add(new Node(Node.Id.NODE, x,y,0,0));
                 } else {
-                    nodes.add(new Node(Node.Id.LOCKED_NODE, x,y));
+                    nodes.add(new Node(Node.Id.LOCKED_NODE, x,y,0,0));
                 }
             }
             if(map.get(i).equals("BOSS_NODE")) {
                 //To be checked with save file later
                 if(true) {
-                    nodes.add(new Node(Node.Id.BOSS_NODE, x,y));
+                    nodes.add(new Node(Node.Id.BOSS_NODE, x,y,0,0));
                 } else {
-                    nodes.add(new Node(Node.Id.LOCKED_BOSS_NODE, x,y));
+                    nodes.add(new Node(Node.Id.LOCKED_BOSS_NODE, x,y,0,0));
                 }
             }
         }
         x = Integer.parseInt(map.get(1));
         y = Integer.parseInt(map.get(2));
-        pointer = new Pointer(Pointer.Id.POINTER,x+25,y+110);
+        pointer = new Pointer(Pointer.Id.POINTER,x+25,y+110,0,0);
         entities.add(pointer);
         entities.addAll(nodes);
 
