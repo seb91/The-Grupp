@@ -4,14 +4,16 @@ import view.*;
 import model.*;
 
 import java.awt.event.ActionEvent;
+import java.io.FileNotFoundException;
 
 import static org.lwjgl.glfw.Callbacks.glfwFreeCallbacks;
 import static org.lwjgl.glfw.GLFW.*;
 
-public class Game implements Observer{
+public class Game implements Listener {
 
     private GameWindow view;
     private Model model;
+    private Loader loader = new Loader();
 
     private long window;
 
@@ -54,7 +56,11 @@ public class Game implements Observer{
                 break;
             case("Map"):
                 System.out.println("Map view should load");
-                model = new MapModel("map_1");
+                try {
+                    model = new MapModel(loader.getMap("map_1"));
+                } catch (FileNotFoundException e1) {
+                    e1.printStackTrace();
+                }
                 view = new MapWindow(model);
                 view.addObserver(this);
                 break;
