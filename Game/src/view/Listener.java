@@ -1,7 +1,7 @@
-package controller;
+package view;
 
 import java.awt.event.ActionEvent;
 
-public interface Observer {
+public interface Listener {
     public void actionPerformed(ActionEvent e);
 }

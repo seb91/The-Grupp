@@ -3,3 +3,5 @@
 Game/.idea/*
 Game/lib/*
 Game/target/*
+.metadata/*
+SideScroller/*

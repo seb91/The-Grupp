@@ -9,14 +9,10 @@ public class MapModel extends Model {
     ArrayList<Node> nodes = new ArrayList<>();
     Pointer pointer;
 
-    public MapModel(String mapName) {
+    public MapModel(ArrayList<String> mapName) {
         int x,y;
-        try {
-            map = assets.getMap(mapName);
+        map = mapName;
 
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
         for(int i = 0; i < map.size(); i = i+3){
             x = Integer.parseInt(map.get(i+1));
             y = Integer.parseInt(map.get(i+2));

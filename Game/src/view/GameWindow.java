@@ -6,7 +6,6 @@ import java.nio.IntBuffer;
 import java.util.ArrayList;
 import java.util.List;
 
-import controller.Observer;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.glfw.*;
 import org.lwjgl.opengl.*;
@@ -26,7 +25,7 @@ public abstract class GameWindow implements Observable{
     private Texture tex;
     protected AssetHandler assets = new AssetHandler();
 
-    private ArrayList<Observer> observers = new ArrayList<Observer>();
+    private ArrayList<Listener> observers = new ArrayList<Listener>();
 
     // The window handle
     private static long window;
@@ -153,12 +152,12 @@ public abstract class GameWindow implements Observable{
     }
 
     @Override
-    public void addObserver(Observer o) {
+    public void addObserver(Listener o) {
         observers.add(o);
     }
 
     protected void notifyObservers(ActionEvent e){
-        for(Observer o : observers){
+        for(Listener o : observers){
             o.actionPerformed(e);
         }
     }
