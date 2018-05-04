@@ -51,6 +51,11 @@ public class Game implements Listener {
                 view = new MainWindow();
                 view.addObserver(this);
                 break;
+            case("SaveMenu"):
+                System.out.println("Save menu should load");
+                view = new SaveWindow();
+                view.addObserver(this);
+                break;
             case("Map"):
                 System.out.println("Map view should load");
                 try {

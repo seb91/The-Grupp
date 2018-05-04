@@ -44,7 +44,7 @@ public class MainWindow extends GameWindow {
                 switch (buttons.get(i).id) {
                     case PLAY:
                         System.out.println("Moving to Save menu");
-                        notifyObservers(new ActionEvent(this, 0, "Map"));
+                        notifyObservers(new ActionEvent(this, 0, "SaveMenu"));
                         break;
                     case OPTIONS:
                         System.out.println("Moving to Options menu");
