@@ -5,7 +5,7 @@ public class Button extends GUIObject {
     public int width,height;
     public Id id;
     public enum Id {
-        PLAY, OPTIONS, QUIT, RETURN, ENTER, MENU
+        PLAY, OPTIONS, QUIT, RETURN, ENTER, MENU,SAVE1,SAVE2,SAVE3
     }
 
     public Button(Id id, String imagePath, int x, int y, int width, int height) {

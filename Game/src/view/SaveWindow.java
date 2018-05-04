@@ -14,8 +14,9 @@ public class SaveWindow extends GameWindow{
 
 
     public SaveWindow(){
-        buttons.add(new Button(Button.Id.PLAY,"./assets/PlayButton.png", 325, 425,150,50));
-        buttons.add(new Button(Button.Id.OPTIONS,"./assets/OptionsButton.png", 325, 350,150,50));
+        buttons.add(new Button(Button.Id.SAVE1,"./assets/Save1.png", 325, 425,150,50));
+        buttons.add(new Button(Button.Id.SAVE2,"./assets/Save2.png", 325, 350,150,50));
+        buttons.add(new Button(Button.Id.SAVE3,"./assets/Save3.png", 325, 275,150,50));
         buttons.add(new Button(Button.Id.QUIT,"./assets/QuitButton.png", 325, 275,150,50));
         viewItems.addAll(buttons);
         viewItems.add(new Image("./assets/GameTitle.png", 150, 500));
@@ -41,13 +42,17 @@ public class SaveWindow extends GameWindow{
         for (int i = 0; i < buttons.size(); i++) {
             if (buttons.get(i).check(posX, posY)) {
                 switch (buttons.get(i).id) {
-                    case PLAY:
-                        System.out.println("Moving to Save menu");
-                        notifyObservers(new ActionEvent(this, 0, "Map"));
+                    case SAVE1:
+                        System.out.println("Recreationg game from save slot 1");
+                        notifyObservers(new ActionEvent(this, 0, "Save1"));
                         break;
-                    case OPTIONS:
-                        System.out.println("Moving to Options menu");
-                        notifyObservers(new ActionEvent(this, 0, "OptionsMenu"));
+                    case SAVE2:
+                        System.out.println("Recreationg game from save slot 2");
+                        notifyObservers(new ActionEvent(this, 0, "Save2"));
+                        break;
+                    case SAVE3:
+                        System.out.println("Recreationg game from save slot 3");
+                        notifyObservers(new ActionEvent(this, 0, "Save3"));
                         break;
                     case QUIT:
                         System.out.println("Terminating program");
