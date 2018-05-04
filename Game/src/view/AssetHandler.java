@@ -21,6 +21,9 @@ public class AssetHandler {
        menuPaths.put(Button.Id.QUIT,"./assets/QuitButton.png");
        menuPaths.put(Button.Id.RETURN,"./assets/ReturnButton.png");
        menuPaths.put(Button.Id.ENTER,"./assets/EnterButton.png");
+       menuPaths.put(Button.Id.SAVE1,"./assets/Save1.png");
+       menuPaths.put(Button.Id.SAVE2,"./assets/Save2.png");
+       menuPaths.put(Button.Id.SAVE3,"./assets/Save3.png");
 
        levelPaths.put(Entity.Id.PLAYER,"./assets/CharacterTexture.png");
        levelPaths.put(Entity.Id.GROUND,"./assets/GroundTexture.png");

@@ -9,6 +9,7 @@ public class GUIObject {
     public enum Id {
         PLAY, OPTIONS, QUIT, RETURN, ENTER, POINTER,
         NODE, LOCKED_NODE, BOSS_NODE, LOCKED_BOSS_NODE,
+        SAVE1, SAVE2, SAVE3
     }
 
     public String getImagePath() {

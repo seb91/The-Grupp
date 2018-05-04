@@ -12,6 +12,7 @@ public class Button extends GUIObject {
         this.height = height;
         imagePath = GameWindow.assets.getMPath(id);
     }
+
     public boolean check(Double posX, Double posY) {
         return (posX >= x && posX <= x+width) && (posY >= y && posY <= y+height);
     }
