@@ -47,15 +47,15 @@ public class SaveWindow extends GameWindow{
             if (buttons.get(i).check(posX, posY)) {
                 switch (buttons.get(i).id) {
                     case SAVE1:
-                        System.out.println("Recreationg game from save slot 1");
+                        System.out.println("Recreatiog game from save slot 1");
                         notifyObservers(new ActionEvent(this, 0, "Save1"));
                         break;
                     case SAVE2:
-                        System.out.println("Recreationg game from save slot 2");
+                        System.out.println("Recreating game from save slot 2");
                         notifyObservers(new ActionEvent(this, 0, "Save2"));
                         break;
                     case SAVE3:
-                        System.out.println("Recreationg game from save slot 3");
+                        System.out.println("Recreating game from save slot 3");
                         notifyObservers(new ActionEvent(this, 0, "Save3"));
                         break;
                     case QUIT:
