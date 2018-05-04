@@ -1,3 +1,7 @@
+/*
+* A simple view containing three options to load a game.
+* @Author Alexander
+* */
 package view;
 
 import java.awt.event.ActionEvent;
