@@ -69,6 +69,36 @@ public class Game implements Listener {
                 view = new MapWindow(model);
                 view.addObserver(this);
                 break;
+            case("Save1"):
+                System.out.println("Map view should load with saved progress from save slot 1");
+                try {
+                    model = new MapModel(loader.getMap("map_1"));
+                } catch (FileNotFoundException e1) {
+                    e1.printStackTrace();
+                }
+                view = new MapWindow(model);
+                view.addObserver(this);
+                break;
+            case("Save2"):
+                System.out.println("Map view should load with saved progress from save slot 2");
+                try {
+                    model = new MapModel(loader.getMap("map_1"));
+                } catch (FileNotFoundException e1) {
+                    e1.printStackTrace();
+                }
+                view = new MapWindow(model);
+                view.addObserver(this);
+                break;
+            case("Save3"):
+                System.out.println("Map view should load with saved progress from save slot 3");
+                try {
+                    model = new MapModel(loader.getMap("map_1"));
+                } catch (FileNotFoundException e1) {
+                    e1.printStackTrace();
+                }
+                view = new MapWindow(model);
+                view.addObserver(this);
+                break;
             case("PointerRight"):
                 System.out.println("Right");
                 model.moveRight();
