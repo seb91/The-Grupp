@@ -6,7 +6,7 @@ import java.util.List;
 
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
-
+//Map menu, displays all available Levels.
 public class MapWindow extends GameWindow {
 
     float[] backgroundRBGA = new float[]{0.4f, 0.7f, 0.3f, 0.0f};
@@ -27,26 +27,26 @@ public class MapWindow extends GameWindow {
             if(map.get(i).equals("NODE")) {
                 //To be checked with save file later
                 if(true) {
-                    nodes.add(new Node(Node.Id.NODE,"./assets/Node.png", x,y));
+                    nodes.add(new Node(Node.Id.NODE, x,y));
                 } else {
-                    nodes.add(new Node(Node.Id.LOCKED_NODE,"./assets/LockedNode.png", x,y));
+                    nodes.add(new Node(Node.Id.LOCKED_NODE, x,y));
                 }
             }
             if(map.get(i).equals("BOSS_NODE")) {
                 //To be checked with save file later
                 if(true) {
-                    nodes.add(new Node(Node.Id.BOSS_NODE,"./assets/BossNode.png", x,y));
+                    nodes.add(new Node(Node.Id.BOSS_NODE, x,y));
                 } else {
-                    nodes.add(new Node(Node.Id.LOCKED_BOSS_NODE,"./assets/LockedBossNode.png", x,y));
+                    nodes.add(new Node(Node.Id.LOCKED_BOSS_NODE, x,y));
                 }
             }
         }
         //Map pointer
-        pointer = new Pointer(Pointer.Id.POINTER,"./assets/NodePointer.png",nodes.get(0).getX()+25,nodes.get(0).getY()+110,0);
+        pointer = new Pointer(Pointer.Id.POINTER,nodes.get(0).getX()+25,nodes.get(0).getY()+110,0);
 
         //Buttons
-        buttons.add(new Button(Button.Id.ENTER, "./assets/EnterButton.png", 0, 0, 150, 50));
-        buttons.add(new Button(Button.Id.RETURN, "./assets/ReturnButton.png", 650, 0, 150, 50));
+        buttons.add(new Button(Button.Id.ENTER, 0, 0, 150, 50));
+        buttons.add(new Button(Button.Id.RETURN, 650, 0, 150, 50));
 
         // Adding all GUI objects to a mutual collection.
         viewItems.add(pointer);

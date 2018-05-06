@@ -26,7 +26,7 @@ public class LevelWindow extends GameWindow {
     public LevelWindow(int model) {
         this.model = model;
         viewItems.add(new Image("./assets/GroundTexture.png", 0, 0));
-        buttons.add(new Button(Button.Id.RETURN, "./assets/MapButton.png", 650, 0, 150, 50));
+        buttons.add(new Button(Button.Id.RETURN, 650, 0, 150, 50));
         viewItems.addAll(buttons);
 
     }
