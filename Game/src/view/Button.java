@@ -3,20 +3,15 @@ package view;
 public class Button extends GUIObject {
 
     public int width,height;
-    public Id id;
-    public enum Id {
-        PLAY, OPTIONS, QUIT, RETURN, ENTER, MENU
-    }
 
-    public Button(Id id, String imagePath, int x, int y, int width, int height) {
+    public Button(Id id, int x, int y, int width, int height) {
         this.id = id;
-        this.imagePath = imagePath;
         this.x = x;
         this.y = y;
         this.width = width;
         this.height = height;
+        imagePath = GameWindow.assets.getMPath(id);
     }
-
     public boolean check(Double posX, Double posY) {
         return (posX >= x && posX <= x+width) && (posY >= y && posY <= y+height);
     }

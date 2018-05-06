@@ -3,20 +3,17 @@ package view;
 public class Pointer extends GUIObject {
     private int position;
     public Id id;
-    public enum Id {
-        POINTER
-    }
 
-    public Pointer(Id id, String imagePath,int x, int y, int position) {
+    public Pointer(Id id ,int x, int y, int position) {
         this.position = position;
         this.id = id;
-        this.imagePath = imagePath;
         this.x = x;
         this.y = y;
+        imagePath = GameWindow.assets.getMPath(id);
     }
+
     public int getPosition() {
         return position;
-
     }
 
     public void setPosition(int position) {

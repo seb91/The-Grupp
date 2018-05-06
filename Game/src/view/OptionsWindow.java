@@ -14,7 +14,7 @@ public class OptionsWindow extends GameWindow {
     private List<GUIObject> viewItems = new ArrayList<>();
 
     public OptionsWindow(){
-        buttons.add(new Button(Button.Id.RETURN,"./assets/BackButton.png", 325, 425,150,50));
+        buttons.add(new Button(Button.Id.RETURN, 325, 425,150,50));
         viewItems.addAll(buttons);
         viewItems.add(new Image("./assets/OptionsTitle.png", 150, 500));
     }

@@ -16,9 +16,9 @@ public class MainWindow extends GameWindow {
 
 
     public MainWindow(){
-        buttons.add(new Button(Button.Id.PLAY,"./assets/PlayButton.png", 325, 425,150,50));
-        buttons.add(new Button(Button.Id.OPTIONS,"./assets/OptionsButton.png", 325, 350,150,50));
-        buttons.add(new Button(Button.Id.QUIT,"./assets/QuitButton.png", 325, 275,150,50));
+        buttons.add(new Button(Button.Id.PLAY, 325, 425,150,50));
+        buttons.add(new Button(Button.Id.OPTIONS, 325, 350,150,50));
+        buttons.add(new Button(Button.Id.QUIT, 325, 275,150,50));
         viewItems.addAll(buttons);
         viewItems.add(new Image("./assets/GameTitle.png", 150, 500));
     }
