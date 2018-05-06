@@ -12,7 +12,6 @@ import static org.lwjgl.glfw.GLFW.*;
 public class Game implements Listener {
 
     private GameWindow view;
-    private Model model;
     private Loader loader = new Loader();
 
     private long window;
@@ -57,23 +56,10 @@ public class Game implements Listener {
             case("Map"):
                 System.out.println("Map view should load");
                 try {
-                    model = new MapModel(loader.getMap("map_1"));
+                    view = new MapWindow(loader.getMap("map_1"));
                 } catch (FileNotFoundException e1) {
                     e1.printStackTrace();
                 }
-                view = new MapWindow(model);
-                view.addObserver(this);
-                break;
-            case("PointerRight"):
-                System.out.println("Right");
-                model.moveRight();
-                view = new MapWindow(model);
-                view.addObserver(this);
-                break;
-            case("PointerLeft"):
-                System.out.println("Left");
-                model.moveLeft();
-                view = new MapWindow(model);
                 view.addObserver(this);
                 break;
             case("EnterLevel"):

@@ -10,8 +10,7 @@ public abstract class Entity {
 
     public Id id;
     public enum Id {
-        NODE, LOCKED_NODE, BOSS_NODE, LOCKED_BOSS_NODE,
-        PLAYER, ENEMY, TERRAIN, POINTER
+        PLAYER, ENEMY, TERRAIN
     }
 
 
