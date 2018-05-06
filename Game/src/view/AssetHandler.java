@@ -8,6 +8,7 @@ public class AssetHandler {
 
     HashMap<GUIObject.Id,String> menuPaths = new HashMap<>();
     HashMap<Entity.Id,String> levelPaths = new HashMap<>();
+    HashMap<Audio.Id,String> audioPaths = new HashMap<>();
 
    public AssetHandler() {
        menuPaths.put(Node.Id.NODE, "./assets/Node.png");
@@ -21,12 +22,16 @@ public class AssetHandler {
        menuPaths.put(Button.Id.RETURN,"./assets/ReturnButton.png");
        menuPaths.put(Button.Id.ENTER,"./assets/EnterButton.png");
 
+       audioPaths.put(Audio.Id.BOUNCE,"./assets/bounce.ogg");
     }
     public String getMPath(GUIObject.Id key){
        return menuPaths.get(key);
     }
     public String getLPath(Entity.Id key){
         return levelPaths.get(key);
+    }
+    public String getAPath(Audio.Id key){
+        return audioPaths.get(key);
     }
 
 }
