@@ -21,7 +21,7 @@ public class SaveWindow extends GameWindow{
         buttons.add(new Button(Button.Id.SAVE1,"./assets/Save1.png", 325, 425,150,50));
         buttons.add(new Button(Button.Id.SAVE2,"./assets/Save2.png", 325, 350,150,50));
         buttons.add(new Button(Button.Id.SAVE3,"./assets/Save3.png", 325, 275,150,50));
-        buttons.add(new Button(Button.Id.QUIT,"./assets/QuitButton.png", 325, 275,150,50));
+        buttons.add(new Button(Button.Id.QUIT,"./assets/QuitButton.png", 325, 150,150,50));
         viewItems.addAll(buttons);
         viewItems.add(new Image("./assets/GameTitle.png", 150, 500));
     }
