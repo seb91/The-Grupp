@@ -56,7 +56,7 @@ public class Game implements Listener {
                 view = new SaveWindow();
                 view.addObserver(this);
                 break;
-            case("Save1"):
+            case("Save1"): // Not yet fully implemented the save function
                 System.out.println("Map view should load with saved progress from save slot 1");
                 try {
                     view = new MapWindow(loader.loadFile("map_1"));
@@ -65,7 +65,7 @@ public class Game implements Listener {
                 }
                 view.addObserver(this);
                 break;
-            case("Save2"):
+            case("Save2"): // Not yet fully implemented the save function
                 System.out.println("Map view should load with saved progress from save slot 2");
                 try {
                     view = new MapWindow(loader.loadFile("map_1"));
@@ -74,7 +74,7 @@ public class Game implements Listener {
                 }
                 view.addObserver(this);
                 break;
-            case("Save3"):
+            case("Save3"): // Not yet fully implemented the save function
                 System.out.println("Map view should load with saved progress from save slot 3");
                 try {
                     view = new MapWindow(loader.loadFile("map_1"));
