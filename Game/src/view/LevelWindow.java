@@ -9,6 +9,12 @@ import java.util.List;
 
 public class LevelWindow extends GameWindow {
 
+
+    int cameraX = 0;
+    int cameraY = 0;
+    int cameraWidth = 800;
+    int cameraHeight = 600;
+
     float[] backgroundRBGA = new float[]{0.70f, 0.88f, 0.99f, 0.0f};
 
     private List<Button> buttons = new ArrayList<>();
@@ -29,9 +35,25 @@ public class LevelWindow extends GameWindow {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // clear the framebuffer
         glClearColor(backgroundRBGA[0], backgroundRBGA[1], backgroundRBGA[2], backgroundRBGA[3]);
         for (GUIObject v : viewItems) {
-            paint(v.getImagePath(),v.getX(),v.getY());
+
+            if(overlapsCamera(v)){
+                paint(v.getImagePath(),cameraX-v.getX(),cameraY-v.getY());
+                paint("./assets/CharacterTexture.png", model,75);
+            }
+
+
+
         }
-        paint("./assets/CharacterTexture.png", model,75);
+    }
+
+    public boolean overlapsCamera(GUIObject e){
+
+        /*int left = this.posX;
+        int right = this.posX+this.width;
+        int bottom = this.posY;
+        int top = this.posY+height;*/
+
+        return cameraX <= e.getX();
     }
 
     @Override
@@ -56,11 +78,13 @@ public class LevelWindow extends GameWindow {
     protected void pressed(int key) {
         switch (key) {
             case GLFW_KEY_LEFT:
-                notifyObservers(new ActionEvent(this,0,"CharacterLeft"));
+                //notifyObservers(new ActionEvent(this,0,"CharacterLeft"));
+                cameraX = cameraX - 1;
                 break;
             case GLFW_KEY_RIGHT:
                 System.out.println("Right button pressed, update character model");
-                notifyObservers(new ActionEvent(this,0,"CharacterRight"));
+                //notifyObservers(new ActionEvent(this,0,"CharacterRight"));
+                cameraX = cameraX + 1;
                 break;
             case GLFW_KEY_ESCAPE:
                 System.out.println("Escape key pressed, moving to map");
