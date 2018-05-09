@@ -14,11 +14,9 @@ public class Game implements Listener {
 
     private GameWindow view;
     private Loader loader = new Loader();
+    private Level model;
 
     private long window;
-
-    //Temporary, for testing purposes. Should be replaced with a Level model later.
-    int modelTemp = 75;
 
     public void run() {
         view = new MainWindow();
@@ -47,7 +45,6 @@ public class Game implements Listener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-
         switch(e.getActionCommand()){
             case("MainMenu"):
                 System.out.println("Main menu should load");
@@ -57,7 +54,7 @@ public class Game implements Listener {
             case("Map"):
                 System.out.println("Map view should load");
                 try {
-                    view = new MapWindow(loader.getMap("map_1"));
+                    view = new MapWindow(loader.loadFile("map_1"));
                 } catch (FileNotFoundException e1) {
                     e1.printStackTrace();
                 }
@@ -65,17 +62,13 @@ public class Game implements Listener {
                 break;
             case("EnterLevel"):
                 System.out.println("Level view should load");
-                view = new LevelWindow(modelTemp);
-                view.addObserver(this);
-                break;
-            case("CharacterRight"):
-                modelTemp=modelTemp+5;
-                view = new LevelWindow(modelTemp);
-                view.addObserver(this);
-                break;
-            case("CharacterLeft"):
-                modelTemp=modelTemp-5;
-                view = new LevelWindow(modelTemp);
+                try {
+                    System.out.println("level_"+e.getID());
+                    model = new Level(loader.loadFile("level_"+e.getID()));
+                } catch (FileNotFoundException e1) {
+                    e1.printStackTrace();
+                }
+                view = new LevelWindow(model);
                 view.addObserver(this);
                 break;
             case("OptionsMenu"):

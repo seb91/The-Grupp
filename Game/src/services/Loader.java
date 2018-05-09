@@ -7,11 +7,12 @@ import java.util.Scanner;
 
 public class Loader {
 
-    ArrayList<String> map = new ArrayList<>();
+    ArrayList<String> map;
     Scanner sc;
 
-    public ArrayList<String> getMap(String mapName) throws FileNotFoundException {
-        sc = new Scanner(new File("./assets/maps/"+mapName+".txt"));
+    public ArrayList<String> loadFile(String fileName) throws FileNotFoundException {
+        map = new ArrayList<>();
+        sc = new Scanner(new File("./assets/maps_and_levels/"+fileName+".txt"));
 
         while(sc.hasNext()){
             map.add(sc.next());

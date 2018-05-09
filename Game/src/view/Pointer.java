@@ -11,11 +11,9 @@ public class Pointer extends GUIObject {
         this.y = y;
         imagePath = GameWindow.assets.getMPath(id);
     }
-
     public int getPosition() {
         return position;
     }
-
     public void setPosition(int position) {
         this.position = position;
     }

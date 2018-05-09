@@ -1,5 +1,7 @@
 package view;
 
+import model.*;
+
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
 
@@ -13,25 +15,24 @@ public class LevelWindow extends GameWindow {
 
     private List<Button> buttons = new ArrayList<>();
     private List<GUIObject> viewItems = new ArrayList<>();
+    private Level model;
 
-    //temp
-    private int model;
-
-    public LevelWindow(int model) {
+    public LevelWindow(Level model) {
         this.model = model;
-        viewItems.add(new Image("./assets/GroundTexture.png", 0, 0));
         buttons.add(new Button(Button.Id.RETURN, 650, 0, 150, 50));
         viewItems.addAll(buttons);
-
     }
 
     public void render() {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // clear the framebuffer
         glClearColor(backgroundRBGA[0], backgroundRBGA[1], backgroundRBGA[2], backgroundRBGA[3]);
         for (GUIObject v : viewItems) {
-            paint(v.getImagePath(),v.getX(),v.getY());
+            paint(v.getImagePath(), v.getX(), v.getY());
         }
-        paint("./assets/CharacterTexture.png", model,75);
+        for (Entity e : model.getEntities()) {
+            paint(GameWindow.assets.getEPath(e.getId()), e.getX(), e.getY());
+        }
+        model.update();
     }
 
     @Override
@@ -56,15 +57,32 @@ public class LevelWindow extends GameWindow {
     protected void pressed(int key) {
         switch (key) {
             case GLFW_KEY_LEFT:
-                notifyObservers(new ActionEvent(this,0,"CharacterLeft"));
+                System.out.println("Left key pressed");
+                model.moveLeft();
                 break;
             case GLFW_KEY_RIGHT:
-                System.out.println("Right button pressed, update character model");
-                notifyObservers(new ActionEvent(this,0,"CharacterRight"));
+                System.out.println("Right key pressed");
+                model.moveRight();
+                break;
+            case GLFW_KEY_SPACE:
+                System.out.println("Space key pressed, update model");
+                model.jump();
                 break;
             case GLFW_KEY_ESCAPE:
                 System.out.println("Escape key pressed, moving to map");
                 notifyObservers(new ActionEvent(this, 0, "Map"));
+                break;
+        }
+    }
+    protected void released(int key) {
+        switch (key) {
+            case GLFW_KEY_LEFT:
+                System.out.println("Left key released");
+                model.stopMoving();
+                break;
+            case GLFW_KEY_RIGHT:
+                System.out.println("Right key released");
+                model.stopMoving();
                 break;
         }
     }

@@ -22,12 +22,16 @@ public class AssetHandler {
        menuPaths.put(Button.Id.RETURN,"./assets/ReturnButton.png");
        menuPaths.put(Button.Id.ENTER,"./assets/EnterButton.png");
 
+       levelPaths.put(Entity.Id.PLAYER,"./assets/CharacterTexture.png");
+       levelPaths.put(Entity.Id.GROUND,"./assets/GroundTexture.png");
+       levelPaths.put(Entity.Id.PLATFORM,"./assets/PlatformTexture.png");
+
        audioPaths.put(Audio.Id.BOUNCE,"./assets/bounce.ogg");
     }
     public String getMPath(GUIObject.Id key){
        return menuPaths.get(key);
     }
-    public String getLPath(Entity.Id key){
+    public String getEPath(Entity.Id key){
         return levelPaths.get(key);
     }
     public String getAPath(Audio.Id key){
