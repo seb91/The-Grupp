@@ -92,12 +92,16 @@ public class MapWindow extends GameWindow {
                 moveRight();
                 break;
             case GLFW_KEY_ENTER:
-                notifyObservers(new ActionEvent(this, 0, "EnterLevel"));
+                notifyObservers(new ActionEvent(this, pointer.getPosition(), "EnterLevel"));
                 break;
             case GLFW_KEY_ESCAPE:
                 notifyObservers(new ActionEvent(this, 0, "MainMenu"));
                 break;
         }
+    }
+    //Relays pointer position to controller.
+    public int getPosition() {
+        return pointer.getPosition();
     }
 
     //Pointer positioning
@@ -121,4 +125,5 @@ public class MapWindow extends GameWindow {
         pointer.setY(y);
         render();
     }
+
 }

@@ -10,7 +10,7 @@ public abstract class Entity {
 
     public Id id;
     public enum Id {
-        PLAYER, ENEMY, TERRAIN
+        PLAYER, ENEMY, GROUND, PLATFORM,
     }
 
 
@@ -35,8 +35,9 @@ public abstract class Entity {
                 ((this.posX+this.width < e.getX()+e.getWidth() && this.posX+this.width > e.getX()) && (this.posY < e.getY()+e.getWidth()) && (this.posY > e.getY()));
     }
 
-    /*public abstract ID returnID();*/
-
+    public Id getId(){
+        return id;
+    }
 
     public int getX(){
         return posX;
@@ -45,12 +46,6 @@ public abstract class Entity {
     public int getY(){
         return posY;
     }
-
-    public void setX(int x) {
-        posX = x;
-    }
-
-    public void setY(int y) { posY = y; }
 
     public int getWidth(){
         return width;

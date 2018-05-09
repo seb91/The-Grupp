@@ -108,10 +108,16 @@ public abstract class GameWindow implements Observable{
         List<Integer> AcceptedKeys = asList(GLFW_KEY_LEFT,
                                             GLFW_KEY_RIGHT,
                                             GLFW_KEY_ESCAPE,
-                                            GLFW_KEY_ENTER);
+                                            GLFW_KEY_ENTER,
+                                            GLFW_KEY_SPACE);
         glfwSetKeyCallback(window, (window, key, scancode, action, mods) -> {
-            if ( AcceptedKeys.contains(key) && (action == GLFW_REPEAT || action == GLFW_PRESS))
+            if ( AcceptedKeys.contains(key) && (action == GLFW_PRESS)){
                 pressed(key);
+            }
+            if ( AcceptedKeys.contains(key) && (action == GLFW_RELEASE)){
+                released(key);
+            }
+
         });
     }
     protected void paint(String imagePath, int x, int y) {
@@ -142,6 +148,7 @@ public abstract class GameWindow implements Observable{
     protected abstract void click(double posX, double posY);
 
     protected void pressed(int key){};
+    protected void released(int key){};
 
     protected int getWindowWidth(){
         return windowWidth;
