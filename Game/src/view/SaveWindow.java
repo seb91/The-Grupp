@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.lwjgl.glfw.GLFW.GLFW_KEY_ENTER;
 import static org.lwjgl.opengl.GL11.*;
 
 public class SaveWindow extends GameWindow{
@@ -21,7 +22,7 @@ public class SaveWindow extends GameWindow{
         buttons.add(new Button(Button.Id.SAVE1, 325, 425,150,50));
         buttons.add(new Button(Button.Id.SAVE2,325, 350,150,50));
         buttons.add(new Button(Button.Id.SAVE3, 325, 275,150,50));
-        buttons.add(new Button(Button.Id.QUIT, 325, 275,150,50));
+        buttons.add(new Button(Button.Id.QUIT, 325, 200,150,50));
         viewItems.addAll(buttons);
         viewItems.add(new Image("./assets/GameTitle.png", 150, 500));
     }
@@ -47,7 +48,7 @@ public class SaveWindow extends GameWindow{
             if (buttons.get(i).check(posX, posY)) {
                 switch (buttons.get(i).id) {
                     case SAVE1:
-                        System.out.println("Recreatiog game from save slot 1");
+                        System.out.println("Recreating game from save slot 1");
                         notifyObservers(new ActionEvent(this, 0, "Save1"));
                         break;
                     case SAVE2:
@@ -65,6 +66,13 @@ public class SaveWindow extends GameWindow{
                 }
             }
         }
-
+    }
+    protected void pressed(int key) {
+        switch (key) {
+            case GLFW_KEY_ENTER:
+                System.out.println("Recreating game from save slot 1");
+                notifyObservers(new ActionEvent(this, 0, "Save1"));
+                break;
+        }
     }
 }

@@ -62,7 +62,7 @@ public class MainWindow extends GameWindow {
     protected void pressed(int key) {
         switch (key) {
             case GLFW_KEY_ENTER:
-                notifyObservers(new ActionEvent(this, 0, "Map"));
+                notifyObservers(new ActionEvent(this, 0, "SaveMenu"));
                 break;
             case GLFW_KEY_ESCAPE:
                 notifyObservers(new ActionEvent(this, 0, "Exit"));

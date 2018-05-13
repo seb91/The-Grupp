@@ -13,9 +13,9 @@ public class Enemy extends Entity{
         this.hp = hp;
     }
 
-    public boolean overlaps(Projectile p){
+   /* public boolean overlaps(Projectile p){
         return super.overlaps(p) && !p.getHostility();
-    }
+    }*/
 
     public boolean updateHP(int difference){
         this.hp = this.hp + difference;

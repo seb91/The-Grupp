@@ -32,15 +32,14 @@ public class LevelWindow extends GameWindow {
     public void render() {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // clear the framebuffer
         glClearColor(backgroundRBGA[0], backgroundRBGA[1], backgroundRBGA[2], backgroundRBGA[3]);
-        for (GUIObject v : viewItems) {
-            paint(v.getImagePath(),v.getX(),v.getY());
-
-        }
-
         for (Entity e : model.getEntities()) {
             if(overlapsCamera(e)){
                 paint(GameWindow.assets.getEPath(e.getId()), e.getX()-cameraX, e.getY());
             }
+        }
+        for (GUIObject v : viewItems) {
+            paint(v.getImagePath(),v.getX(),v.getY());
+
         }
         model.update();
     }
@@ -62,7 +61,7 @@ public class LevelWindow extends GameWindow {
                 switch (buttons.get(i).id) {
                     case RETURN:
                         System.out.println("Moving to main menu");
-                        notifyObservers(new ActionEvent(this, 0, "Map"));
+                        notifyObservers(new ActionEvent(this, 0, "Save1"));
                         break;
                 }
             }
@@ -85,7 +84,7 @@ public class LevelWindow extends GameWindow {
                 break;
             case GLFW_KEY_ESCAPE:
                 System.out.println("Escape key pressed, moving to map");
-                notifyObservers(new ActionEvent(this, 0, "Map"));
+                notifyObservers(new ActionEvent(this, 0, "Save1"));
                 break;
         }
     }
@@ -93,11 +92,11 @@ public class LevelWindow extends GameWindow {
         switch (key) {
             case GLFW_KEY_LEFT:
                 System.out.println("Left key released");
-                model.stopMoving();
+                model.stopMoving(key);
                 break;
             case GLFW_KEY_RIGHT:
                 System.out.println("Right key released");
-                model.stopMoving();
+                model.stopMoving(key);
                 break;
         }
     }

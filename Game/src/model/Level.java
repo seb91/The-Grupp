@@ -2,12 +2,16 @@ package model;
 
 import java.util.ArrayList;
 
+import static org.lwjgl.glfw.GLFW.*;
+
 public class Level {
 
     private ArrayList<Entity> entities = new ArrayList<>();
     private Player player;
     private String entityType;
     private int levelWidth = 1000;
+    public boolean pressedR = false;
+    public boolean pressedL = false;
     int x,y;
 
     public Level(ArrayList<String> level) {
@@ -22,7 +26,7 @@ public class Level {
                     this.entities.add(player);
                     break;
                 case "PLATFORM":
-                    this.entities.add(new Terrain(Terrain.Id.PLATFORM,x,y,100,75));
+                    this.entities.add(new Terrain(Terrain.Id.PLATFORM,x,y,100,25));
                     break;
                 case "GROUND":
                     this.entities.add(new Terrain(Terrain.Id.GROUND,x,y,800,75));
@@ -37,29 +41,35 @@ public class Level {
     }
 
     public void moveRight(){
+        pressedR = true;
         player.setFriction(0);
-        player.setDx(10);
-        for (Entity e : entities) {
-            if(e.getId() != Entity.Id.PLAYER){
-                //e.setX();
-            }
-        }
+        player.setDx(5);
     }
+
     public void moveLeft(){
+        pressedL = true;
         player.setFriction(0);
-        player.setDx(-10);
-        for (Entity e : entities) {
-            if(e.getId() != Entity.Id.PLAYER){
-                //e.setX();
-            }
-        }
+        player.setDx(-5);
     }
-    public void stopMoving(){
-        player.setFriction(1);
+
+    public void stopMoving(int key){
+        if (pressedR && pressedL) {
+            if (key==GLFW_KEY_RIGHT) {
+                moveLeft();
+                pressedR = false;
+            } else if (key==GLFW_KEY_LEFT) {
+                moveRight();
+                pressedL = false;
+            }
+        } else {
+            player.setFriction(1);
+            pressedL = false;
+            pressedR = false;
+        }
     }
 
     public void jump(){
-        if(player.getY()== 75){
+        if(player.getY()== player.getFallLimit()){
             System.out.println("Jump");
             player.setDy(15);
         }
@@ -69,8 +79,10 @@ public class Level {
         return levelWidth;
     }
 
-
     public void update(){
+        for (Entity e: entities){
+            player.collision(e);
+        }
         player.update();
     }
 
