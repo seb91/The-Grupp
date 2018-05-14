@@ -44,6 +44,9 @@ public class Level {
                     System.out.println("BOSSBALL");
                     this.entities.add(new BouncingBossBall(BouncingBossBall.Id.BOSSBALL,x,y, 50,50));
                     break;
+                case "MOVINGPLATFORM":
+                    this.entities.add(new MovingPlatform(MovingPlatform.Id.MOVINGPLATFORM,x,y,100,25));
+                    break;
             }
         }
     }
@@ -106,6 +109,10 @@ public class Level {
             if (e.getId() == Entity.Id.BOSSBALL){
                 BouncingBossBall b = (BouncingBossBall)e;
                 b.update();
+            }
+            if (e.getId() == Entity.Id.MOVINGPLATFORM){
+                MovingPlatform p = (MovingPlatform) e;
+                p.update();
             }
         }
     }
