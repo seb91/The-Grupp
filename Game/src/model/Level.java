@@ -31,7 +31,10 @@ public class Level {
                 case "GROUND":
                     this.entities.add(new Terrain(Terrain.Id.GROUND,x,y,800,75));
                     break;
-
+                case "BALL":
+                    System.out.println("BALL");
+                    this.entities.add(new BouncingBall(BouncingBall.Id.BALL,x,y, 50,50));
+                    break;
             }
         }
     }
@@ -82,8 +85,13 @@ public class Level {
     public void update(){
         for (Entity e: entities){
             player.collision(e);
+            if (e.getId() == Entity.Id.BALL){
+                BouncingBall b = (BouncingBall)e;
+                b.update();
+            }
         }
         player.update();
+
     }
 
     public void playerAttack(){
