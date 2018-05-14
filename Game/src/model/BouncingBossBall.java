@@ -12,7 +12,6 @@ public class BouncingBossBall extends Entity {
     }
 
     public void update() {
-        // TODO this method implements one step of simulation with a step deltaT
             // detect collision with the border
             if (posX < width || posX > 800 - width) {
                 speedX *= -1; // change direction of ball
@@ -25,7 +24,6 @@ public class BouncingBossBall extends Entity {
                 speedY *= -1;
                 posY= 600 - width;
             }
-            //speedY = speedY - ;
 
             // compute new position according to the speed of the ball
             posX +=  speedX;
