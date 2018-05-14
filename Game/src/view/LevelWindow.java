@@ -32,11 +32,17 @@ public class LevelWindow extends GameWindow {
     public void render() {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // clear the framebuffer
         glClearColor(backgroundRBGA[0], backgroundRBGA[1], backgroundRBGA[2], backgroundRBGA[3]);
+
         for (Entity e : model.getEntities()) {
             if(overlapsCamera(e)){
                 paint(GameWindow.assets.getEPath(e.getId()), e.getX()-cameraX, e.getY());
             }
         }
+    
+        if(model.getPlayerX()-cameraX > 550){
+            cameraX = model.getPlayerX()-550;
+        }
+
         for (GUIObject v : viewItems) {
             paint(v.getImagePath(),v.getX(),v.getY());
 
@@ -46,7 +52,7 @@ public class LevelWindow extends GameWindow {
 
     public boolean overlapsCamera(Entity e){
 
-        return cameraX <= e.getX();
+        return cameraX <= e.getX() && cameraX+cameraWidth >= e.getX()+e.getWidth() ;
 
     }
 
@@ -73,10 +79,12 @@ public class LevelWindow extends GameWindow {
         switch (key) {
             case GLFW_KEY_LEFT:
                 model.moveLeft();
+                //cameraX -= 1;
                 break;
             case GLFW_KEY_RIGHT:
                 System.out.println("Right button pressed, update character model");
                 model.moveRight();
+                //cameraX += 1;
                 break;
             case GLFW_KEY_SPACE:
                 System.out.println("Space key pressed, update model");
