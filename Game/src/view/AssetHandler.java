@@ -29,6 +29,7 @@ public class AssetHandler {
        levelPaths.put(Entity.Id.GROUND,"./assets/GroundTexture.png");
        levelPaths.put(Entity.Id.PLATFORM,"./assets/PlatformTexture.png");
        levelPaths.put(Entity.Id.BALL,"./assets/Ball.png");
+       levelPaths.put(Entity.Id.BOSSBALL,"./assets/Ball.png");
 
        audioPaths.put(Audio.Id.BOUNCE,"./assets/bounce.ogg");
     }
