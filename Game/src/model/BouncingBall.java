@@ -15,9 +15,14 @@ public class BouncingBall extends Entity {
     public int nextY(){
         return posY+dy;
     }
+    public void setDy(int dy) {
+        this.dy = dy;
+    }
 
     public void update(){
-
+        if (posY == fallLimit) {
+            dy = 20;
+        }
         if(dx > 0) {
             dx = dx - friction;
         } else if(dx < 0){
@@ -49,3 +54,4 @@ public class BouncingBall extends Entity {
         }
     }
 }
+

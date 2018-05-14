@@ -10,7 +10,7 @@ public abstract class Entity {
 
     public Id id;
     public enum Id {
-        PLAYER,ENEMY, GROUND, PLATFORM,
+        PLAYER, ENEMY, GROUND, PLATFORM, BALL
     }
 
 
