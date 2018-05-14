@@ -40,6 +40,10 @@ public class Level {
                     System.out.println("BALL");
                     this.entities.add(new BouncingBall(BouncingBall.Id.BALL,x,y, 50,50));
                     break;
+                case "BOSSBALL":
+                    System.out.println("BOSSBALL");
+                    this.entities.add(new BouncingBossBall(BouncingBossBall.Id.BOSSBALL,x,y, 50,50));
+                    break;
             }
         }
     }
@@ -98,6 +102,10 @@ public class Level {
                 if (enemy != null) {
                     enemy.collision(e);
                 }
+            }
+            if (e.getId() == Entity.Id.BOSSBALL){
+                BouncingBossBall b = (BouncingBossBall)e;
+                b.update();
             }
         }
     }
