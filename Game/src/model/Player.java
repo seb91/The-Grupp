@@ -4,21 +4,21 @@ public class Player extends Entity{
 
     private int hp;
     private Weapon weapon;
-    private int dx,dy;
+    protected int dx,dy;
     private int friction;
     private Entity standingOn;
     private int gravity = 1;
-    private int fallLimit,leftLimit, rightLimit;
+    protected int fallLimit,leftLimit, rightLimit;
 
     public Player(Id id,int posX, int posY, int width, int height, int hp) {
         super(id,posX, posY, width, height);
         this.hp = hp;
+        lastPosX = posX;
     }
 
     /*public boolean overlaps(Projectile p){
         return super.overlaps(p) && p.getHostility();
     }*/
-
 
     public boolean updateHP(int difference){
         this.hp = this.hp + difference;
@@ -27,6 +27,10 @@ public class Player extends Entity{
             return true;
 
         return false;
+    }
+
+    public int getHealth() {
+        return hp;
     }
 
     public int getDx() {
@@ -53,7 +57,6 @@ public class Player extends Entity{
 
     //Checks collisions for objects.
     public void collision(Entity e){
-
         if(e!=this) {
             boolean rightOfEntity = posX >= e.getX()+e.getWidth();
             boolean leftOfEntity = posX+width <= e.getX();
@@ -63,9 +66,9 @@ public class Player extends Entity{
             boolean withinEntityWidth = posX+width > e.getX() && posX < e.getX() + e.getWidth();
 
             //Checks if there would be an overlap in the next render
-            if (overlaps(nextX(),nextY(),e)||e.overlaps(e.getX()-dx,e.getY()+dy,this)) {
-                System.out.println("Player collided with " + e.id);
-
+            if (overlaps(nextX(),nextY(),e)||e.overlaps(e.getX()-dx,e.getY(),this)) {
+                System.out.println(id+" collided with " + e.id);
+                System.out.println(rightOfEntity);
                 //From above
                 if (aboveEntity && withinEntityWidth) {
                     fallLimit = e.getY() + e.getHeight();
@@ -78,12 +81,14 @@ public class Player extends Entity{
                     posY = e.getY()-height-1;
                 }
                 //From the Right
+
                 else if(rightOfEntity){
-                    leftLimit = e.getX() + e.getWidth();
+
+                    leftLimit = e.getX() + e.getWidth()+1;
                 }
                 //From the Left
                 else if(leftOfEntity){
-                    rightLimit = e.getX()-width;
+                    rightLimit = e.getX()-width-1;
                 }
 
             } else if(!withinEntityWidth && standingOn == e){
@@ -92,7 +97,7 @@ public class Player extends Entity{
         } else {
             leftLimit = 0;
             // to be set to level width later
-            rightLimit = 1000;
+            rightLimit = 760;
         }
 
     }
