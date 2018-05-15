@@ -18,10 +18,13 @@ public class LevelWindow extends GameWindow {
     private List<Button> buttons = new ArrayList<>();
     private List<GUIObject> viewItems = new ArrayList<>();
     private Level model;
+    private HealthBar hp;
 
     public LevelWindow(Level model) {
         this.model = model;
         buttons.add(new Button(Button.Id.RETURN, 650, 0, 150, 50));
+        hp =new HealthBar(HealthBar.Id.HEALTH_BAR,10,560);
+        viewItems.add(hp);
         viewItems.addAll(buttons);
         camera = new Camera(0, 0, getWindowWidth(), getWindowHeight());
     }
@@ -34,6 +37,12 @@ public class LevelWindow extends GameWindow {
             if(camera.overlaps(e)){
                 paint(GameWindow.assets.getEPath(e.getId()), e.getX()-camera.getX(), e.getY());
             }
+            if(e.id == Entity.Id.PLAYER){
+                animate(e);
+            }
+            if(e.id == Entity.Id.ENEMY){
+                animate(e);
+            }
         }
         int breakpoint = (int) (camera.getWidth()/1.5);
 
@@ -44,6 +53,7 @@ public class LevelWindow extends GameWindow {
         for (GUIObject v : viewItems) {
             paint(v.getImagePath(),v.getX(),v.getY());
         }
+        hp.updateHealthBar(model.getPlayerHealth());
         model.update();
     }
 
@@ -86,6 +96,37 @@ public class LevelWindow extends GameWindow {
                 notifyObservers(new ActionEvent(this, saveData, "Save"));
                 break;
         }
+    }
+    private void animate (Entity e){
+        int lastX = e.getLastPosX();
+        String path = assets.getEPath(e.id);
+        String step = path.substring(path.length()-5, path.length()-4);
+        path = path.substring(0, path.length() - 5);
+
+        if(lastX-20 >= e.getX()){
+            e.setLastPosX(e.getX());
+            if(step.equals("1")||step.equals("2")){
+                path = path+3+".png";
+            }else if(step.equals("3")){
+                path = path +4+".png";
+            }  else {
+                path = path +3+".png";
+            }
+            assets.updateLevelAsset(e.id,path);
+        }
+
+        if(lastX+20 <= e.getX()){
+            e.setLastPosX(e.getX());
+            if(step.equals("3")||step.equals("4")){
+                path = path+1+".png";
+            }else if(step.equals("1")){
+                path = path +2+".png";
+            }  else  {
+                path = path +1+".png";
+            }
+            assets.updateLevelAsset(e.id,path);
+        }
+
     }
     protected void released(int key) {
         switch (key) {

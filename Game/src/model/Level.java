@@ -7,6 +7,7 @@ import static org.lwjgl.glfw.GLFW.*;
 public class Level {
 
     private ArrayList<Entity> entities = new ArrayList<>();
+    private Enemy enemy;
     private Player player;
     private String entityType;
     private int levelWidth = 1000;
@@ -22,8 +23,12 @@ public class Level {
             y = Integer.parseInt(level.get(i+2));
             switch (entityType) {
                 case "PLAYER":
-                    player = new Player(Player.Id.PLAYER,x,y,40,75,100);
+                    player = new Player(Player.Id.PLAYER,x,y,40,75,5);
                     this.entities.add(player);
+                    break;
+                case "ENEMY":
+                    enemy = new Enemy(Entity.Id.ENEMY,x,y,40,75,1);
+                    this.entities.add(enemy);
                     break;
                 case "PLATFORM":
                     this.entities.add(new Terrain(Terrain.Id.PLATFORM,x,y,100,25));
@@ -80,22 +85,36 @@ public class Level {
     }
 
     public void update(){
+
         for (Entity e: entities){
             player.collision(e);
+            if(enemy != null) {
+                enemy.collision(e);
+            }
         }
+        if(enemy!= null) {
+            enemy.move();
+            enemy.update();
+        }
+
         player.update();
+
     }
 
     public void playerAttack(){
 
     }
-
+    
     public int getPlayerX(){
         return player.getX();
     }
 
     public int getPlayerY(){
         return player.getY();
+    }
+
+    public int getPlayerHealth() {
+        return player.getHealth();
     }
 
 }

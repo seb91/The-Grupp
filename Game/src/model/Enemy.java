@@ -2,38 +2,34 @@ package model;
 
 import java.util.Random;
 
-public class Enemy extends Entity{
+public class Enemy extends Player{
 
-    private int hp;
-
-
+    int bounds;
 
     public Enemy(Id id,int posX, int posY, int width, int height, int hp) {
-        super(id,posX, posY, width, height);
-        this.hp = hp;
+        super(id,posX, posY, width, height,hp);
+        bounds =-1;
     }
 
-   /* public boolean overlaps(Projectile p){
-        return super.overlaps(p) && !p.getHostility();
-    }*/
-
-    public boolean updateHP(int difference){
-        this.hp = this.hp + difference;
-
-        if(hp<=0)
-            return true;
-
-        return false;
-    }
-
-    public void randomMovement(){
+    private void randomMovement(){
         Random random = new Random();
         int n = random.nextInt(10) +1;
         if (n<5){
-            posX+= n;
+            dx = 1;
         }
         if (n>5){
-            posX-= n-5;
+            dx = -1;
+        }
+        if(n<4&&posY<=fallLimit){
+            dy = 15;
+        }
+    }
+    public void move(){
+        if(bounds-100>=posX||bounds+100<=posX){
+            bounds = posX;
+            randomMovement();
+        } else if(posX==rightLimit||posX==leftLimit){
+            randomMovement();
         }
     }
 }

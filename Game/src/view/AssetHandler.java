@@ -25,8 +25,10 @@ public class AssetHandler {
        menuPaths.put(Button.Id.SAVE2,"./assets/Save2.png");
        menuPaths.put(Button.Id.SAVE3,"./assets/Save3.png");
        menuPaths.put(Button.Id.BG_MUSIC_TOGGLE,"./assets/BgMusicButton.png");
+       menuPaths.put(GUIObject.Id.HEALTH_BAR,"./assets/health_bar/HealthBar1.png");
 
-       levelPaths.put(Entity.Id.PLAYER,"./assets/CharacterTexture.png");
+       levelPaths.put(Entity.Id.PLAYER,"./assets/characters/Player1.png");
+       levelPaths.put(Entity.Id.ENEMY,"./assets/characters/Enemy1.png");
        levelPaths.put(Entity.Id.GROUND,"./assets/GroundTexture.png");
        levelPaths.put(Entity.Id.PLATFORM,"./assets/PlatformTexture.png");
 
@@ -41,6 +43,10 @@ public class AssetHandler {
     }
     public String getAPath(Audio.Id key){
         return audioPaths.get(key);
+    }
+
+    public void updateLevelAsset(Entity.Id key, String value){
+       levelPaths.put(key,value);
     }
 
 }
