@@ -20,7 +20,7 @@ public class BouncingBossBall extends MovingEntity {
 
     public void update() {
             // detect collision with the border
-            if (posX < width || posX > 800 - width) {
+            if (posX < width || posX > 800 - width || nextX() < leftLimit) {
                 speedX *= -1; // change direction of ball
             }
             if (posY < width) {

@@ -117,7 +117,6 @@ public class Player extends MovingEntity{
     }
 
     public void update(){
-
         if(dx > 0) {
             dx = dx - friction;
         } else if(dx < 0){
@@ -131,9 +130,9 @@ public class Player extends MovingEntity{
             posY = posY+dy;
         }
 
-        if(nextX() < leftLimit ){
+        if(nextX() < leftLimit || posX <leftLimit){
             posX = leftLimit;
-        } else if(nextX() > rightLimit ) {
+        } else if(nextX() > rightLimit || posX >rightLimit) {
             posX = rightLimit;
         } else {
             posX = posX + dx;
