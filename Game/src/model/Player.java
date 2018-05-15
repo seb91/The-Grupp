@@ -9,6 +9,7 @@ public class Player extends Entity{
     private Entity standingOn;
     private int gravity = 1;
     protected int fallLimit,leftLimit, rightLimit;
+    private Long tookDamage = System.currentTimeMillis()-1000;
 
     public Player(Id id,int posX, int posY, int width, int height, int hp) {
         super(id,posX, posY, width, height);
@@ -55,6 +56,14 @@ public class Player extends Entity{
         return posY+dy;
     }
 
+    public void damageCheck(Entity.Id id){
+        Long currentTime = System.currentTimeMillis();
+        if((this.id == Id.PLAYER&&id==Id.ENEMY)&&(tookDamage - currentTime < -1000)){
+            updateHP(-1);
+            tookDamage = currentTime;
+        }
+    }
+
     //Checks collisions for objects.
     public void collision(Entity e){
         if(e!=this) {
@@ -67,13 +76,11 @@ public class Player extends Entity{
 
             //Checks if there would be an overlap in the next render
             if (overlaps(nextX(),nextY(),e)||e.overlaps(e.getX()-dx,e.getY(),this)) {
-                System.out.println(id+" collided with " + e.id);
-                System.out.println(rightOfEntity);
+                damageCheck(e.id);
                 //From above
                 if (aboveEntity && withinEntityWidth) {
                     fallLimit = e.getY() + e.getHeight();
                     standingOn = e;
-                    System.out.println("Fall limit is now " + (e.getY() + e.getHeight()));
                 }
                 //From below
                 else if(belowEntity && withinEntityWidth) {

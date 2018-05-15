@@ -49,7 +49,11 @@ public class LevelWindow extends GameWindow {
         for (GUIObject v : viewItems) {
             paint(v.getImagePath(),v.getX(),v.getY());
         }
-        hp.updateHealthBar(model.getPlayerHealth());
+        if(model.getPlayerHealth()>=1) {
+            hp.updateHealthBar(model.getPlayerHealth());
+        } else{
+            notifyObservers(new ActionEvent(this, saveData, "Save"));
+        }
         model.update();
     }
 
