@@ -14,26 +14,36 @@ import static org.lwjgl.system.libc.LibCStdlib.free;
 
 public class Audio extends Thread {
 
+    public Id id;
+
     private int playtime;
     private String path;
-    public Id id;
+    private boolean loop;
+    private boolean play;
+    private int sourcePointer;
+    private int bufferPointer;
+    private long context;
+    private long device;
+
+
     public enum Id {
-        BOUNCE
+        BOUNCE, BG_MUSIC
     }
 
-    public Audio(Id id,int playtime) {
+    public Audio(Id id,int playtime,boolean loop) {
         this.id = id;
         this.path = GameWindow.assets.getAPath(id);
         this.playtime = playtime;
+        this.loop = loop;
     }
 
     public void run(){
         //Initialization
         String defaultDeviceName = alcGetString(0, ALC_DEFAULT_DEVICE_SPECIFIER);
-        long   device            = alcOpenDevice(defaultDeviceName);
+        device = alcOpenDevice(defaultDeviceName);
 
         int[] attributes = {0};
-        long  context    = alcCreateContext(device, attributes);
+        context = alcCreateContext(device, attributes);
         alcMakeContextCurrent(context);
 
         ALCCapabilities alcCapabilities = ALC.createCapabilities(device);
@@ -63,7 +73,7 @@ public class Audio extends Thread {
         }
 
         //Request space for the buffer
-        int bufferPointer = alGenBuffers();
+        bufferPointer = alGenBuffers();
 
         //Send the data to OpenAL
         alBufferData(bufferPointer, format, rawAudioBuffer, sampleRate);
@@ -72,23 +82,32 @@ public class Audio extends Thread {
         free(rawAudioBuffer);
 
         //Request a source
-        int sourcePointer = alGenSources();
+        sourcePointer = alGenSources();
 
         //Assign the sound we just loaded to the source
         alSourcei(sourcePointer, AL_BUFFER, bufferPointer);
 
-        //Play the sound
-        alSourcePlay(sourcePointer);
+        play = true;
+        while(play) {
+            //Play the sound
+            alSourcePlay(sourcePointer);
 
-        try {
-            Thread.sleep(playtime);
-        } catch (InterruptedException ignored) {
+            try {
+                Thread.sleep(playtime);
+            } catch (InterruptedException ignored) {
+            }
+            play = loop;
         }
+        terminateAudio();
+    }
 
-        //Terminate OpenAL
-        alDeleteSources(sourcePointer);
-        alDeleteBuffers(bufferPointer);
-        alcDestroyContext(context);
-        alcCloseDevice(device);
+    public void terminateAudio(){
+        if(play) {
+            alDeleteSources(sourcePointer);
+            alDeleteBuffers(bufferPointer);
+            alcDestroyContext(context);
+            alcCloseDevice(device);
+            play = false;
+        }
     }
 }

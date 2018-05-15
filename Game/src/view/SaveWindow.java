@@ -22,7 +22,7 @@ public class SaveWindow extends GameWindow{
         buttons.add(new Button(Button.Id.SAVE1, 325, 425,150,50));
         buttons.add(new Button(Button.Id.SAVE2,325, 350,150,50));
         buttons.add(new Button(Button.Id.SAVE3, 325, 275,150,50));
-        buttons.add(new Button(Button.Id.QUIT, 325, 200,150,50));
+        buttons.add(new Button(Button.Id.RETURN, 325, 200,150,50));
         viewItems.addAll(buttons);
         viewItems.add(new Image("./assets/GameTitle.png", 150, 500));
     }
@@ -59,9 +59,9 @@ public class SaveWindow extends GameWindow{
                         System.out.println("Recreating game from save slot 3");
                         notifyObservers(new ActionEvent(this, 0, "Save3"));
                         break;
-                    case QUIT:
-                        System.out.println("Terminating program");
-                        notifyObservers(new ActionEvent(this, 0, "Exit"));
+                    case RETURN:
+                        System.out.println("Returning to main menu.");
+                        notifyObservers(new ActionEvent(this, 0, "MainMenu"));
                         break;
                 }
             }
