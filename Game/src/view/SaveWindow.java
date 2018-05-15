@@ -49,15 +49,15 @@ public class SaveWindow extends GameWindow{
                 switch (buttons.get(i).id) {
                     case SAVE1:
                         System.out.println("Recreating game from save slot 1");
-                        notifyObservers(new ActionEvent(this, 0, "Save1"));
+                        notifyObservers(new ActionEvent(this, 1, "Save"));
                         break;
                     case SAVE2:
                         System.out.println("Recreating game from save slot 2");
-                        notifyObservers(new ActionEvent(this, 0, "Save2"));
+                        notifyObservers(new ActionEvent(this, 2, "Save"));
                         break;
                     case SAVE3:
                         System.out.println("Recreating game from save slot 3");
-                        notifyObservers(new ActionEvent(this, 0, "Save3"));
+                        notifyObservers(new ActionEvent(this, 3, "Save"));
                         break;
                     case RETURN:
                         System.out.println("Returning to main menu.");
@@ -71,7 +71,7 @@ public class SaveWindow extends GameWindow{
         switch (key) {
             case GLFW_KEY_ENTER:
                 System.out.println("Recreating game from save slot 1");
-                notifyObservers(new ActionEvent(this, 0, "Save1"));
+                notifyObservers(new ActionEvent(this, 1, "Save"));
                 break;
         }
     }

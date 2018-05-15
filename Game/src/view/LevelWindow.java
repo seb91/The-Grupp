@@ -57,8 +57,8 @@ public class LevelWindow extends GameWindow {
             if (buttons.get(i).check(posX, posY)) {
                 switch (buttons.get(i).id) {
                     case RETURN:
-                        System.out.println("Moving to main menu");
-                        notifyObservers(new ActionEvent(this, 0, "Save1"));
+                        System.out.println("Moving to map");
+                        notifyObservers(new ActionEvent(this, saveData , "Save"));
                         break;
                 }
             }
@@ -83,7 +83,7 @@ public class LevelWindow extends GameWindow {
                 break;
             case GLFW_KEY_ESCAPE:
                 System.out.println("Escape key pressed, moving to map");
-                notifyObservers(new ActionEvent(this, 0, "Save1"));
+                notifyObservers(new ActionEvent(this, saveData, "Save"));
                 break;
         }
     }
