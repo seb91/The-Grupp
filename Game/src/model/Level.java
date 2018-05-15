@@ -95,27 +95,30 @@ public class Level {
     }
 
     public void update(){
-
     for (Entity e: entities) {
         player.collision(e);
-        if (e.getId() == Entity.Id.BALL) {
-            BouncingBall b = (BouncingBall) e;
-            b.update();
+
             for (Enemy enemy : enemies) {
                 if (enemy != null) {
                     enemy.collision(e);
                 }
             }
+        if (e.getId() == Entity.Id.BALL){
+            BouncingBall b = (BouncingBall)e;
+            b.collision(player);
+            b.update();
+        }
             if (e.getId() == Entity.Id.BOSSBALL){
                 BouncingBossBall b = (BouncingBossBall)e;
+                b.collision(player);
                 b.update();
             }
             if (e.getId() == Entity.Id.MOVINGPLATFORM){
                 MovingPlatform p = (MovingPlatform) e;
                 p.update();
+                p.collision(player);
             }
         }
-    }
     for(Enemy enemy: enemies){
         enemy.move();
         enemy.update();

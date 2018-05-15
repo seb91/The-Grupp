@@ -1,15 +1,19 @@
 package model;
 
-public class Player extends Entity{
+import services.CheckCollision;
+
+public class Player extends MovingEntity{
 
     private int hp;
     private Weapon weapon;
-    protected int dx,dy;
+    private Long tookDamage = System.currentTimeMillis()-1000;
+
+    /*private int dx,dy;
     private int friction;
     private Entity standingOn;
     private int gravity = 1;
-    protected int fallLimit,leftLimit, rightLimit;
-    private Long tookDamage = System.currentTimeMillis()-1000;
+    private int fallLimit,leftLimit, rightLimit;*/
+
 
     public Player(Id id,int posX, int posY, int width, int height, int hp) {
         super(id,posX, posY, width, height);
@@ -66,6 +70,9 @@ public class Player extends Entity{
 
     //Checks collisions for objects.
     public void collision(Entity e){
+        CheckCollision.collision(this,e);
+        /*
+>>>>>>> moving the collision check to a service class
         if(e!=this) {
             boolean rightOfEntity = posX >= e.getX()+e.getWidth();
             boolean leftOfEntity = posX+width <= e.getX();
@@ -106,7 +113,7 @@ public class Player extends Entity{
             // to be set to level width later
             rightLimit = 2360;
         }
-
+*/
     }
 
     public void update(){
