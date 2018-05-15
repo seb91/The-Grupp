@@ -57,6 +57,9 @@ public abstract class Entity {
     public int getY(){
         return posY;
     }
+    public void setY(int y){
+        posY = y;
+    }
 
     public int getWidth(){
         return width;

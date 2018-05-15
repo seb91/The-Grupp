@@ -94,15 +94,19 @@ public class Level {
             player.collision(e);
             if (e.getId() == Entity.Id.BALL){
                 BouncingBall b = (BouncingBall)e;
+                b.collision(player);
                 b.update();
             }
             if (e.getId() == Entity.Id.BOSSBALL){
                 BouncingBossBall b = (BouncingBossBall)e;
+                b.collision(player);
                 b.update();
+
             }
             if (e.getId() == Entity.Id.MOVINGPLATFORM){
                 MovingPlatform p = (MovingPlatform) e;
                 p.update();
+                p.collision(player);
             }
         }
         player.update();

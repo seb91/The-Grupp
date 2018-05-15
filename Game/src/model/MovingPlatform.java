@@ -1,6 +1,8 @@
 package model;
 
-public class MovingPlatform extends Terrain {
+import services.CheckCollision;
+
+public class MovingPlatform extends MovingEntity {
     private int originX;
     private int originY;
     private int speed;
@@ -12,6 +14,11 @@ public class MovingPlatform extends Terrain {
         path = 40;
         originX=posX;
         originY=posY;
+    }
+
+    @Override
+    public void collision(Entity b) {
+        CheckCollision.collision(this, b);
     }
 
     public void update(){

@@ -1,6 +1,8 @@
 package model;
 
-public class BouncingBossBall extends Entity {
+import services.CheckCollision;
+
+public class BouncingBossBall extends MovingEntity {
 
     private int speedX;
     private int speedY;
@@ -9,6 +11,11 @@ public class BouncingBossBall extends Entity {
         super(id, posX, posY, width, height);
         this.speedX = 10;
         this.speedY = 10;
+    }
+
+    @Override
+    public void collision(Entity b) {
+        CheckCollision.collision(this,b);
     }
 
     public void update() {
