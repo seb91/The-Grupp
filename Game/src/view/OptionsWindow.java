@@ -12,7 +12,6 @@ public class OptionsWindow extends GameWindow {
 
     private List<Button> buttons = new ArrayList<>();
     private List<GUIObject> viewItems = new ArrayList<>();
-    private Boolean musicOn = true;
 
     public OptionsWindow(){
         buttons.add(new Button(Button.Id.RETURN, 325, 350,150,50));

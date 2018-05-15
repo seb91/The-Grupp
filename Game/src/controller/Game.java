@@ -1,6 +1,7 @@
 package controller;
 
 import services.Loader;
+import services.SaveGame;
 import view.*;
 import model.*;
 
@@ -9,6 +10,7 @@ import java.io.FileNotFoundException;
 
 import static org.lwjgl.glfw.Callbacks.glfwFreeCallbacks;
 import static org.lwjgl.glfw.GLFW.*;
+import static services.SaveGame.createGame;
 
 public class Game implements Listener {
 
@@ -56,28 +58,10 @@ public class Game implements Listener {
                 view = new SaveWindow();
                 view.addObserver(this);
                 break;
-            case("Save1"): // Not yet fully implemented the save function
-                System.out.println("Map view should load with saved progress from save slot 1");
+            case("Save"):
+                System.out.println("Map view should load with saved progress from save slot: "+e.getID());
                 try {
-                    view = new MapWindow(loader.loadFile("map_1"));
-                } catch (FileNotFoundException e1) {
-                    e1.printStackTrace();
-                }
-                view.addObserver(this);
-                break;
-            case("Save2"): // Not yet fully implemented the save function
-                System.out.println("Map view should load with saved progress from save slot 2");
-                try {
-                    view = new MapWindow(loader.loadFile("map_1"));
-                } catch (FileNotFoundException e1) {
-                    e1.printStackTrace();
-                }
-                view.addObserver(this);
-                break;
-            case("Save3"): // Not yet fully implemented the save function
-                System.out.println("Map view should load with saved progress from save slot 3");
-                try {
-                    view = new MapWindow(loader.loadFile("map_1"));
+                    view = new MapWindow(loader.loadFile("map_1"),createGame(e.getID()));
                 } catch (FileNotFoundException e1) {
                     e1.printStackTrace();
                 }

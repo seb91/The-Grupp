@@ -25,8 +25,9 @@ public abstract class GameWindow implements Observable{
     private Texture tex;
     private ArrayList<Listener> observers = new ArrayList<Listener>();
     protected static ArrayList<Audio> audio = new ArrayList<>();
-    protected static ArrayList<Thread> audioThreads = new ArrayList<>();
     protected static AssetHandler assets = new AssetHandler();
+    protected static Boolean musicOn = true;
+    protected static int saveData;
 
     // The window handle
     private static long window;
