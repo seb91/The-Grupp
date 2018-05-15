@@ -38,9 +38,9 @@ public class Game implements Listener {
 
 
         // Terminate GLFW and free the error callback
+        view.terminateAllAudio();
         glfwTerminate();
         glfwSetErrorCallback(null).free();
-
     }
 
     @Override
@@ -99,12 +99,8 @@ public class Game implements Listener {
                 view = new OptionsWindow();
                 view.addObserver(this);
                 break;
-            case("ReturnMain"):
-                System.out.println("got to back pressed switch");
-                view = new MainWindow();
-                view.addObserver(this);
-                break;
             case("Exit"):
+                view.terminateAllAudio();
                 glfwTerminate();
                 glfwSetErrorCallback(null).free();
                 System.exit(0);

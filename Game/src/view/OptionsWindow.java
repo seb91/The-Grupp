@@ -12,9 +12,11 @@ public class OptionsWindow extends GameWindow {
 
     private List<Button> buttons = new ArrayList<>();
     private List<GUIObject> viewItems = new ArrayList<>();
+    private Boolean musicOn = true;
 
     public OptionsWindow(){
-        buttons.add(new Button(Button.Id.RETURN, 325, 425,150,50));
+        buttons.add(new Button(Button.Id.RETURN, 325, 350,150,50));
+        buttons.add(new Button(Button.Id.BG_MUSIC_TOGGLE, 325, 425,150,50));
         viewItems.addAll(buttons);
         viewItems.add(new Image("./assets/OptionsTitle.png", 150, 500));
     }
@@ -41,7 +43,16 @@ public class OptionsWindow extends GameWindow {
                 switch (buttons.get(i).id) {
                     case RETURN:
                         System.out.println("Returning to Main Menu");
-                        notifyObservers(new ActionEvent(this, 2, "ReturnMain"));
+                        notifyObservers(new ActionEvent(this, 2, "MainMenu"));
+                        break;
+                    case BG_MUSIC_TOGGLE:
+                        if (musicOn) {
+                            musicOn = false;
+                            terminateAudio(Audio.Id.BG_MUSIC);
+                        } else{
+                            musicOn = true;
+                            playAudio(Audio.Id.BG_MUSIC);
+                        }
                         break;
                 }
             }

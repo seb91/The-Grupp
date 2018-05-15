@@ -23,9 +23,10 @@ public abstract class GameWindow implements Observable{
     private final int windowWidth = 800;
     private final int windowHeight = 600 ;
     private Texture tex;
-
-    protected static AssetHandler assets = new AssetHandler();
     private ArrayList<Listener> observers = new ArrayList<Listener>();
+    protected static ArrayList<Audio> audio = new ArrayList<>();
+    protected static ArrayList<Thread> audioThreads = new ArrayList<>();
+    protected static AssetHandler assets = new AssetHandler();
 
     // The window handle
     private static long window;
@@ -85,10 +86,40 @@ public abstract class GameWindow implements Observable{
         // Enable v-sync
         glfwSwapInterval(1);
 
+        //Add background music, and play it.
+        audio.add(new Audio(Audio.Id.BG_MUSIC,77000,true));
+        playAudio(Audio.Id.BG_MUSIC);
+
         // Make the window visible
         glfwShowWindow(window);
 
         return window;
+    }
+
+    public static void terminateAllAudio(){
+        System.out.println("All audio terminated.");
+        for(Audio a: audio){
+            a.terminateAudio();
+        }
+    }
+
+    public static void playAudio(Audio.Id id){
+        System.out.println("Audio file: "+id+" played.");
+        for(Audio a: audio){
+            if(a.id == id) {
+                (new Thread(a)).start();
+            }
+        }
+    }
+    public static void terminateAudio(Audio.Id id){
+        System.out.println("Audio file: "+id+" terminated.");
+        for(Audio a: audio){
+            if(a.id == id){
+                if(a!= null) {
+                    a.terminateAudio();
+                }
+            }
+        }
     }
 
     public void input(){

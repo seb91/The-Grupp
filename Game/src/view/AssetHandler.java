@@ -24,12 +24,14 @@ public class AssetHandler {
        menuPaths.put(Button.Id.SAVE1,"./assets/Save1.png");
        menuPaths.put(Button.Id.SAVE2,"./assets/Save2.png");
        menuPaths.put(Button.Id.SAVE3,"./assets/Save3.png");
+       menuPaths.put(Button.Id.BG_MUSIC_TOGGLE,"./assets/BgMusicButton.png");
 
        levelPaths.put(Entity.Id.PLAYER,"./assets/CharacterTexture.png");
        levelPaths.put(Entity.Id.GROUND,"./assets/GroundTexture.png");
        levelPaths.put(Entity.Id.PLATFORM,"./assets/PlatformTexture.png");
 
-       audioPaths.put(Audio.Id.BOUNCE,"./assets/bounce.ogg");
+       audioPaths.put(Audio.Id.BOUNCE,"./assets/audio/bounce.ogg");
+       audioPaths.put(Audio.Id.BG_MUSIC,"./assets/audio/background_music.ogg");
     }
     public String getMPath(GUIObject.Id key){
        return menuPaths.get(key);

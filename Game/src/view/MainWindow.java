@@ -49,7 +49,6 @@ public class MainWindow extends GameWindow {
                     case OPTIONS:
                         System.out.println("Moving to Options menu");
                         notifyObservers(new ActionEvent(this, 0, "OptionsMenu"));
-                        (new Thread(new Audio(Audio.Id.BOUNCE,1000))).start();
                         break;
                     case QUIT:
                         System.out.println("Terminating program");
