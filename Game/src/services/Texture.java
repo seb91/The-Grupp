@@ -35,6 +35,7 @@ public class Texture {
     }
 
     public void delete() {
+        glBindTexture(GL_TEXTURE_2D, 0);
         glDeleteTextures(id);
     }
 
@@ -72,6 +73,8 @@ public class Texture {
 
         texture.uploadData(GL_RGBA8, width, height, GL_RGBA, data);
 
+        stbi_image_free(data);
+
         return texture;
     }
 
@@ -95,6 +98,7 @@ public class Texture {
             /* Get width and height of image */
             width = w.get();
             height = h.get();
+
         }
 
         return createTexture(width, height, image);

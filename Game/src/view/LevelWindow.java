@@ -11,11 +11,7 @@ import java.util.List;
 
 public class LevelWindow extends GameWindow {
 
-
-    int cameraX = 0;
-    int cameraY = 0;
-    int cameraWidth = 800;
-    int cameraHeight = 600;
+    private Camera camera;
 
     float[] backgroundRBGA = new float[]{0.70f, 0.88f, 0.99f, 0.0f};
 
@@ -27,6 +23,7 @@ public class LevelWindow extends GameWindow {
         this.model = model;
         buttons.add(new Button(Button.Id.RETURN, 650, 0, 150, 50));
         viewItems.addAll(buttons);
+        camera = new Camera(0, 0, getWindowWidth(), getWindowHeight());
     }
 
     public void render() {
@@ -34,28 +31,23 @@ public class LevelWindow extends GameWindow {
         glClearColor(backgroundRBGA[0], backgroundRBGA[1], backgroundRBGA[2], backgroundRBGA[3]);
 
         for (Entity e : model.getEntities()) {
-            if(overlapsCamera(e)){
-                paint(GameWindow.assets.getEPath(e.getId()), e.getX()-cameraX, e.getY());
+            if(camera.overlaps(e)){
+                paint(GameWindow.assets.getEPath(e.getId()), e.getX()-camera.getX(), e.getY());
             }
         }
 
-        if(model.getPlayerX()-cameraX > 550){
-            cameraX = model.getPlayerX()-550;
+        int breakpoint = (int) (camera.getWidth()/1.5);
+
+        if(model.getPlayerX()-camera.getX() > breakpoint){
+            camera.setX(model.getPlayerX()-breakpoint);
         }
 
         for (GUIObject v : viewItems) {
             paint(v.getImagePath(),v.getX(),v.getY());
-
         }
 
 
         model.update();
-    }
-
-    public boolean overlapsCamera(Entity e){
-
-        return cameraX <= e.getX() && cameraX+cameraWidth >= e.getX()+e.getWidth() ;
-
     }
 
     @Override
