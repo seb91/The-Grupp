@@ -104,7 +104,7 @@ public class Player extends Entity{
         } else {
             leftLimit = 0;
             // to be set to level width later
-            rightLimit = 760;
+            rightLimit = 2360;
         }
 
     }

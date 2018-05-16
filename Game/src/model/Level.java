@@ -10,7 +10,7 @@ public class Level {
     private ArrayList<Enemy> enemies = new ArrayList<>();
     private Player player;
     private String entityType;
-    private int levelWidth = 1000;
+    private int levelWidth = 2400;
     public boolean pressedR = false;
     public boolean pressedL = false;
     int x,y;
@@ -104,7 +104,6 @@ public class Level {
     }
 
     public void playerAttack(){
-
     }
     
     public int getPlayerX(){
