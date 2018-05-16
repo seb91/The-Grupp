@@ -34,21 +34,22 @@ public abstract class Entity {
                 ((this.posX+this.width < e.getX()+e.getWidth() && this.posX+this.width > e.getX()) && (this.posY+height > e.getY()) && (this.posY+height < e.getY()+e.getHeight())) ||
                 ((this.posX+this.width < e.getX()+e.getWidth() && this.posX+this.width > e.getX()) && (this.posY < e.getY()+e.getWidth()) && (this.posY > e.getY()));
                 */
-/*
+
         boolean upperY = y + height >= e.getY() && y + height <= e.getY()+e.getHeight();
         boolean lowerY = y <= e.getY()+e.getHeight() && y >= e.getY();
         boolean leftX = x >= e.getX() && x <= e.getX()+e.getWidth();
         boolean rightX = x + width <= e.getX()+e.getWidth() && x + width >= e.getX();
-        */
+
+        /*
         boolean Y = y < e.getY() && y+ height > e.getY() || y < e.getY()+e.getHeight() && y+ height > e.getY()+e.getHeight()|| e.getY() < y && e.getY()+e.getHeight() > y || e.getY() < y+height && e.getY()+e.getHeight() > y+height;
         boolean X = x < e.getX() && x+ width > e.getX() || x < e.getX()+e.getWidth() && x+ width > e.getX()+e.getWidth()|| e.getX() < x && e.getX()+e.getWidth() > x || e.getX() < x+width && e.getX()+e.getWidth() > x+width;
+*/
 
-
-        /*return  (leftX && upperY) ||
+        return  (leftX && upperY) ||
                 (leftX && lowerY) ||
                 (rightX && upperY) ||
-                (rightX && lowerY );*/
-        return Y&&X;
+                (rightX && lowerY );
+        /*return Y&&X; */
     }
 
     public int getLastPosX() {
