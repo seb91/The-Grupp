@@ -21,7 +21,7 @@ import services.*;
 public abstract class GameWindow implements Observable{
 
     private final int windowWidth = 800;
-    private final int windowHeight = 600 ;
+    private final int windowHeight = 600;
     private Texture tex;
 
     protected static AssetHandler assets = new AssetHandler();
@@ -141,6 +141,8 @@ public abstract class GameWindow implements Observable{
         glTexCoord2f(1,1); glVertex2f(floatX+width,floatY+height);
         glTexCoord2f(1,0); glVertex2f(floatX+width,floatY);
         glEnd();
+
+        tex.delete();
     }
 
     public abstract void render();
