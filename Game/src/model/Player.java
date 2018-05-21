@@ -25,6 +25,10 @@ public class Player extends MovingEntity{
         return super.overlaps(p) && p.getHostility();
     }*/
 
+    /*
+     Updates player's HP. Returns true if this kills the player, or false
+     if player survives.
+     */
     public boolean updateHP(int difference){
         this.hp = this.hp + difference;
 
@@ -137,7 +141,7 @@ public class Player extends MovingEntity{
         } else {
             posX = posX + dx;
         }
-        
+
         if(dx == 0){
             friction = 0;
         }
