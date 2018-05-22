@@ -43,6 +43,7 @@ public class Game implements Listener {
         view.terminateAllAudio();
         glfwTerminate();
         glfwSetErrorCallback(null).free();
+        System.exit(0);
     }
 
     @Override

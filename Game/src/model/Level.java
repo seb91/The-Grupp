@@ -1,5 +1,7 @@
 package model;
 
+import com.sun.org.apache.xpath.internal.SourceTree;
+
 import java.util.ArrayList;
 
 import static org.lwjgl.glfw.GLFW.*;
@@ -59,12 +61,14 @@ public class Level {
         pressedR = true;
         player.setFriction(0);
         player.setDx(5);
+        player.setDirection(Player.Direction.RIGHT);
     }
 
     public void moveLeft(){
         pressedL = true;
         player.setFriction(0);
         player.setDx(-5);
+        player.setDirection(Player.Direction.LEFT);
     }
 
     public void stopMoving(int key){
@@ -95,8 +99,25 @@ public class Level {
     }
 
     public void update(){
-    for (Entity e: entities) {
-        player.collision(e);
+        ArrayList<Entity> copy = new ArrayList<>(entities);
+        for (Entity e: copy) {
+            player.collision(e);
+
+            if(e.getId() == Entity.Id.PROJECTILE){
+                Projectile p = (Projectile) e;
+                p.updatePosition();
+                ArrayList<Enemy> copyEnemies = new ArrayList<>(enemies);
+                for(Enemy enemy : copyEnemies){
+                    //enemy dies
+                    if(p.overlaps(p.getX(), p.getY(), enemy)){
+                        entities.remove(p);
+                        entities.remove(enemy);
+                        enemies.remove(enemy);
+                    }
+                }
+            }
+
+
 
             for (Enemy enemy : enemies) {
                 if (enemy != null) {
@@ -129,6 +150,29 @@ public class Level {
     }
 
     public void playerAttack(){
+
+        int projectileWidth = 20;
+        int projectileHeight = 10;
+
+        if(player.getDirection() == Player.Direction.RIGHT){
+            this.entities.add( new Projectile(
+                            Entity.Id.PROJECTILE,
+                            player.getX()+player.getWidth(),
+                            player.getY()+(player.getHeight()/2),
+                            projectileWidth,
+                            projectileHeight,
+                            false,
+                            5));
+        } else if(player.getDirection() == Player.Direction.LEFT){
+            this.entities.add( new Projectile(
+                            Entity.Id.PROJECTILE,
+                            player.getX()-15,
+                            player.getY()+(player.getHeight()/2),
+                            projectileWidth,
+                            projectileHeight,
+                            false,
+                            -5));
+        }
     }
     
     public int getPlayerX(){

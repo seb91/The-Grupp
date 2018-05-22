@@ -141,7 +141,8 @@ public abstract class GameWindow implements Observable{
                                             GLFW_KEY_RIGHT,
                                             GLFW_KEY_ESCAPE,
                                             GLFW_KEY_ENTER,
-                                            GLFW_KEY_SPACE);
+                                            GLFW_KEY_SPACE,
+                                            GLFW_KEY_Z);
         glfwSetKeyCallback(window, (window, key, scancode, action, mods) -> {
             if ( AcceptedKeys.contains(key) && (action == GLFW_PRESS)){
                 pressed(key);
