@@ -1,21 +1,27 @@
 package model;
 
-public class Projectile extends Entity{
+import services.CheckCollision;
+
+public class Projectile extends MovingEntity{
 
     private boolean isHostile;
-    private int velocity;
 
-    public Projectile(Id id,int posX, int posY, int width, int height, boolean isHostile, int velocity) {
+    public Projectile(Id id,int posX, int posY, int width, int height, boolean isHostile, int dx) {
         super(id,posX, posY, width, height);
         this.isHostile = isHostile;
-        this.velocity = velocity;
+        this.setDx(dx);
     }
 
     public boolean getHostility(){
         return isHostile;
     }
 
-    public int getVelocity(){
-        return velocity;
+    @Override
+    public void collision(Entity e) {
+        CheckCollision.collision(this, e);
+    }
+
+    public void updatePosition(){
+        this.posX = posX + dx;
     }
 }

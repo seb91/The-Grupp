@@ -9,6 +9,10 @@ public class Weapon {
         this.damage = damage;
     }
 
+    public Projectile fire(int x, int y){
+        return new Projectile(Entity.Id.PROJECTILE, x, y, 20, 20, false, 5);
+    }
+
     public String toString(){
         return this.name  + " " + this.damage;
     }

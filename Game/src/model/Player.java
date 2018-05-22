@@ -7,6 +7,10 @@ public class Player extends MovingEntity{
     private int hp;
     private Weapon weapon;
     private Long tookDamage = System.currentTimeMillis()-1000;
+    public enum Direction {
+      LEFT, RIGHT
+    };
+    private Direction direction;
 
     /*private int dx,dy;
     private int friction;
@@ -19,6 +23,15 @@ public class Player extends MovingEntity{
         super(id,posX, posY, width, height);
         this.hp = hp;
         lastPosX = posX;
+        direction = Direction.RIGHT;
+    }
+
+    public void setDirection(Direction d){
+        this.direction = d;
+    }
+
+    public Direction getDirection(){
+        return direction;
     }
 
     /*public boolean overlaps(Projectile p){
@@ -36,6 +49,10 @@ public class Player extends MovingEntity{
             return true;
 
         return false;
+    }
+
+    public Projectile fireWeapon(){
+        return weapon.fire(getX(), getY());
     }
 
     public int getHealth() {

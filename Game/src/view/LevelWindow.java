@@ -33,10 +33,17 @@ public class LevelWindow extends GameWindow {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // clear the framebuffer
         glClearColor(backgroundRBGA[0], backgroundRBGA[1], backgroundRBGA[2], backgroundRBGA[3]);
 
-        for (Entity e : model.getEntities()) {
+        ArrayList<Entity> copy = new ArrayList<>(model.getEntities());
+
+        for (Entity e : copy) {
             if(camera.overlaps(e)){
                 paint(GameWindow.assets.getEPath(e.getId()), e.getX()-camera.getX(), e.getY());
+            } else {
+                if(e.getId() == Entity.Id.PROJECTILE){
+                    model.getEntities().remove(e);
+                }
             }
+
             if(e.id == Entity.Id.PLAYER){
                 animate(e);
             }
@@ -98,6 +105,10 @@ public class LevelWindow extends GameWindow {
             case GLFW_KEY_ESCAPE:
                 System.out.println("Escape key pressed, moving to map");
                 notifyObservers(new ActionEvent(this, saveData, "Save"));
+                break;
+            case GLFW_KEY_Z:
+                System.out.println("Z key pressed, firing weapon");
+                model.playerAttack();
                 break;
         }
     }
