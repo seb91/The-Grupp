@@ -1,7 +1,5 @@
 package model;
 
-import services.CheckCollision;
-
 public class MovingPlatform extends MovingEntity {
     private int originX;
     private int originY;

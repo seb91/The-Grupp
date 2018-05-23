@@ -1,7 +1,5 @@
 package model;
 
-import services.CheckCollision;
-
 public class BouncingBossBall extends MovingEntity {
 
     private int speedX;

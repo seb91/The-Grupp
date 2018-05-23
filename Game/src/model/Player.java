@@ -1,7 +1,5 @@
 package model;
 
-import services.CheckCollision;
-
 public class Player extends MovingEntity{
 
     private int hp;
