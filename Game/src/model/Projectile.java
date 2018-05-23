@@ -1,7 +1,5 @@
 package model;
 
-import services.CheckCollision;
-
 public class Projectile extends MovingEntity{
 
     private boolean isHostile;
