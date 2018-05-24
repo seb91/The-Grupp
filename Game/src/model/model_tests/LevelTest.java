@@ -20,6 +20,7 @@ public class LevelTest extends TestCase {
         System.out.println("Setting up objects for Level test");
 
         try {
+            //loads level 1, where player spawns at x = 100;
             level = new Level(loader.loadFile("level_1"));
         } catch (FileNotFoundException e) {
             e.printStackTrace();

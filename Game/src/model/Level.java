@@ -12,14 +12,16 @@ public class Level {
     private ArrayList<Enemy> enemies = new ArrayList<>();
     private Player player;
     private String entityType;
-    private int levelWidth = 2400;
+    private int levelWidth;
     public boolean pressedR = false;
     public boolean pressedL = false;
-    int x,y;
+    public boolean levelComplete = false;
+    int x,y,levelNr;
 
     public Level(ArrayList<String> level) {
 
-        for(int i = 0; i < level.size(); i = i+3){
+        levelNr = Integer.parseInt(level.get(0));
+        for(int i = 1; i < level.size(); i = i+3){
             entityType = level.get(i);
             x = Integer.parseInt(level.get(i+1));
             y = Integer.parseInt(level.get(i+2));
@@ -48,6 +50,12 @@ public class Level {
                     break;
                 case "MOVINGPLATFORM":
                     this.entities.add(new MovingPlatform(MovingPlatform.Id.MOVINGPLATFORM,x,y,100,25));
+                    break;
+                case "GOAL":
+                    this.entities.add(new Terrain(Entity.Id.GOAL, x, y, 50, 50));
+                    this.levelWidth = x;
+                    CheckCollision.setLeft(0);
+                    CheckCollision.setRight(levelWidth);
                     break;
             }
         }
@@ -89,17 +97,21 @@ public class Level {
 
     public void jump(){
         if(player.getY()== player.getFallLimit()){
-            System.out.println("Jump");
             player.setDy(15);
         }
     }
 
-    public int getLevelWidth(){
-        return levelWidth;
-    }
-
     public void update(){
+
+        System.out.println("Player position: "+getPlayerX());
+
+        if(player.getX()+player.getWidth()+5 >= levelWidth){
+            levelComplete = true;
+            System.out.println("Level Complete");
+        }
+
         ArrayList<Entity> copy = new ArrayList<>(entities);
+
         for (Entity e: copy) {
             player.collision(e);
 
@@ -187,4 +199,7 @@ public class Level {
         return player.getHealth();
     }
 
+    public int getLevelNr() {
+        return levelNr;
+    }
 }

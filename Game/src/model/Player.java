@@ -81,7 +81,7 @@ public class Player extends MovingEntity{
 
     public void damageCheck(Entity.Id id){
         Long currentTime = System.currentTimeMillis();
-        if((this.id == Id.PLAYER&&id==Id.ENEMY)&&(tookDamage - currentTime < -1000)){
+        if((this.id == Id.PLAYER&& (id==Id.ENEMY || id==Id.BALL || id == Id.BOSSBALL))&&(tookDamage - currentTime < -1000)){
             updateHP(-1);
             tookDamage = currentTime;
         }

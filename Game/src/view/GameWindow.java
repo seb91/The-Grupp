@@ -27,7 +27,7 @@ public abstract class GameWindow implements Observable{
     protected static ArrayList<Audio> audio = new ArrayList<>();
     protected static AssetHandler assets = new AssetHandler();
     protected static Boolean musicOn = true;
-    protected static int saveData;
+    protected static int saveData,saveSlot;
 
     // The window handle
     private static long window;

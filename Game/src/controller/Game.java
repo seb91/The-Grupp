@@ -62,7 +62,7 @@ public class Game implements Listener {
             case("Save"):
                 System.out.println("Map view should load with saved progress from save slot: "+e.getID());
                 try {
-                    view = new MapWindow(loader.loadFile("map_1"),createGame(e.getID()));
+                    view = new MapWindow(loader.loadFile("map_1"),createGame(e.getID()),e.getID());
                 } catch (FileNotFoundException e1) {
                     e1.printStackTrace();
                 }

@@ -6,6 +6,16 @@ package model;
 
 public class CheckCollision {
 
+    private static int playerLeft, levelLimit;
+
+    public static void setLeft(int i){
+        playerLeft = i;
+    }
+
+    public static void setRight(int i){
+        levelLimit = i;
+    }
+
     public static void collision(MovingEntity a, Entity b){
 
         if(b!=a) {
@@ -47,8 +57,12 @@ public class CheckCollision {
             }
         } else {
             a.setLeftLimit(0);
+
+            if(a.getId() == Entity.Id.PLAYER){
+                a.setLeftLimit(playerLeft);
+            }
             // to be set to level a.getWidth() later
-            a.setRightLimit(1000);
+            a.setRightLimit(levelLimit);
         }
 
     }

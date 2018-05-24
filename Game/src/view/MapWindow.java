@@ -18,10 +18,11 @@ public class MapWindow extends GameWindow {
     private Pointer pointer;
     int x,y;
 
-    public MapWindow(ArrayList<String> map,int saveData) {
+    public MapWindow(ArrayList<String> map,int saveData,int saveSlot) {
         //Setting up map nodes based on Save data and the map parameter.
         this.map = map;
         this.saveData = saveData;
+        this.saveSlot = saveSlot;
         for(int i = 0; i < map.size(); i = i+3){
 
             x = Integer.parseInt(map.get(i+1));

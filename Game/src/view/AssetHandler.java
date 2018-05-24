@@ -35,6 +35,7 @@ public class AssetHandler {
        levelPaths.put(Entity.Id.BALL,"./assets/Ball.png");
        levelPaths.put(Entity.Id.BOSSBALL,"./assets/Ball.png");
        levelPaths.put(Entity.Id.PROJECTILE,"./assets/Projectile.png");
+       levelPaths.put(Entity.Id.GOAL,"./assets/Goal.png");
 
        audioPaths.put(Audio.Id.BOUNCE,"./assets/audio/bounce.ogg");
        audioPaths.put(Audio.Id.BG_MUSIC,"./assets/audio/background_music.ogg");

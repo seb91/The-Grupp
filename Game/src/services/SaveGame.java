@@ -9,6 +9,7 @@ public final class SaveGame {
         PrintWriter writer = null;
         try {
             writer = new PrintWriter("./saves/save" + saveSlot + ".txt", "UTF-8");
+            System.out.println("Hello");
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (UnsupportedEncodingException e) {

@@ -1,6 +1,7 @@
 package view;
 
 import model.*;
+import services.SaveGame;
 
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
@@ -33,6 +34,14 @@ public class LevelWindow extends GameWindow {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // clear the framebuffer
         glClearColor(backgroundRBGA[0], backgroundRBGA[1], backgroundRBGA[2], backgroundRBGA[3]);
 
+        if(model.levelComplete){
+            if(saveData<model.getLevelNr()+1) {
+                System.out.println("Level nr: " + model.getLevelNr() + ", " + "Save slot: " + saveSlot);
+                SaveGame.saveGame(model.getLevelNr() + 1, saveSlot);
+            }
+            notifyObservers(new ActionEvent(this, saveSlot, "Save"));
+        }
+
         ArrayList<Entity> copy = new ArrayList<>(model.getEntities());
 
         for (Entity e : copy) {
@@ -55,15 +64,17 @@ public class LevelWindow extends GameWindow {
 
         if(model.getPlayerX()-camera.getX() > breakpoint){
             camera.setX(model.getPlayerX()-breakpoint);
+            CheckCollision.setLeft(camera.getX());
         }
 
         for (GUIObject v : viewItems) {
             paint(v.getImagePath(),v.getX(),v.getY());
         }
-        if(model.getPlayerHealth()>=1) {
-            hp.updateHealthBar(model.getPlayerHealth());
-        } else{
+
+        if(model.getPlayerY()<=0 || model.getPlayerHealth()<=0){
             notifyObservers(new ActionEvent(this, saveData, "Save"));
+        } else {
+            hp.updateHealthBar(model.getPlayerHealth());
         }
         model.update();
     }
@@ -79,7 +90,7 @@ public class LevelWindow extends GameWindow {
                 switch (buttons.get(i).id) {
                     case RETURN:
                         System.out.println("Moving to map");
-                        notifyObservers(new ActionEvent(this, saveData , "Save"));
+                        notifyObservers(new ActionEvent(this, saveSlot, "Save"));
                         break;
                 }
             }
@@ -104,7 +115,7 @@ public class LevelWindow extends GameWindow {
                 break;
             case GLFW_KEY_ESCAPE:
                 System.out.println("Escape key pressed, moving to map");
-                notifyObservers(new ActionEvent(this, saveData, "Save"));
+                notifyObservers(new ActionEvent(this, saveSlot, "Save"));
                 break;
             case GLFW_KEY_Z:
                 System.out.println("Z key pressed, firing weapon");
