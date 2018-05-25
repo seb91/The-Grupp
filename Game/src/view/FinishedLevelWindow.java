@@ -1,3 +1,6 @@
+/*
+*A view to be shown when the level is ended, either by dying or by reaching the goal.
+ */
 package view;
 
 import java.awt.event.ActionEvent;

@@ -64,6 +64,11 @@ public class Game implements Listener {
                 view = new FinishedLevelWindow(e.getID(), false);
                 view.addObserver(this);
                 break;
+                case("Finish"):
+                System.out.println("FinishedWindow with Good Job message should load");
+                view = new FinishedLevelWindow(e.getID(), true);
+                view.addObserver(this);
+                break;
             case("Save"):
                 System.out.println("Map view should load with saved progress from save slot: "+e.getID());
                 try {

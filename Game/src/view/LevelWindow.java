@@ -39,7 +39,7 @@ public class LevelWindow extends GameWindow {
                 System.out.println("Level nr: " + model.getLevelNr() + ", " + "Save slot: " + saveSlot);
                 SaveGame.saveGame(model.getLevelNr() + 1, saveSlot);
             }
-            notifyObservers(new ActionEvent(this, saveSlot, "Save"));
+            notifyObservers(new ActionEvent(this, saveSlot, "Finish"));
         }
 
         ArrayList<Entity> copy = new ArrayList<>(model.getEntities());
