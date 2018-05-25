@@ -17,13 +17,16 @@ public class FinishedLevelWindow extends GameWindow{
 
     public FinishedLevelWindow(int saveSlot, boolean isGoal) {
         this.saveSlot = saveSlot;
-        buttons.add(new Button(Button.Id.MAP, 325, 425, 150, 50));
+        buttons.add(new Button(Button.Id.MAP, 300, 425, 150, 50));
+        buttons.add(new Button(Button.Id.MENU, 300, 350,150,50));
         buttons.add(new Button(Button.Id.QUIT, 325, 275, 150, 50));
         viewItems.addAll(buttons);
         if (isGoal) {
-            viewItems.add(new Image("./assets/GameTitle.png", 150, 500));
+            viewItems.add(new Image("./assets/GameFinished.png", 150, 500));
+            backgroundRBGA = new float[]{0f,1.0f,0.0f,0.0f};
         } else {
-            viewItems.add(new Image("./assets/GameTitle.png", 150, 500));
+            viewItems.add(new Image("./assets/GameOver.png", 150, 500));
+            backgroundRBGA = new float[]{1.0f,0.0f,0.0f,0.0f};
         }
     }
     public void render(){
@@ -49,9 +52,9 @@ public class FinishedLevelWindow extends GameWindow{
                         System.out.println("Moving to map with saved progress");
                         notifyObservers(new ActionEvent(this, saveSlot, "Save"));
                         break;
-                    case OPTIONS:
-                        System.out.println("Moving to Options menu");
-                        notifyObservers(new ActionEvent(this, 0, "OptionsMenu"));
+                    case MENU:
+                        System.out.println("Moving to Main menu");
+                        notifyObservers(new ActionEvent(this, 0, "MainMenu"));
                         break;
                     case QUIT:
                         System.out.println("Terminating program");
