@@ -4,15 +4,18 @@ public class Player extends MovingEntity{
 
     private Weapon weapon;
     private Long tookDamage = System.currentTimeMillis()-1000;
-    public enum Direction {
-      LEFT, RIGHT
-    };
+    private int hp;
+
     private Direction direction;
+    public enum Direction {
+        LEFT, RIGHT
+    };
 
     public Player(Id id,int posX, int posY, int width, int height, int hp) {
         super(id,posX, posY, width, height);
         this.hp = hp;
         lastPosX = posX;
+        this.weapon = new Weapon("The Gun", 8, 20, 10);
         direction = Direction.RIGHT;
     }
 
@@ -22,6 +25,10 @@ public class Player extends MovingEntity{
 
     public Direction getDirection(){
         return direction;
+    }
+
+    public Projectile fireProjectile(){
+        return weapon.fire(this.getX(), this.getY()+this.getHeight()/6*2, direction, this.getDx());
     }
 
     /*

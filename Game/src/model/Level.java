@@ -127,8 +127,6 @@ public class Level {
                 }
             }
 
-
-
             for (Enemy enemy : enemies) {
                 if (enemy != null) {
                     enemy.collision(e);
@@ -160,27 +158,7 @@ public class Level {
     }
 
     public void playerAttack(){
-
-        int projectileWidth = 20;
-        int projectileHeight = 10;
-
-        if(player.getDirection() == Player.Direction.RIGHT){
-            this.entities.add( new Projectile(
-                            Entity.Id.PROJECTILE,
-                            player.getX()+player.getWidth(),
-                            player.getY()+(player.getHeight()/2),
-                            projectileWidth,
-                            projectileHeight,
-                            5));
-        } else if(player.getDirection() == Player.Direction.LEFT){
-            this.entities.add( new Projectile(
-                            Entity.Id.PROJECTILE,
-                            player.getX()-15,
-                            player.getY()+(player.getHeight()/2),
-                            projectileWidth,
-                            projectileHeight,
-                        -5));
-        }
+        this.entities.add(player.fireProjectile());
     }
     
     public int getPlayerX(){
