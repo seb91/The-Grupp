@@ -2,7 +2,8 @@ package model;
 
 import java.util.ArrayList;
 
-import static org.lwjgl.glfw.GLFW.*;
+import static org.lwjgl.glfw.GLFW.GLFW_KEY_LEFT;
+import static org.lwjgl.glfw.GLFW.GLFW_KEY_RIGHT;
 
 public class Level {
 
@@ -11,9 +12,9 @@ public class Level {
     private Player player;
     private String entityType;
     private int levelWidth;
-    public boolean pressedR = false;
-    public boolean pressedL = false;
-    public boolean levelComplete = false;
+    public boolean pressedR;
+    public boolean pressedL;
+    public boolean levelComplete;
     int x,y,levelNr;
 
     public Level(ArrayList<String> level) {
@@ -39,11 +40,9 @@ public class Level {
                     this.entities.add(new Terrain(Terrain.Id.GROUND,x,y,800,75));
                     break;
                 case "BALL":
-                    System.out.println("BALL");
                     this.entities.add(new BouncingBall(BouncingBall.Id.BALL,x,y, 50,50));
                     break;
                 case "BOSSBALL":
-                    System.out.println("BOSSBALL");
                     this.entities.add(new BouncingBossBall(BouncingBossBall.Id.BOSSBALL,x,y, 50,50));
                     break;
                 case "MOVINGPLATFORM":
@@ -101,11 +100,9 @@ public class Level {
 
     public void update(){
 
-        System.out.println("Player position: "+getPlayerX());
 
         if(player.getX()+player.getWidth()+5 >= levelWidth){
             levelComplete = true;
-            System.out.println("Level Complete");
         }
 
         ArrayList<Entity> copy = new ArrayList<>(entities);

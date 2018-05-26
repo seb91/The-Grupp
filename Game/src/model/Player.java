@@ -2,7 +2,8 @@ package model;
 
 public class Player extends MovingEntity{
 
-    private Weapon weapon;
+    private int hp;
+    //private Weapon weapon;
     private Long tookDamage = System.currentTimeMillis()-1000;
     private int hp;
 

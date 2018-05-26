@@ -43,25 +43,20 @@ public class SaveWindow extends GameWindow{
     protected void click(double posX, double posY) {
         int winHeight = getWindowHeight();
         posY = winHeight - posY;
-        System.out.println("MClick (" + posX + ", " + posY + ")");
 
-        for (int i = 0; i < buttons.size(); i++) {
-            if (buttons.get(i).check(posX, posY)) {
-                switch (buttons.get(i).id) {
+        for(Button b: buttons){
+            if (b.check(posX, posY)) {
+                switch (b.id) {
                     case SAVE1:
-                        System.out.println("Recreating game from save slot 1");
                         notifyObservers(new ActionEvent(this, 1, "Save"));
                         break;
                     case SAVE2:
-                        System.out.println("Recreating game from save slot 2");
                         notifyObservers(new ActionEvent(this, 2, "Save"));
                         break;
                     case SAVE3:
-                        System.out.println("Recreating game from save slot 3");
                         notifyObservers(new ActionEvent(this, 3, "Save"));
                         break;
                     case RETURN:
-                        System.out.println("Returning to main menu.");
                         notifyObservers(new ActionEvent(this, 0, "MainMenu"));
                         break;
                 }
@@ -71,11 +66,9 @@ public class SaveWindow extends GameWindow{
     protected void pressed(int key) {
         switch (key) {
             case GLFW_KEY_ENTER:
-                System.out.println("Recreating game from save slot 1");
                 notifyObservers(new ActionEvent(this, 1, "Save"));
                 break;
             case GLFW_KEY_ESCAPE:
-                System.out.println("Recreating game from save slot 1");
                 notifyObservers(new ActionEvent(this, 0, "MainMenu"));
                 break;
         }

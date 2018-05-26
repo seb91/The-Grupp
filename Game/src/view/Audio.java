@@ -45,7 +45,7 @@ public class Audio extends Thread {
         alcMakeContextCurrent(context);
 
         ALCCapabilities alcCapabilities = ALC.createCapabilities(device);
-        ALCapabilities  alCapabilities  = AL.createCapabilities(alcCapabilities);
+        AL.createCapabilities(alcCapabilities);
 
         ShortBuffer rawAudioBuffer;
 

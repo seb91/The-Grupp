@@ -42,21 +42,17 @@ public class PausedWindow extends GameWindow {
     protected void click(double posX, double posY) {
         int winHeight = getWindowHeight();
         posY = winHeight - posY;
-        System.out.println("MClick (" + posX + ", " + posY + ")");
 
-        for (int i = 0; i < buttons.size(); i++) {
-            if (buttons.get(i).check(posX, posY)) {
-                switch (buttons.get(i).id) {
+        for(Button b: buttons){
+            if (b.check(posX, posY)) {
+                switch (b.id) {
                     case RESUME:
-                        System.out.println("Resuming game");
                         notifyObservers(new ActionEvent(lvl, saveSlot, "Resume"));
                         break;
                     case MAP:
-                        System.out.println("Moving to map with saved progress");
                         notifyObservers(new ActionEvent(this, saveSlot, "Save"));
                         break;
                     case MENU:
-                        System.out.println("Moving to Main menu");
                         notifyObservers(new ActionEvent(this, 0, "MainMenu"));
                         break;
                 }

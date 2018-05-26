@@ -18,11 +18,8 @@ public class FinishedLevelWindow extends GameWindow{
     private List<Button> buttons = new ArrayList<>();
     private List<GUIObject> viewItems = new ArrayList<>();
     private int saveSlot;
-    private LevelWindow lvl;
-    private boolean isGoal;
 
     public FinishedLevelWindow(int saveSlot, boolean isGoal) {
-        this.isGoal = isGoal;
         this.saveSlot = saveSlot;
         buttons.add(new Button(Button.Id.MAP, 300, 425, 150, 50));
         buttons.add(new Button(Button.Id.MENU, 300, 350,150,50));
@@ -50,17 +47,13 @@ public class FinishedLevelWindow extends GameWindow{
     protected void click(double posX, double posY) {
         int winHeight = getWindowHeight();
         posY = winHeight - posY;
-        System.out.println("MClick (" + posX + ", " + posY + ")");
-
-        for (int i = 0; i < buttons.size(); i++) {
-            if (buttons.get(i).check(posX, posY)) {
-                switch (buttons.get(i).id) {
+        for(Button b: buttons){
+            if (b.check(posX, posY)) {
+                switch (b.id) {
                     case MAP:
-                        System.out.println("Moving to map with saved progress");
                         notifyObservers(new ActionEvent(this, saveSlot, "Save"));
                         break;
                     case MENU:
-                        System.out.println("Moving to Main menu");
                         notifyObservers(new ActionEvent(this, 0, "MainMenu"));
                         break;
                 }

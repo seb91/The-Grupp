@@ -31,12 +31,10 @@ public class CheckCollision {
                 if (a.getId() == Entity.Id.PLAYER) {
                     ((Player)a).damageCheck(b.id);
                 }
-                System.out.println(a.getId() + " collided with " + b.id);
                 //From above
                 if (aboveEntity && withinEntityWidth) {
                     a.setFallLimit(b.getY() + b.getHeight());
                     a.setStandingOn(b);
-                    System.out.println("Fall limit is now " + (b.getY() + b.getHeight()));
                 }
                 //From below
                 else if(belowEntity && withinEntityWidth) {

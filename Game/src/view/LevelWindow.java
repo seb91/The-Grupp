@@ -20,7 +20,7 @@ public class LevelWindow extends GameWindow {
     private List<GUIObject> viewItems = new ArrayList<>();
     private Level model;
     private HealthBar hp;
-    private boolean isPaused = false;
+    private boolean isPaused;
 
     public LevelWindow(Level model) {
         this.model = model;
@@ -37,7 +37,6 @@ public class LevelWindow extends GameWindow {
 
         if(model.levelComplete){
             if(saveData<model.getLevelNr()+1) {
-                System.out.println("Level nr: " + model.getLevelNr() + ", " + "Save slot: " + saveSlot);
                 SaveGame.saveGame(model.getLevelNr() + 1, saveSlot);
             }
             notifyObservers(new ActionEvent(this, saveSlot, "Finish"));
@@ -86,13 +85,11 @@ public class LevelWindow extends GameWindow {
     protected void click(double posX, double posY) {
         int winHeight = getWindowHeight();
         posY = winHeight - posY;
-        System.out.println("LClick (" + posX + ", " + posY + ")");
 
-        for (int i = 0; i < buttons.size(); i++) {
-            if (buttons.get(i).check(posX, posY)) {
-                switch (buttons.get(i).id) {
+        for(Button b: buttons){
+            if (b.check(posX, posY)) {
+                switch (b.id) {
                     case RETURN:
-                        System.out.println("Moving to map");
                         notifyObservers(new ActionEvent(this, saveSlot, "Save"));
                         break;
                 }
@@ -130,11 +127,11 @@ public class LevelWindow extends GameWindow {
         if(lastX-20 >= e.getX()){
             e.setLastPosX(e.getX());
             if(step.equals("1")||step.equals("2")){
-                path = path+3+".png";
+                path += 3+".png";
             }else if(step.equals("3")){
-                path = path +4+".png";
+                path += 4+".png";
             }  else {
-                path = path +3+".png";
+                path += 3+".png";
             }
             assets.updateLevelAsset(e.id,path);
         }
@@ -142,11 +139,11 @@ public class LevelWindow extends GameWindow {
         if(lastX+20 <= e.getX()){
             e.setLastPosX(e.getX());
             if(step.equals("3")||step.equals("4")){
-                path = path+1+".png";
+                path += 1+".png";
             }else if(step.equals("1")){
-                path = path +2+".png";
+                path += +2+".png";
             }  else  {
-                path = path +1+".png";
+                path += +1+".png";
             }
             assets.updateLevelAsset(e.id,path);
         }
