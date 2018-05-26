@@ -37,21 +37,17 @@ public class MainWindow extends GameWindow {
     protected void click(double posX, double posY) {
         int winHeight = getWindowHeight();
         posY = winHeight - posY;
-        System.out.println("MClick (" + posX + ", " + posY + ")");
 
-        for (int i = 0; i < buttons.size(); i++) {
-            if (buttons.get(i).check(posX, posY)) {
-                switch (buttons.get(i).id) {
+        for(Button b: buttons){
+            if (b.check(posX, posY)) {
+                switch (b.id) {
                     case PLAY:
-                        System.out.println("Moving to Save menu");
                         notifyObservers(new ActionEvent(this, 0, "SaveMenu"));
                         break;
                     case OPTIONS:
-                        System.out.println("Moving to Options menu");
                         notifyObservers(new ActionEvent(this, 0, "OptionsMenu"));
                         break;
                     case QUIT:
-                        System.out.println("Terminating program");
                         notifyObservers(new ActionEvent(this, 0, "Exit"));
                         break;
                 }

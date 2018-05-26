@@ -8,7 +8,6 @@ import services.Loader;
 import java.io.FileNotFoundException;
 
 import static org.lwjgl.glfw.GLFW.GLFW_KEY_LEFT;
-import static org.lwjgl.glfw.GLFW.GLFW_KEY_RIGHT;
 
 public class LevelTest extends TestCase {
 

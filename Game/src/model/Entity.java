@@ -1,6 +1,6 @@
 package model;
 
-public abstract class Entity {
+public class Entity {
 
     protected int posX;
     protected int posY;

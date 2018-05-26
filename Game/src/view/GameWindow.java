@@ -98,14 +98,12 @@ public abstract class GameWindow implements Observable{
     }
 
     public static void terminateAllAudio(){
-        System.out.println("All audio terminated.");
         for(Audio a: audio){
             a.terminateAudio();
         }
     }
 
     public static void playAudio(Audio.Id id){
-        System.out.println("Audio file: "+id+" played.");
         for(Audio a: audio){
             if(a.id == id) {
                 (new Thread(a)).start();
@@ -113,7 +111,6 @@ public abstract class GameWindow implements Observable{
         }
     }
     public static void terminateAudio(Audio.Id id){
-        System.out.println("Audio file: "+id+" terminated.");
         for(Audio a: audio){
             if(a.id == id){
                 if(a!= null) {

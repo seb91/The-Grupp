@@ -19,7 +19,6 @@ public class MapWindow extends GameWindow {
 
     public MapWindow(ArrayList<String> map,int saveData,int saveSlot) {
         //Setting up map nodes based on Save data and the map parameter.
-        ArrayList<String> map1 = map;
         GameWindow.saveData = saveData;
         GameWindow.saveSlot = saveSlot;
         for(int i = 0; i < map.size(); i = i+3){
@@ -68,17 +67,14 @@ public class MapWindow extends GameWindow {
     protected void click(double posX, double posY) {
         int winHeight = getWindowHeight();
         posY = winHeight - posY;
-        System.out.println("LClick (" + posX + ", " + posY + ")");
 
-        for (int i = 0; i < buttons.size(); i++) {
-            if (buttons.get(i).check(posX, posY)) {
-                switch (buttons.get(i).id) {
+        for(Button b: buttons){
+            if (b.check(posX, posY)) {
+                switch (b.id) {
                     case ENTER:
-                        System.out.println("Moving to level");
                         notifyObservers(new ActionEvent(this, 0, "EnterLevel"));
                         break;
                     case RETURN:
-                        System.out.println("Moving to main menu");
                         notifyObservers(new ActionEvent(this, 0, "MainMenu"));
                         break;
                 }

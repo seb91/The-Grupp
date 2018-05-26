@@ -32,16 +32,13 @@ public class OptionsWindow extends GameWindow {
 
     @Override
     protected void click(double posX, double posY) {
-        int winWidth = getWindowWidth();
         int winHeight = getWindowHeight();
         posY = winHeight - posY;
-        System.out.println("MClick ("+posX+", "+posY+")");
 
-        for ( int i = 0; i< buttons.size();i++) {
-            if(buttons.get(i).check(posX,posY)) {
-                switch (buttons.get(i).id) {
+        for(Button b: buttons){
+            if (b.check(posX, posY)) {
+                switch (b.id) {
                     case RETURN:
-                        System.out.println("Returning to Main Menu");
                         notifyObservers(new ActionEvent(this, 2, "MainMenu"));
                         break;
                     case BG_MUSIC_TOGGLE:
