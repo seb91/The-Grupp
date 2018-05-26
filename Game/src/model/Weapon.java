@@ -1,15 +1,17 @@
 package model;
 
 public class Weapon {
-    private String name;
     private int dx;
     private int projectileWidth;
     private int getProjectileHeight;
 
+    public Weapon() {
+        this.dx = 8;
+        this.projectileWidth = 20;
+        this.getProjectileHeight = 10;
+    }
 
-
-    public Weapon(String name, int dx, int projectileWidth, int getProjectileHeight) {
-        this.name = name;
+    public Weapon(int dx, int projectileWidth, int getProjectileHeight) {
         this.dx = dx;
         this.projectileWidth = projectileWidth;
         this.getProjectileHeight = getProjectileHeight;
@@ -40,14 +42,6 @@ public class Weapon {
 
 
         return projectile;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
 }

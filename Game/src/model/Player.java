@@ -16,7 +16,8 @@ public class Player extends MovingEntity{
         super(id,posX, posY, width, height);
         this.hp = hp;
         lastPosX = posX;
-        this.weapon = new Weapon("The Gun", 8, 20, 10);
+        //just create a default weapon
+        this.weapon = new Weapon();
         direction = Direction.RIGHT;
     }
 
