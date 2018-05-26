@@ -1,7 +1,5 @@
 package model;
 
-import com.sun.org.apache.xpath.internal.SourceTree;
-
 import java.util.ArrayList;
 
 import static org.lwjgl.glfw.GLFW.*;
@@ -173,7 +171,6 @@ public class Level {
                             player.getY()+(player.getHeight()/2),
                             projectileWidth,
                             projectileHeight,
-                            false,
                             5));
         } else if(player.getDirection() == Player.Direction.LEFT){
             this.entities.add( new Projectile(
@@ -182,8 +179,7 @@ public class Level {
                             player.getY()+(player.getHeight()/2),
                             projectileWidth,
                             projectileHeight,
-                            false,
-                            -5));
+                        -5));
         }
     }
     

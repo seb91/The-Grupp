@@ -4,7 +4,6 @@ public class BouncingBossBall extends MovingEntity {
 
     private int speedX;
     private int speedY;
-    private int gravity = 1;
     public BouncingBossBall(Id id, int posX, int posY, int width, int height) {
         super(id, posX, posY, width, height);
         this.speedX = 10;

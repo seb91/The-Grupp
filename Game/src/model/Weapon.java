@@ -10,7 +10,7 @@ public class Weapon {
     }
 
     public Projectile fire(int x, int y){
-        return new Projectile(Entity.Id.PROJECTILE, x, y, 20, 20, false, 5);
+        return new Projectile(Entity.Id.PROJECTILE, x, y, 20, 20, 5);
     }
 
     public String toString(){

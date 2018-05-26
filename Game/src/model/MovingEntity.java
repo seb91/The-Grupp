@@ -18,16 +18,9 @@ public abstract class MovingEntity extends Entity {
     }
 
     public abstract void collision(Entity b);
-    public int getRightLimit() {
-        return rightLimit;
-    }
 
     public void setRightLimit(int rightLimit) {
         this.rightLimit = rightLimit;
-    }
-
-    public int getLeftLimit() {
-        return leftLimit;
     }
 
     public void setLeftLimit(int leftLimit) {
@@ -48,10 +41,6 @@ public abstract class MovingEntity extends Entity {
 
     public void setStandingOn(Entity standingOn) {
         this.standingOn = standingOn;
-    }
-
-    public int getDy() {
-        return dy;
     }
 
     public void setDy(int dy) {

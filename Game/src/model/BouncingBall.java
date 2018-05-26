@@ -1,10 +1,8 @@
 package model;
 
 public class BouncingBall extends MovingEntity {
-    private int dx,dy;
-    private int friction;
+    private int dy;
     private int gravity = 1;
-    private int fallLimit,leftLimit, rightLimit;
 
     public BouncingBall(Id id, int posX, int posY, int width, int height) {
         super(id, posX, posY, width, height);

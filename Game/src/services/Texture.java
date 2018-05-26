@@ -26,9 +26,6 @@ public class Texture {
         glTexParameteri(GL_TEXTURE_2D, name, value);
     }
 
-    public void uploadData(int width, int height, ByteBuffer data) {
-        uploadData(GL_RGBA8, width, height, GL_RGBA, data);
-    }
 
     public void uploadData(int internalFormat, int width, int height, int format, ByteBuffer data) {
         glTexImage2D(GL_TEXTURE_2D, 0, internalFormat, width, height, 0, format, GL_UNSIGNED_BYTE, data);

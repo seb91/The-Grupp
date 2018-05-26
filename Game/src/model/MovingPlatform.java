@@ -2,7 +2,6 @@ package model;
 
 public class MovingPlatform extends MovingEntity {
     private int originX;
-    private int originY;
     private int speed;
     private int path;
 
@@ -11,7 +10,6 @@ public class MovingPlatform extends MovingEntity {
         speed = 1;
         path = 40;
         originX=posX;
-        originY=posY;
     }
 
     @Override
