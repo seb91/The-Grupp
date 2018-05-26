@@ -3,9 +3,8 @@ package model;
 public class Player extends MovingEntity{
 
     private int hp;
-    //private Weapon weapon;
+    private Weapon weapon;
     private Long tookDamage = System.currentTimeMillis()-1000;
-    private int hp;
 
     private Direction direction;
     public enum Direction {
