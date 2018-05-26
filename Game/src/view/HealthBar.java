@@ -1,7 +1,5 @@
 package view;
 
-import model.Player;
-
 import static view.GameWindow.assets;
 
 public class HealthBar extends GUIObject {

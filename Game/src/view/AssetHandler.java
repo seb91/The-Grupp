@@ -6,9 +6,9 @@ import java.util.HashMap;
 
 public class AssetHandler {
 
-    HashMap<GUIObject.Id,String> menuPaths = new HashMap<>();
-    HashMap<Entity.Id,String> levelPaths = new HashMap<>();
-    HashMap<Audio.Id,String> audioPaths = new HashMap<>();
+    private HashMap<GUIObject.Id,String> menuPaths = new HashMap<>();
+    private HashMap<Entity.Id,String> levelPaths = new HashMap<>();
+    private HashMap<Audio.Id,String> audioPaths = new HashMap<>();
 
    public AssetHandler() {
        menuPaths.put(Node.Id.NODE, "./assets/Node.png");
@@ -43,6 +43,7 @@ public class AssetHandler {
        audioPaths.put(Audio.Id.BOUNCE,"./assets/audio/bounce.ogg");
        audioPaths.put(Audio.Id.BG_MUSIC,"./assets/audio/background_music.ogg");
     }
+
     public String getMPath(GUIObject.Id key){
        return menuPaths.get(key);
     }

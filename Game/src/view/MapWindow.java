@@ -6,41 +6,40 @@ import java.util.List;
 
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
+
 //Map menu, displays all available Levels.
 public class MapWindow extends GameWindow {
 
-    float[] backgroundRBGA = new float[]{0.4f, 0.7f, 0.3f, 0.0f};
+    private float[] backgroundRBGA = new float[]{0.4f, 0.7f, 0.3f, 0.0f};
 
     private List<Button> buttons = new ArrayList<>();
     private ArrayList<Node> nodes = new ArrayList<>();
     private List<GUIObject> viewItems = new ArrayList<>();
-    private ArrayList<String> map;
     private Pointer pointer;
-    int x,y;
 
     public MapWindow(ArrayList<String> map,int saveData,int saveSlot) {
         //Setting up map nodes based on Save data and the map parameter.
-        this.map = map;
-        this.saveData = saveData;
-        this.saveSlot = saveSlot;
+        ArrayList<String> map1 = map;
+        GameWindow.saveData = saveData;
+        GameWindow.saveSlot = saveSlot;
         for(int i = 0; i < map.size(); i = i+3){
 
-            x = Integer.parseInt(map.get(i+1));
-            y = Integer.parseInt(map.get(i+2));
+            int x = Integer.parseInt(map.get(i + 1));
+            int y = Integer.parseInt(map.get(i + 2));
             if(map.get(i).equals("NODE")) {
                 //To be checked with save file later
                 if(saveData >= i/3) {
-                    nodes.add(new Node(Node.Id.NODE, x,y));
+                    nodes.add(new Node(Node.Id.NODE, x, y));
                 } else {
-                    nodes.add(new Node(Node.Id.LOCKED_NODE, x,y));
+                    nodes.add(new Node(Node.Id.LOCKED_NODE, x, y));
                 }
             }
             if(map.get(i).equals("BOSS_NODE")) {
                 //To be checked with save file later
                 if(saveData >= i/3) {
-                    nodes.add(new Node(Node.Id.BOSS_NODE, x,y));
+                    nodes.add(new Node(Node.Id.BOSS_NODE, x, y));
                 } else {
-                    nodes.add(new Node(Node.Id.LOCKED_BOSS_NODE, x,y));
+                    nodes.add(new Node(Node.Id.LOCKED_BOSS_NODE, x, y));
                 }
             }
         }
@@ -108,19 +107,19 @@ public class MapWindow extends GameWindow {
     }
 
     //Pointer positioning
-    public void moveRight() {
+    private void moveRight() {
         int position = pointer.getPosition()+1;
         if(position < nodes.size() && saveData >= position){
             updatePosition(position);
         }
     }
-    public void moveLeft() {
+    private void moveLeft() {
         int position = pointer.getPosition() - 1;
         if(position >= 0) {
             updatePosition(position);
         }
     }
-    public void updatePosition(int position){
+    private void updatePosition(int position){
         pointer.setPosition(position);
         int x = nodes.get(position).getX() + 25;
         int y = nodes.get(position).getY() + 110;

@@ -66,7 +66,7 @@ public class Game implements Listener {
                 break;
             case("Pause"):
                 System.out.println("FinishedWindow with Paused message should load");
-                view = new FinishedLevelWindow(e.getID(), false, (LevelWindow)e.getSource());
+                view = new PausedWindow(e.getID(), (LevelWindow)e.getSource());
                 view.addObserver(this);
                 break;
             case("Resume"):
@@ -75,7 +75,7 @@ public class Game implements Listener {
                 view.addObserver(this);
                 ((LevelWindow)e.getSource()).resume(false);
                 break;
-                case("Finish"):
+            case("Finish"):
                 System.out.println("FinishedWindow with Good Job message should load");
                 view = new FinishedLevelWindow(e.getID(), true);
                 view.addObserver(this);

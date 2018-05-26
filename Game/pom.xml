@@ -215,7 +215,6 @@
             <groupId>org.lwjgl</groupId>
             <artifactId>lwjgl-ovr</artifactId>
             <version>${lwjgl.version}</version>
-            <classifier>${lwjgl.natives}</classifier>
             <scope>runtime</scope>
         </dependency>
         <dependency>

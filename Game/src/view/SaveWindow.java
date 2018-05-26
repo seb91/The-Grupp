@@ -9,10 +9,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.lwjgl.glfw.GLFW.GLFW_KEY_ENTER;
+import static org.lwjgl.glfw.GLFW.GLFW_KEY_ESCAPE;
 import static org.lwjgl.opengl.GL11.*;
 
 public class SaveWindow extends GameWindow{
-    float[] backgroundRBGA = new float[]{1.0f,0.0f,0.0f,0.0f};
+    private float[] backgroundRBGA = new float[]{1.0f,0.0f,0.0f,0.0f};
 
     private List<Button> buttons = new ArrayList<>();
     private List<GUIObject> viewItems = new ArrayList<>();
@@ -72,6 +73,10 @@ public class SaveWindow extends GameWindow{
             case GLFW_KEY_ENTER:
                 System.out.println("Recreating game from save slot 1");
                 notifyObservers(new ActionEvent(this, 1, "Save"));
+                break;
+            case GLFW_KEY_ESCAPE:
+                System.out.println("Recreating game from save slot 1");
+                notifyObservers(new ActionEvent(this, 0, "MainMenu"));
                 break;
         }
     }

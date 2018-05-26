@@ -8,7 +8,7 @@ import java.util.List;
 
 public class OptionsWindow extends GameWindow {
 
-    float[] backgroundRBGA = new float[]{0.0f,0.0f,1.0f,0.0f};
+    private float[] backgroundRBGA = new float[]{0.0f,0.0f,1.0f,0.0f};
 
     private List<Button> buttons = new ArrayList<>();
     private List<GUIObject> viewItems = new ArrayList<>();

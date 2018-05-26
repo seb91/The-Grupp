@@ -4,10 +4,10 @@ import model.Entity;
 
 public class Camera {
 
-    int cameraX;
-    int cameraY;
-    int cameraWidth;
-    int cameraHeight;
+    private int cameraX;
+    private int cameraY;
+    private int cameraWidth;
+    private int cameraHeight;
 
     public Camera(int cameraX, int cameraY, int cameraWidth, int cameraHeight){
         this.cameraX = cameraX;

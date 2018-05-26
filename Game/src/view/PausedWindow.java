@@ -1,6 +1,3 @@
-/*
-*A view to be shown when the level is ended, either by dying or by reaching the goal. Also works as a pause window.
- */
 package view;
 
 import java.awt.event.ActionEvent;
@@ -11,7 +8,7 @@ import static org.lwjgl.glfw.GLFW.GLFW_KEY_ENTER;
 import static org.lwjgl.glfw.GLFW.GLFW_KEY_ESCAPE;
 import static org.lwjgl.opengl.GL11.*;
 
-public class FinishedLevelWindow extends GameWindow{
+public class PausedWindow extends GameWindow {
 
     private float[] backgroundRBGA;
 
@@ -19,21 +16,16 @@ public class FinishedLevelWindow extends GameWindow{
     private List<GUIObject> viewItems = new ArrayList<>();
     private int saveSlot;
     private LevelWindow lvl;
-    private boolean isGoal;
 
-    public FinishedLevelWindow(int saveSlot, boolean isGoal) {
-        this.isGoal = isGoal;
+    public PausedWindow (int saveSlot, LevelWindow lvl) {
+        this.lvl=lvl;
         this.saveSlot = saveSlot;
-        buttons.add(new Button(Button.Id.MAP, 300, 425, 150, 50));
-        buttons.add(new Button(Button.Id.MENU, 300, 350,150,50));
+        buttons.add(new Button(Button.Id.RESUME, 300, 425, 150, 50));
+        buttons.add(new Button(Button.Id.MAP, 300, 350, 150, 50));
+        buttons.add(new Button(Button.Id.MENU, 300, 275,150,50));
         viewItems.addAll(buttons);
-        if (isGoal) {
-            viewItems.add(new Image("./assets/GameFinished.png", 150, 500));
-            backgroundRBGA = new float[]{0f,1.0f,0.0f,0.0f};
-        } else {
-            viewItems.add(new Image("./assets/GameOver.png", 150, 500));
-            backgroundRBGA = new float[]{1.0f,0.0f,0.0f,0.0f};
-        }
+        viewItems.add(new Image("./assets/GamePaused.png", 150, 500));
+        backgroundRBGA = new float[]{0f,1.0f,0.0f,0.0f};
     }
 
     public void render(){
@@ -55,6 +47,10 @@ public class FinishedLevelWindow extends GameWindow{
         for (int i = 0; i < buttons.size(); i++) {
             if (buttons.get(i).check(posX, posY)) {
                 switch (buttons.get(i).id) {
+                    case RESUME:
+                        System.out.println("Resuming game");
+                        notifyObservers(new ActionEvent(lvl, saveSlot, "Resume"));
+                        break;
                     case MAP:
                         System.out.println("Moving to map with saved progress");
                         notifyObservers(new ActionEvent(this, saveSlot, "Save"));
@@ -74,9 +70,8 @@ public class FinishedLevelWindow extends GameWindow{
                 notifyObservers(new ActionEvent(this, saveSlot, "Save"));
                 break;
             case GLFW_KEY_ESCAPE:
-                notifyObservers(new ActionEvent(this, 0, "MainMenu"));
+                notifyObservers(new ActionEvent(lvl, saveSlot, "Resume"));
                 break;
         }
     }
 }
-

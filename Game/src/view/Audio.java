@@ -2,8 +2,6 @@ package view;
 
 import org.lwjgl.openal.*;
 import org.lwjgl.system.*;
-import view.GameWindow;
-
 import java.nio.*;
 
 import static org.lwjgl.openal.AL10.*;

@@ -14,7 +14,7 @@ public class LevelWindow extends GameWindow {
 
     private Camera camera;
 
-    float[] backgroundRBGA = new float[]{0.70f, 0.88f, 0.99f, 0.0f};
+    private float[] backgroundRBGA = new float[]{0.70f, 0.88f, 0.99f, 0.0f};
 
     private List<Button> buttons = new ArrayList<>();
     private List<GUIObject> viewItems = new ArrayList<>();
@@ -74,7 +74,6 @@ public class LevelWindow extends GameWindow {
 
         if(model.getPlayerY()<=0 || model.getPlayerHealth()<=0){
             notifyObservers(new ActionEvent(this, saveSlot, "Dead"));
-            //notifyObservers(new ActionEvent(this, saveData, "Save"));
         } else {
             hp.updateHealthBar(model.getPlayerHealth());
         }
@@ -106,25 +105,18 @@ public class LevelWindow extends GameWindow {
         switch (key) {
             case GLFW_KEY_LEFT:
                 model.moveLeft();
-                //cameraX -= 1;
                 break;
             case GLFW_KEY_RIGHT:
-                System.out.println("Right button pressed, update character model");
                 model.moveRight();
-                //cameraX += 1;
                 break;
             case GLFW_KEY_SPACE:
-                System.out.println("Space key pressed, update model");
                 model.jump();
                 break;
             case GLFW_KEY_ESCAPE:
-                System.out.println("Escape key pressed, moving to map");
                 isPaused=!isPaused;
                 notifyObservers(new ActionEvent(this, saveSlot, "Pause"));
-                //notifyObservers(new ActionEvent(this, saveSlot, "Save"));
                 break;
             case GLFW_KEY_Z:
-                System.out.println("Z key pressed, firing weapon");
                 model.playerAttack();
                 break;
         }
@@ -163,11 +155,9 @@ public class LevelWindow extends GameWindow {
     protected void released(int key) {
         switch (key) {
             case GLFW_KEY_LEFT:
-                System.out.println("Left key released");
                 model.stopMoving(key);
                 break;
             case GLFW_KEY_RIGHT:
-                System.out.println("Right key released");
                 model.stopMoving(key);
                 break;
         }

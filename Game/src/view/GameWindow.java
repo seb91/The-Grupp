@@ -24,10 +24,10 @@ public abstract class GameWindow implements Observable{
     private final int windowHeight = 600;
     private Texture tex;
     private ArrayList<Listener> observers = new ArrayList<Listener>();
-    protected static ArrayList<Audio> audio = new ArrayList<>();
-    protected static AssetHandler assets = new AssetHandler();
+    private static ArrayList<Audio> audio = new ArrayList<>();
     protected static Boolean musicOn = true;
     protected static int saveData,saveSlot;
+    protected static AssetHandler assets = new AssetHandler();
 
     // The window handle
     private static long window;
