@@ -1,5 +1,5 @@
 /*
-*A view to be shown when the level is ended, either by dying or by reaching the goal.
+*A view to be shown when the level is ended, either by dying or by reaching the goal. Also works as a pause window.
  */
 package view;
 
@@ -42,7 +42,7 @@ public class FinishedLevelWindow extends GameWindow{
         buttons.add(new Button(Button.Id.MENU, 300, 275,150,50));
         buttons.add(new Button(Button.Id.QUIT, 325, 200, 150, 50));
         viewItems.addAll(buttons);
-        viewItems.add(new Image("./assets/GameFinished.png", 150, 500));
+        viewItems.add(new Image("./assets/GamePaused.png", 150, 500));
         backgroundRBGA = new float[]{0f,1.0f,0.0f,0.0f};
     }
 

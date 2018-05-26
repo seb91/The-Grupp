@@ -173,6 +173,8 @@ public class LevelWindow extends GameWindow {
         }
     }
     public void resume(boolean bool){
+        released(GLFW_KEY_LEFT);
+        released(GLFW_KEY_RIGHT);
         isPaused=bool;
     }
 }
