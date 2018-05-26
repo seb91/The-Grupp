@@ -26,6 +26,7 @@ public class AssetHandler {
        menuPaths.put(Button.Id.SAVE3,"./assets/Save3.png");
        menuPaths.put(Button.Id.MAP,"./assets/BackToMap.png");
        menuPaths.put(Button.Id.MENU,"./assets/BackToMenu.png");
+       menuPaths.put(Button.Id.RESUME,"./assets/Resume.png");
        menuPaths.put(Button.Id.BG_MUSIC_TOGGLE,"./assets/BgMusicButton.png");
        menuPaths.put(GUIObject.Id.HEALTH_BAR,"./assets/health_bar/HealthBar1.png");
 

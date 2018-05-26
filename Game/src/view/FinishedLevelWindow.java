@@ -17,6 +17,7 @@ public class FinishedLevelWindow extends GameWindow{
     private List<Button> buttons = new ArrayList<>();
     private List<GUIObject> viewItems = new ArrayList<>();
     private int saveSlot;
+    private LevelWindow lvl;
 
     public FinishedLevelWindow(int saveSlot, boolean isGoal) {
         this.saveSlot = saveSlot;
@@ -32,6 +33,19 @@ public class FinishedLevelWindow extends GameWindow{
             backgroundRBGA = new float[]{1.0f,0.0f,0.0f,0.0f};
         }
     }
+
+    public FinishedLevelWindow(int saveSlot, boolean isGoal, LevelWindow lvl) {
+        this.lvl=lvl;
+        this.saveSlot = saveSlot;
+        buttons.add(new Button(Button.Id.RESUME, 300, 425, 150, 50));
+        buttons.add(new Button(Button.Id.MAP, 300, 350, 150, 50));
+        buttons.add(new Button(Button.Id.MENU, 300, 275,150,50));
+        buttons.add(new Button(Button.Id.QUIT, 325, 200, 150, 50));
+        viewItems.addAll(buttons);
+        viewItems.add(new Image("./assets/GameFinished.png", 150, 500));
+        backgroundRBGA = new float[]{0f,1.0f,0.0f,0.0f};
+    }
+
     public void render(){
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // clear the framebuffer
 
@@ -51,6 +65,10 @@ public class FinishedLevelWindow extends GameWindow{
         for (int i = 0; i < buttons.size(); i++) {
             if (buttons.get(i).check(posX, posY)) {
                 switch (buttons.get(i).id) {
+                    case RESUME:
+                        System.out.println("Resuming game");
+                        notifyObservers(new ActionEvent(lvl, saveSlot, "Resume"));
+                        break;
                     case MAP:
                         System.out.println("Moving to map with saved progress");
                         notifyObservers(new ActionEvent(this, saveSlot, "Save"));

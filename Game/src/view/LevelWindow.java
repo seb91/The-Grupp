@@ -20,6 +20,7 @@ public class LevelWindow extends GameWindow {
     private List<GUIObject> viewItems = new ArrayList<>();
     private Level model;
     private HealthBar hp;
+    private boolean isPaused = false;
 
     public LevelWindow(Level model) {
         this.model = model;
@@ -77,7 +78,9 @@ public class LevelWindow extends GameWindow {
         } else {
             hp.updateHealthBar(model.getPlayerHealth());
         }
-        model.update();
+        if (!isPaused) {
+            model.update();
+        }
     }
 
     @Override
@@ -116,7 +119,9 @@ public class LevelWindow extends GameWindow {
                 break;
             case GLFW_KEY_ESCAPE:
                 System.out.println("Escape key pressed, moving to map");
-                notifyObservers(new ActionEvent(this, saveSlot, "Save"));
+                isPaused=!isPaused;
+                notifyObservers(new ActionEvent(this, saveSlot, "Pause"));
+                //notifyObservers(new ActionEvent(this, saveSlot, "Save"));
                 break;
             case GLFW_KEY_Z:
                 System.out.println("Z key pressed, firing weapon");
@@ -166,5 +171,8 @@ public class LevelWindow extends GameWindow {
                 model.stopMoving(key);
                 break;
         }
+    }
+    public void resume(boolean bool){
+        isPaused=bool;
     }
 }
