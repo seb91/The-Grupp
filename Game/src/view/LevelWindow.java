@@ -72,7 +72,7 @@ public class LevelWindow extends GameWindow {
         }
 
         if(model.getPlayerY()<=0 || model.getPlayerHealth()<=0){
-            notifyObservers(new ActionEvent(this, saveData, "Dead"));
+            notifyObservers(new ActionEvent(this, saveSlot, "Dead"));
             //notifyObservers(new ActionEvent(this, saveData, "Save"));
         } else {
             hp.updateHealthBar(model.getPlayerHealth());
