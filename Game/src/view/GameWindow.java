@@ -88,7 +88,7 @@ public abstract class GameWindow implements Observable{
         glfwSwapInterval(1);
 
         //Add background music, and play it.
-        audio.add(new Audio(Audio.Id.BG_MUSIC,77000,true));
+        audio.add(new AudioObject(Audio.Id.BG_MUSIC,77000,true));
         playAudio(Audio.Id.BG_MUSIC);
 
         // Make the window visible
