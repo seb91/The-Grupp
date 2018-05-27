@@ -5,11 +5,7 @@ public class Player extends MovingEntity{
     private int hp;
     private Weapon weapon;
     private Long tookDamage = System.currentTimeMillis()-1000;
-
-    private Direction direction;
-    public enum Direction {
-        LEFT, RIGHT
-    };
+    private int lastDx;
 
     public Player(Id id,int posX, int posY, int width, int height, int hp) {
         super(id,posX, posY, width, height);
@@ -17,19 +13,11 @@ public class Player extends MovingEntity{
         lastPosX = posX;
         //just create a default weapon
         this.weapon = new Weapon();
-        direction = Direction.RIGHT;
-    }
-
-    public void setDirection(Direction d){
-        this.direction = d;
-    }
-
-    public Direction getDirection(){
-        return direction;
     }
 
     public Projectile fireProjectile(){
-        return weapon.fire(this.getX(), this.getY()+this.getHeight()/6*2, direction, this.getDx());
+        //send relevant position info to weapon
+        return weapon.fire(this.getX(), this.getY()+this.getHeight()/6*2, lastDx);
     }
 
     /*
@@ -81,8 +69,10 @@ public class Player extends MovingEntity{
 
     public void update(){
         if(dx > 0) {
+            lastDx = dx;
             dx = dx - friction;
         } else if(dx < 0){
+            lastDx = dx;
             dx = dx + friction;
         }
 

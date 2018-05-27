@@ -1,7 +1,3 @@
-/*
-* A simple view containing three options to load a game.
-* @Author Alexander
-* */
 package view;
 
 import java.awt.event.ActionEvent;
@@ -12,6 +8,11 @@ import static org.lwjgl.glfw.GLFW.GLFW_KEY_ENTER;
 import static org.lwjgl.glfw.GLFW.GLFW_KEY_ESCAPE;
 import static org.lwjgl.opengl.GL11.*;
 
+/*
+ * A simple view containing three options to load a game.
+ *
+ * @author Alexander
+ */
 public class SaveWindow extends GameWindow{
     private float[] backgroundRBGA = new float[]{1.0f,0.0f,0.0f,0.0f};
 
@@ -63,6 +64,7 @@ public class SaveWindow extends GameWindow{
             }
         }
     }
+
     protected void pressed(int key) {
         switch (key) {
             case GLFW_KEY_ENTER:

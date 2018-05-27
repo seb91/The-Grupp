@@ -8,6 +8,12 @@ import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import java.util.List;
 
+/*
+ * Simple window that allows the user to modify program state. At the moment, only muting
+ * the music is supported, but additional functionality can be added should it be needed.
+ *
+ * @author Eric
+ */
 public class OptionsWindow extends GameWindow {
 
     private float[] backgroundRBGA = new float[]{0.0f,0.0f,1.0f,0.0f};

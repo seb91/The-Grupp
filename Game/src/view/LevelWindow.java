@@ -10,6 +10,16 @@ import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import java.util.List;
 
+/*
+ * This is the core view of the game.
+ *
+ * The class is created based on the Model and all containing Entities.
+ * It has a single button and a health bar GUI object and renders these, as well as the model entities.
+ * This class continually re-renders based on the ever changing model.
+ *
+ * @author Sebastian
+ * @author Eric
+ */
 public class LevelWindow extends GameWindow {
 
     private Camera camera;
@@ -28,9 +38,7 @@ public class LevelWindow extends GameWindow {
         camera = new Camera(0, 0, getWindowWidth(), getWindowHeight());
     }
 
-    public void render() {
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // clear the framebuffer
-        glClearColor(backgroundRBGA[0], backgroundRBGA[1], backgroundRBGA[2], backgroundRBGA[3]);
+    private void update(){
 
         if(model.levelComplete){
             if(saveData<model.getLevelNr()+1) {
@@ -38,6 +46,31 @@ public class LevelWindow extends GameWindow {
             }
             notifyObservers(new ActionEvent(this, saveSlot, "Finish"));
         }
+
+        int breakpoint = (int) (camera.getWidth()/1.5);
+
+        if(model.getPlayerX()-camera.getX() > breakpoint){
+            camera.setX(model.getPlayerX()-breakpoint);
+            CheckCollision.setLeft(camera.getX());
+        }
+
+        if(model.getPlayerY()<=0 || model.getPlayerHealth()<=0){
+            notifyObservers(new ActionEvent(this, saveSlot, "Dead"));
+        } else {
+            hp.updateHealthBar(model.getPlayerHealth());
+        }
+
+        if (!isPaused) {
+            model.update();
+        }
+
+    }
+
+    public void render() {
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // clear the framebuffer
+        glClearColor(backgroundRBGA[0], backgroundRBGA[1], backgroundRBGA[2], backgroundRBGA[3]);
+
+        update();
 
         ArrayList<Entity> copy = new ArrayList<>(model.getEntities());
 
@@ -57,24 +90,9 @@ public class LevelWindow extends GameWindow {
                 animate(e);
             }
         }
-        int breakpoint = (int) (camera.getWidth()/1.5);
-
-        if(model.getPlayerX()-camera.getX() > breakpoint){
-            camera.setX(model.getPlayerX()-breakpoint);
-            CheckCollision.setLeft(camera.getX());
-        }
 
         for (GUIObject v : viewItems) {
             paint(v.getImagePath(),v.getX(),v.getY());
-        }
-
-        if(model.getPlayerY()<=0 || model.getPlayerHealth()<=0){
-            notifyObservers(new ActionEvent(this, saveSlot, "Dead"));
-        } else {
-            hp.updateHealthBar(model.getPlayerHealth());
-        }
-        if (!isPaused) {
-            model.update();
         }
     }
 

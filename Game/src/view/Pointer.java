@@ -1,5 +1,10 @@
 package view;
 
+/*
+ * Unlike other GUI Objects, this hold functionality for updating position in relation to node position.
+ *
+ * @author Sebastian
+ */
 public class Pointer extends GUIObject {
     private int position;
     public Id id;

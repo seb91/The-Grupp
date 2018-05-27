@@ -4,6 +4,18 @@ import model.*;
 
 import java.util.HashMap;
 
+/*
+ * Functions as a collections of directory paths for game assets(paths to files used by the program).
+ *
+ * It holds three HashMap objects for images used in relation to the model object Entity,
+ * view objectGUIObject and view object Audio.
+ *
+ * A single static version of this file is only every used and is contained in GameWindow.Entity,
+ * GUIObject and Audio objects all contain ID’s, these ID’s are used as a Keys in each corresponding
+ * HashMap and is paired with a directory path as its Value.
+ *
+ * @author Sebastian
+ */
 public class AssetHandler {
 
     private HashMap<GUIObject.Id,String> menuPaths = new HashMap<>();

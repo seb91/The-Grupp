@@ -18,6 +18,21 @@ import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import services.*;
 
+/*
+ * Abstract definition of a game window. Defines the basic functionality of all windows, such as
+ * supplying them with vital methods. Each class that extends this must define their own render
+ * and input logic.
+ *
+ * Initializes the game window by using the GLFW library, contains assets, audio and renders textures.
+ *
+ * This is where the background music is created and run. It also sets up key callbacks, meaning,
+ * what happens when a specific key is pressed.
+ *
+ * All other Windows inherit this class.
+ *
+ * @author Eric
+ * @author Sebastian
+ */
 public abstract class GameWindow implements Observable{
 
     private final int windowWidth = 800;

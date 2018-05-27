@@ -7,7 +7,16 @@ import java.util.List;
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
 
-//Map menu, displays all available Levels.
+/*
+ * This class is generated based on save and map data and contains as many nodes as the map data instructs,
+ * these nodes are either locked or unlocked based on the save data.
+ *
+ * It holds a pointer object, this object is rendered above a node and is moved given a key press.
+ * How far the pointer may move is limited by either the end of the row of nodes,
+ * or if the next node is locked.
+ *
+ * @author Sebastian
+ */
 public class MapWindow extends GameWindow {
 
     private float[] backgroundRBGA = new float[]{0.4f, 0.7f, 0.3f, 0.0f};

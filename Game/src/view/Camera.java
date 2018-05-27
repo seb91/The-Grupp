@@ -2,6 +2,15 @@ package view;
 
 import model.Entity;
 
+/*
+ * The camera is the core of the side-scrolling mechanic.
+ *
+ * Its used when LevelWindow paints entities from model, based on how far the character has
+ * moved the cameras sets what entities may get painted and how far their coordinated should
+ * be modified when painted.
+ *
+ * @author Eric
+ */
 public class Camera {
 
     private int cameraX;

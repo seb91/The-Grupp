@@ -11,6 +11,15 @@ import static org.lwjgl.glfw.Callbacks.glfwFreeCallbacks;
 import static org.lwjgl.glfw.GLFW.*;
 import static services.SaveGame.createGame;
 
+/*
+ * Acts as a controller for the program, containing both the active model and the active view.
+ * Game initializes the first view, the Main menu.
+ * It listens to the active view waiting to get notified to update it.
+ * Game will only create and use the model when creating a level view.
+ *
+ * @author Eric
+ * @author Sebastian
+ */
 public class Game implements Listener {
 
     private GameWindow view;

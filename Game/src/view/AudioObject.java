@@ -10,6 +10,18 @@ import static org.lwjgl.stb.STBVorbis.*;
 import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.libc.LibCStdlib.free;
 
+/*
+ * This sets up the Audio object and is created with an ID, playtime and a Loop value(on/off).
+ *
+ * The object inherits Audio, which extends to Java's Thread class to support running in its own,
+ * thread once started.
+ *
+ * It however does not initiate this thread itself. A static list of all created audio objects,
+ * exists in where the functionality for creating new threads for Audio objects, as well as,
+ * terminating these audio files is located.
+ *
+ * @author Sebastian
+ */
 public class AudioObject extends Audio {
 
     private static AssetHandler assets = new AssetHandler();

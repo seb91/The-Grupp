@@ -1,34 +1,35 @@
 package model;
 
 public class Weapon {
-    private int dx;
+    private int projectileDx;
     private int projectileWidth;
-    private int getProjectileHeight;
+    private int projectileHeight;
 
     public Weapon() {
-        this.dx = 8;
+        this.projectileDx = 8;
         this.projectileWidth = 20;
-        this.getProjectileHeight = 10;
+        this.projectileHeight = 10;
     }
 
-    public Weapon(int dx, int projectileWidth, int getProjectileHeight) {
-        this.dx = dx;
+    public Weapon(int projectileDx, int projectileWidth, int projectileHeight) {
+        this.projectileDx = projectileDx;
         this.projectileWidth = projectileWidth;
-        this.getProjectileHeight = getProjectileHeight;
+        this.projectileHeight = projectileHeight;
     }
 
-    public Projectile fire(int x, int y, Player.Direction direction, int playerDx){
+    public Projectile fire(int x, int y, int lastShooterDx){
 
-        int previous = Math.abs(dx);
+        int directionDx = projectileDx;
 
-        if(direction == Player.Direction.RIGHT){
-            dx = previous;
-            //player widht plus projectile width and dx to compensate for movement
-            x = x+45+playerDx;
+        if(lastShooterDx >= 0){
+            //spawn projectile fixed distance from shooter
+            //some distance plus projectile width and dx to compensate for movement
+            x = x+45+lastShooterDx;
         } else {
-            //player x minus projectile width
-            x = x-25+playerDx;
-            dx = previous*-1;
+            //shooter x minus projectile width
+            x = x-25+lastShooterDx;
+            //projectile supposed to go to the left, hence we make dx negative
+            directionDx *= -1;
         }
 
         Projectile projectile = new Projectile(
@@ -36,10 +37,9 @@ public class Weapon {
                 x,
                 y,
                 projectileWidth,
-                getProjectileHeight,
-                dx
+                projectileHeight,
+                directionDx
         );
-
 
         return projectile;
     }

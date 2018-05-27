@@ -1,6 +1,3 @@
-/*
-*A view to be shown when the level is ended, either by dying or by reaching the goal. Also works as a pause window.
- */
 package view;
 
 import java.awt.event.ActionEvent;
@@ -11,6 +8,11 @@ import static org.lwjgl.glfw.GLFW.GLFW_KEY_ENTER;
 import static org.lwjgl.glfw.GLFW.GLFW_KEY_ESCAPE;
 import static org.lwjgl.opengl.GL11.*;
 
+/*
+ * A view to be shown when the level is ended, either by dying or by reaching the goal.
+ *
+ * @author Alexander
+ */
 public class FinishedLevelWindow extends GameWindow{
 
     private float[] backgroundRBGA;

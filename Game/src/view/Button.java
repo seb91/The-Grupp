@@ -1,5 +1,11 @@
 package view;
 
+/*
+ * In addition to the inherited values, this class holds a height and a width, as well as
+ * functionality using these values to calculate if a coordinate exists on the button.
+ *
+ * @author Sebastian
+ */
 public class Button extends GUIObject {
 
     public int width,height;

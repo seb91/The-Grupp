@@ -2,6 +2,11 @@ package view;
 
 import static view.GameWindow.assets;
 
+/*
+ * Holds functionality to change what Value is used in asset handler for its ID, based on model.
+ *
+ * @author Sebastian
+ */
 public class HealthBar extends GUIObject {
 
     public HealthBar(Id id,int x, int y) {

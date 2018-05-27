@@ -66,14 +66,12 @@ public class Level {
         pressedR = true;
         player.setFriction(0);
         player.setDx(5);
-        player.setDirection(Player.Direction.RIGHT);
     }
 
     public void moveLeft(){
         pressedL = true;
         player.setFriction(0);
         player.setDx(-5);
-        player.setDirection(Player.Direction.LEFT);
     }
 
     public void stopMoving(int key){

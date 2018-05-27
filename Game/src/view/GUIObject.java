@@ -1,5 +1,10 @@
 package view;
 
+/*
+ * This object holds an ID, coordinates and a directory path value.
+ *
+ * @author Sebastian
+ */
 public class GUIObject {
     protected String imagePath;
     protected int x,y;

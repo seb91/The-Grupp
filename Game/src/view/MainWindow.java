@@ -7,6 +7,15 @@ import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import java.util.List;
 
+/*
+ * The starting menu is generated here. It contains three button objects and an image object.
+ *
+ * Play button or Enter key: Notify controller, transition to the Save Menu
+ * Options button: Notify controller, transition to the Options menu.
+ * Quit button or Escape key: Notify controller, terminate program.
+ *
+ * @author Sebastian
+ */
 public class MainWindow extends GameWindow {
 
     private float[] backgroundRBGA = new float[]{1.0f,0.0f,0.0f,0.0f};

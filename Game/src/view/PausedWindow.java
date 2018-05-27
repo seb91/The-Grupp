@@ -8,6 +8,13 @@ import static org.lwjgl.glfw.GLFW.GLFW_KEY_ENTER;
 import static org.lwjgl.glfw.GLFW.GLFW_KEY_ESCAPE;
 import static org.lwjgl.opengl.GL11.*;
 
+/*
+ * Window that is shown when game is paused while in the LevelWindow. Allows the user to
+ * exit the level or return to main menu.
+ *
+ * @author Alexander
+ * @author Eric
+ */
 public class PausedWindow extends GameWindow {
 
     private float[] backgroundRBGA;
