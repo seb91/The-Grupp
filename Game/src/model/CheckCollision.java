@@ -29,7 +29,7 @@ public class CheckCollision {
             //Checks if there would be an overlap in the next render
             if (a.overlaps(a.nextX(),a.nextY(),b)||b.overlaps(b.getX()-a.getDx(),b.getY(),a)) {
                 if (a.getId() == Entity.Id.PLAYER) {
-                    ((Player)a).damageCheck(b.id);
+                    a.damageCheck(b.id);
                 }
                 //From above
                 if (aboveEntity && withinEntityWidth) {
