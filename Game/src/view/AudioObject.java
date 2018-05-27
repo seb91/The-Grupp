@@ -12,7 +12,7 @@ import static org.lwjgl.system.libc.LibCStdlib.free;
 
 public class AudioObject extends Audio {
 
-    private AssetHandler assets = new AssetHandler();
+    private static AssetHandler assets = new AssetHandler();
     private int playtime;
     private boolean loop;
     private String path;

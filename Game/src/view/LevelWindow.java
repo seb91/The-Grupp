@@ -16,7 +16,6 @@ public class LevelWindow extends GameWindow {
 
     private float[] backgroundRBGA = new float[]{0.70f, 0.88f, 0.99f, 0.0f};
 
-    private List<Button> buttons = new ArrayList<>();
     private List<GUIObject> viewItems = new ArrayList<>();
     private Level model;
     private HealthBar hp;
@@ -24,10 +23,8 @@ public class LevelWindow extends GameWindow {
 
     public LevelWindow(Level model) {
         this.model = model;
-        buttons.add(new Button(Button.Id.RETURN, 650, 0, 150, 50));
         hp =new HealthBar(HealthBar.Id.HEALTH_BAR,10,560);
         viewItems.add(hp);
-        viewItems.addAll(buttons);
         camera = new Camera(0, 0, getWindowWidth(), getWindowHeight());
     }
 
@@ -81,20 +78,7 @@ public class LevelWindow extends GameWindow {
         }
     }
 
-    @Override
     protected void click(double posX, double posY) {
-        int winHeight = getWindowHeight();
-        posY = winHeight - posY;
-
-        for(Button b: buttons){
-            if (b.check(posX, posY)) {
-                switch (b.id) {
-                    case RETURN:
-                        notifyObservers(new ActionEvent(this, saveSlot, "Save"));
-                        break;
-                }
-            }
-        }
     }
 
     @Override
