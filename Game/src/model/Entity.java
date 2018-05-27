@@ -66,4 +66,7 @@ public class Entity {
         return height;
     }
 
+    public void damageCheck(Entity.Id id){
+    }
+
 }
