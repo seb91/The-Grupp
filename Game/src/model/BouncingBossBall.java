@@ -1,5 +1,10 @@
 package model;
 
+/*
+ * An object traveling on both axes, inverting its direction on collision unaffected by gravity.
+ *
+ * @author Alexander
+ */
 public class BouncingBossBall extends MovingEntity {
 
     private int speedX;

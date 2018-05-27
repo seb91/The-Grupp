@@ -1,5 +1,11 @@
 package model;
 
+/*
+ * An extension of the Entity class. Defines behaviour for an Entity that is able to
+ * be in motion.
+ *
+ * @author Alexander
+ */
 public abstract class MovingEntity extends Entity {
     protected int dx,dy;
     protected int friction;

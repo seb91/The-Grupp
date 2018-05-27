@@ -1,5 +1,10 @@
 package model;
 
+/*
+ * An object continually updating its x-coordinate to move right to left.
+ *
+ * @author Alexander
+ */
 public class MovingPlatform extends MovingEntity {
     private int originX;
     private int speed;

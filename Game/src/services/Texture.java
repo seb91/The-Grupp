@@ -8,6 +8,11 @@ import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL13.GL_CLAMP_TO_BORDER;
 import static org.lwjgl.stb.STBImage.*;
 
+/*
+ * Translates images into data to be rendered.
+ *
+ * @author Sebastian
+ */
 public class Texture {
 
     private final int id;

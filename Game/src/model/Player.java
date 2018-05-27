@@ -1,5 +1,12 @@
 package model;
 
+/*
+ * Holds core functionality for the player character, such as health, movement, taking damage,
+ * dealing damage and dying.
+ *
+ * @author Sebastian
+ * @author Eric
+ */
 public class Player extends MovingEntity{
 
     private int hp;
@@ -34,24 +41,6 @@ public class Player extends MovingEntity{
     }
     public int getHealth() {
         return hp;
-    }
-
-    public int getDx() {
-        return dx;
-    }
-
-    public void setDx(int dx) {
-        this.dx = dx;
-    }
-
-    public void setDy(int dy) {
-        this.dy = dy;
-    }
-    public int nextX(){
-        return posX+dx;
-    }
-    public int nextY(){
-        return posY+dy;
     }
 
     public void damageCheck(Entity.Id id){

@@ -1,5 +1,13 @@
 package model;
 
+/*
+ * This is an existing physical object in the level.
+ *
+ * It is defined during the levels creation and holds, dimensions,  coordinates, an ID
+ * and collision detection functionality.
+ *
+ * @author Eric
+ */
 public class Entity {
 
     protected int posX;
@@ -10,7 +18,7 @@ public class Entity {
 
     public Id id;
     public enum Id {
-        PLAYER, ENEMY, GROUND, PLATFORM, BALL, BOSSBALL,MOVINGPLATFORM, PROJECTILE, GOAL
+        PLAYER, ENEMY, GROUND, PLATFORM, BALL, BOSSBALL, MOVINGPLATFORM, PROJECTILE, GOAL
     }
 
 

@@ -1,5 +1,11 @@
 package model;
 
+/*
+ * An object with custom functionality that regains its y-axis velocity on collision.
+ * This ball only travels on the y-axis.
+ *
+ * @author Alexander
+ */
 public class BouncingBall extends MovingEntity {
     private int dy;
     private int gravity = 1;

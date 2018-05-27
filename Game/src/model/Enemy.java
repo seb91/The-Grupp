@@ -2,6 +2,12 @@ package model;
 
 import java.util.Random;
 
+/*
+ * Holds functionality unique to the enemy character, such as independent random movement.
+ *
+ * @author Sebastian
+ * @author Alexander
+ */
 public class Enemy extends Player{
 
     int bounds;

@@ -5,6 +5,14 @@ import java.util.ArrayList;
 import static org.lwjgl.glfw.GLFW.GLFW_KEY_LEFT;
 import static org.lwjgl.glfw.GLFW.GLFW_KEY_RIGHT;
 
+/*
+ * Given a list of IDs, usually from a file, will generate a customized level model.
+ * This model defines everything existing on the Level, as well as, functionality to modify the model.
+ *
+ * @author Sebastian
+ * @author Eric
+ * @author Alexander
+ */
 public class Level {
 
     private ArrayList<Entity> entities = new ArrayList<>();

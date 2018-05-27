@@ -5,6 +5,12 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/*
+ * Loads Level and Map files by translating the file text into and array of Strings.
+ * This is used by the controller when creating the level model and the map view.
+ *
+ * @author Sebastian
+ */
 public class Loader {
 
     ArrayList<String> map;

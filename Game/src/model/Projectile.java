@@ -1,5 +1,11 @@
 package model;
 
+/*
+ * Used by the Weapon class, is simply a directional object continually updating
+ * coordinates until collision.
+ *
+ * @author Eric
+ */
 public class Projectile extends MovingEntity{
 
     public Projectile(Id id,int posX, int posY, int width, int height, int dx) {

@@ -1,5 +1,13 @@
 package model;
 
+/*
+ * Held by Player class, allows it to define a Weapon with specific attributes.
+ *
+ * If the need for more than one weapon for the Player arises, this class can be slightly modified
+ * with minimal effort to accommodate that change.
+ *
+ * @author Eric
+ */
 public class Weapon {
     private int projectileDx;
     private int projectileWidth;

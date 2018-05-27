@@ -3,6 +3,12 @@ package services;
 import java.io.*;
 import java.util.Scanner;
 
+/*
+ * Writes and reads save files. This is used by the controller when creating the map view,
+ * with the purpose of limiting or increasing player progress.
+ *
+ * @author Alexander
+ */
 public final class SaveGame {
 
     public static void saveGame(int lvl, int saveSlot) {

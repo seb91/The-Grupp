@@ -1,9 +1,11 @@
-/*
- * This class checks for collision between a moving entity and other entities
- *
- */
 package model;
 
+/*
+ * Used by Level to check for Entity collisions.
+ *
+ * @author Sebastian
+ * @author Alexander
+ */
 public class CheckCollision {
 
     private static int playerLeft, levelLimit;
