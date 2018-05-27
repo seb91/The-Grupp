@@ -38,7 +38,7 @@ public abstract class GameWindow implements Observable{
     private final int windowWidth = 800;
     private final int windowHeight = 600;
     private Texture tex;
-    private ArrayList<Listener> observers = new ArrayList<Listener>();
+    private ArrayList<Listener> listeners = new ArrayList<Listener>();
     private static ArrayList<Audio> audio = new ArrayList<>();
     protected static Boolean musicOn = true;
     protected static int saveData,saveSlot;
@@ -206,13 +206,13 @@ public abstract class GameWindow implements Observable{
     }
 
     @Override
-    public void addObserver(Listener o) {
-        observers.add(o);
+    public void addListener(Listener o) {
+        listeners.add(o);
     }
 
-    protected void notifyObservers(ActionEvent e){
-        for(Listener o : observers){
-            o.actionPerformed(e);
+    protected void notifyListeners(ActionEvent e){
+        for(Listener l : listeners){
+            l.actionPerformed(e);
         }
     }
 }

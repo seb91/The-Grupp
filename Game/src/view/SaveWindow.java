@@ -49,16 +49,16 @@ public class SaveWindow extends GameWindow{
             if (b.check(posX, posY)) {
                 switch (b.id) {
                     case SAVE1:
-                        notifyObservers(new ActionEvent(this, 1, "Save"));
+                        notifyListeners(new ActionEvent(this, 1, "Save"));
                         break;
                     case SAVE2:
-                        notifyObservers(new ActionEvent(this, 2, "Save"));
+                        notifyListeners(new ActionEvent(this, 2, "Save"));
                         break;
                     case SAVE3:
-                        notifyObservers(new ActionEvent(this, 3, "Save"));
+                        notifyListeners(new ActionEvent(this, 3, "Save"));
                         break;
                     case RETURN:
-                        notifyObservers(new ActionEvent(this, 0, "MainMenu"));
+                        notifyListeners(new ActionEvent(this, 0, "MainMenu"));
                         break;
                 }
             }
@@ -68,10 +68,10 @@ public class SaveWindow extends GameWindow{
     protected void pressed(int key) {
         switch (key) {
             case GLFW_KEY_ENTER:
-                notifyObservers(new ActionEvent(this, 1, "Save"));
+                notifyListeners(new ActionEvent(this, 1, "Save"));
                 break;
             case GLFW_KEY_ESCAPE:
-                notifyObservers(new ActionEvent(this, 0, "MainMenu"));
+                notifyListeners(new ActionEvent(this, 0, "MainMenu"));
                 break;
         }
     }

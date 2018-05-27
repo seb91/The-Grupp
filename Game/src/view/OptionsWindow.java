@@ -1,7 +1,6 @@
 package view;
 
 import static org.lwjgl.glfw.GLFW.*;
-import static org.lwjgl.glfw.GLFW.GLFW_KEY_Z;
 import static org.lwjgl.opengl.GL11.*;
 
 import java.awt.event.ActionEvent;
@@ -47,7 +46,7 @@ public class OptionsWindow extends GameWindow {
             if (b.check(posX, posY)) {
                 switch (b.id) {
                     case RETURN:
-                        notifyObservers(new ActionEvent(this, 2, "MainMenu"));
+                        notifyListeners(new ActionEvent(this, 2, "MainMenu"));
                         break;
                     case BG_MUSIC_TOGGLE:
                         if (musicOn) {
@@ -66,7 +65,7 @@ public class OptionsWindow extends GameWindow {
     protected void pressed(int key) {
         switch (key) {
             case GLFW_KEY_ESCAPE:
-                notifyObservers(new ActionEvent(this, 2, "MainMenu"));
+                notifyListeners(new ActionEvent(this, 2, "MainMenu"));
                 break;
         }
     }

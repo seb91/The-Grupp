@@ -51,13 +51,13 @@ public class MainWindow extends GameWindow {
             if (b.check(posX, posY)) {
                 switch (b.id) {
                     case PLAY:
-                        notifyObservers(new ActionEvent(this, 0, "SaveMenu"));
+                        notifyListeners(new ActionEvent(this, 0, "SaveMenu"));
                         break;
                     case OPTIONS:
-                        notifyObservers(new ActionEvent(this, 0, "OptionsMenu"));
+                        notifyListeners(new ActionEvent(this, 0, "OptionsMenu"));
                         break;
                     case QUIT:
-                        notifyObservers(new ActionEvent(this, 0, "Exit"));
+                        notifyListeners(new ActionEvent(this, 0, "Exit"));
                         break;
                 }
             }
@@ -66,10 +66,10 @@ public class MainWindow extends GameWindow {
     protected void pressed(int key) {
         switch (key) {
             case GLFW_KEY_ENTER:
-                notifyObservers(new ActionEvent(this, 0, "SaveMenu"));
+                notifyListeners(new ActionEvent(this, 0, "SaveMenu"));
                 break;
             case GLFW_KEY_ESCAPE:
-                notifyObservers(new ActionEvent(this, 0, "Exit"));
+                notifyListeners(new ActionEvent(this, 0, "Exit"));
                 break;
         }
     }

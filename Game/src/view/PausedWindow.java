@@ -54,13 +54,13 @@ public class PausedWindow extends GameWindow {
             if (b.check(posX, posY)) {
                 switch (b.id) {
                     case RESUME:
-                        notifyObservers(new ActionEvent(lvl, saveSlot, "Resume"));
+                        notifyListeners(new ActionEvent(lvl, saveSlot, "Resume"));
                         break;
                     case MAP:
-                        notifyObservers(new ActionEvent(this, saveSlot, "Save"));
+                        notifyListeners(new ActionEvent(this, saveSlot, "Save"));
                         break;
                     case MENU:
-                        notifyObservers(new ActionEvent(this, 0, "MainMenu"));
+                        notifyListeners(new ActionEvent(this, 0, "MainMenu"));
                         break;
                 }
             }
@@ -70,10 +70,10 @@ public class PausedWindow extends GameWindow {
     protected void pressed(int key) {
         switch (key) {
             case GLFW_KEY_ENTER:
-                notifyObservers(new ActionEvent(this, saveSlot, "Save"));
+                notifyListeners(new ActionEvent(this, saveSlot, "Save"));
                 break;
             case GLFW_KEY_ESCAPE:
-                notifyObservers(new ActionEvent(lvl, saveSlot, "Resume"));
+                notifyListeners(new ActionEvent(lvl, saveSlot, "Resume"));
                 break;
         }
     }

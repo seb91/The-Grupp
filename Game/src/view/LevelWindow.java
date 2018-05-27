@@ -44,7 +44,7 @@ public class LevelWindow extends GameWindow {
             if(saveData<model.getLevelNr()+1) {
                 SaveGame.saveGame(model.getLevelNr() + 1, saveSlot);
             }
-            notifyObservers(new ActionEvent(this, saveSlot, "Finish"));
+            notifyListeners(new ActionEvent(this, saveSlot, "Finish"));
         }
 
         int breakpoint = (int) (camera.getWidth()/1.5);
@@ -55,7 +55,7 @@ public class LevelWindow extends GameWindow {
         }
 
         if(model.getPlayerY()<=0 || model.getPlayerHealth()<=0){
-            notifyObservers(new ActionEvent(this, saveSlot, "Dead"));
+            notifyListeners(new ActionEvent(this, saveSlot, "Dead"));
         } else {
             hp.updateHealthBar(model.getPlayerHealth());
         }
@@ -113,7 +113,7 @@ public class LevelWindow extends GameWindow {
                 break;
             case GLFW_KEY_ESCAPE:
                 isPaused=!isPaused;
-                notifyObservers(new ActionEvent(this, saveSlot, "Pause"));
+                notifyListeners(new ActionEvent(this, saveSlot, "Pause"));
                 break;
             case GLFW_KEY_Z:
                 model.playerAttack();

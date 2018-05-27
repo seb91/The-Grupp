@@ -81,10 +81,10 @@ public class MapWindow extends GameWindow {
             if (b.check(posX, posY)) {
                 switch (b.id) {
                     case ENTER:
-                        notifyObservers(new ActionEvent(this, 0, "EnterLevel"));
+                        notifyListeners(new ActionEvent(this, pointer.getPosition(), "EnterLevel"));
                         break;
                     case RETURN:
-                        notifyObservers(new ActionEvent(this, 0, "MainMenu"));
+                        notifyListeners(new ActionEvent(this, 0, "MainMenu"));
                         break;
                 }
             }
@@ -99,10 +99,10 @@ public class MapWindow extends GameWindow {
                 moveRight();
                 break;
             case GLFW_KEY_ENTER:
-                notifyObservers(new ActionEvent(this, pointer.getPosition(), "EnterLevel"));
+                notifyListeners(new ActionEvent(this, pointer.getPosition(), "EnterLevel"));
                 break;
             case GLFW_KEY_ESCAPE:
-                notifyObservers(new ActionEvent(this, 0, "MainMenu"));
+                notifyListeners(new ActionEvent(this, 0, "MainMenu"));
                 break;
         }
     }

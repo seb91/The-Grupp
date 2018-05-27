@@ -30,7 +30,7 @@ public class Game implements Listener {
 
     public void run() {
         view = new MainWindow();
-        view.addObserver(this);
+        view.addListener(this);
 
         window = view.init();
 
@@ -59,28 +59,28 @@ public class Game implements Listener {
         switch(e.getActionCommand()){
             case("MainMenu"):
                 view = new MainWindow();
-                view.addObserver(this);
+                view.addListener(this);
                 break;
             case("SaveMenu"):
                 view = new SaveWindow();
-                view.addObserver(this);
+                view.addListener(this);
                 break;
             case("Dead"):
                 view = new FinishedLevelWindow(e.getID(), false);
-                view.addObserver(this);
+                view.addListener(this);
                 break;
             case("Pause"):
                 view = new PausedWindow(e.getID(), (LevelWindow)e.getSource());
-                view.addObserver(this);
+                view.addListener(this);
                 break;
             case("Resume"):
                 view = (LevelWindow)e.getSource();
-                view.addObserver(this);
+                view.addListener(this);
                 ((LevelWindow)e.getSource()).resume(false);
                 break;
             case("Finish"):
                 view = new FinishedLevelWindow(e.getID(), true);
-                view.addObserver(this);
+                view.addListener(this);
                 break;
             case("Save"):
                 try {
@@ -88,7 +88,7 @@ public class Game implements Listener {
                 } catch (FileNotFoundException e1) {
                     e1.printStackTrace();
                 }
-                view.addObserver(this);
+                view.addListener(this);
                 break;
             case("EnterLevel"):
                 try {
@@ -97,11 +97,11 @@ public class Game implements Listener {
                     e1.printStackTrace();
                 }
                 view = new LevelWindow(model);
-                view.addObserver(this);
+                view.addListener(this);
                 break;
             case("OptionsMenu"):
                 view = new OptionsWindow();
-                view.addObserver(this);
+                view.addListener(this);
                 break;
             case("Exit"):
                 view.terminateAllAudio();
